@@ -6,7 +6,7 @@
 # Run Script
 #
 
-EXECUTABLE="bin/search"
+EXECUTABLE="bin/iengine"
 SOURCE_CODE="src/*.swift"
 OS=$(uname)
 
