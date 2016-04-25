@@ -6,7 +6,3 @@
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
-import Foundation
-
-print("Hello, World!")
-

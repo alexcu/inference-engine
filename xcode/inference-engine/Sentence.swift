@@ -13,7 +13,7 @@ infix operator |/=  { }
 // Represents logical biconditional
 infix operator <=> { }
 func <=>(lhs: Sentence, rhs: Sentence) -> Sentence {
-    return lhs.bidirectionallyImplicateWith(rhs)
+    return lhs.biconditionallyImplicateWith(rhs)
 }
 
 // Represents logical implication
@@ -31,7 +31,7 @@ func |(lhs: Sentence, rhs: Sentence) -> Sentence {
 func &(lhs: Sentence, rhs: Sentence) -> Sentence {
     return lhs.conjunctWith(rhs)
 }
-// Represents logical disjunction (OR)
+// Represents logical negation (NOT)
 prefix func !(lhs: Sentence) -> Sentence {
     return lhs.negate()
 }
@@ -45,7 +45,7 @@ struct Sentence {
         self.truth = truth
     }
 
-    func bidirectionallyImplicateWith(other: Sentence) -> Sentence {
+    func biconditionallyImplicateWith(other: Sentence) -> Sentence {
         // Bidirectional eliminiation equivalence
         return (self => other) & (other => self)
     }

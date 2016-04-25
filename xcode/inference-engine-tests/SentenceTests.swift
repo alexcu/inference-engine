@@ -13,7 +13,7 @@ class SentenceTests: XCTestCase {
     func testNegate() {
         // P    !P
         // t     f
-        let p = Term(symbol: "P")
+        let p = Sentence(symbol: "P")
         XCTAssertFalse(!p.truth)
     }
     func testConjoin() {
@@ -22,8 +22,8 @@ class SentenceTests: XCTestCase {
         // t    f     f
         // f    t     f
         // f    f     f
-        let p = Term(symbol: "P")
-        let q = Term(symbol: "Q")
+        let p = Sentence(symbol: "P")
+        let q = Sentence(symbol: "Q")
         XCTAssertTrue((p & q).truth)
         XCTAssertFalse((!p & !q).truth)
         XCTAssertFalse((p & !q).truth)
@@ -35,8 +35,8 @@ class SentenceTests: XCTestCase {
         // t    f     t
         // f    t     t
         // f    f     f
-        let p = Term(symbol: "P")
-        let q = Term(symbol: "Q")
+        let p = Sentence(symbol: "P")
+        let q = Sentence(symbol: "Q")
         XCTAssertTrue((p | q).truth)
         XCTAssertTrue((p | !q).truth)
         XCTAssertTrue((!p | q).truth)
@@ -48,8 +48,8 @@ class SentenceTests: XCTestCase {
         // t    f     f
         // f    t     t
         // f    f     t
-        let p = Term(symbol: "P")
-        let q = Term(symbol: "Q")
+        let p = Sentence(symbol: "P")
+        let q = Sentence(symbol: "Q")
         XCTAssertTrue((p => q).truth)
         XCTAssertTrue((!p => q).truth)
         XCTAssertTrue((!p => !q).truth)
@@ -61,8 +61,8 @@ class SentenceTests: XCTestCase {
         // t    f      f
         // f    t      f
         // f    f      t
-        let p = Term(symbol: "P")
-        let q = Term(symbol: "Q")
+        let p = Sentence(symbol: "P")
+        let q = Sentence(symbol: "Q")
         XCTAssertTrue((p <=> q).truth)
         XCTAssertTrue((!p <=> !q).truth)
         XCTAssertFalse((!p <=> q).truth)

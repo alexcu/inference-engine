@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		FA58BAEE1CCD101000A3C0FB /* Int+nthBit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58BAED1CCD101000A3C0FB /* Int+nthBit.swift */; };
+		FA72DAFC1CCE4951000ADC59 /* TokeniserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72DAFB1CCE4951000ADC59 /* TokeniserTests.swift */; };
+		FA72DAFD1CCE4965000ADC59 /* Tokeniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */; };
+		FA72DAFE1CCE49B8000ADC59 /* LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */; };
 		FAA069BF1CC762F50039A495 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069BE1CC762F50039A495 /* main.swift */; };
 		FAA069CC1CC763300039A495 /* SentenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069CB1CC763300039A495 /* SentenceTests.swift */; };
 		FAA069D21CC763AF0039A495 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D11CC763AF0039A495 /* BinaryTree.swift */; };
 		FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */; };
 		FAA069D81CC76D760039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Sentence.swift */; };
 		FAA069DB1CC774750039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Sentence.swift */; };
+		FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A081CCDF9F500299BA7 /* FileParser.swift */; };
+		FAF28A0B1CCDFA1100299BA7 /* Tokeniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */; };
+		FAF28A0D1CCDFAFF00299BA7 /* LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		FA58BAED1CCD101000A3C0FB /* Int+nthBit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+nthBit.swift"; sourceTree = "<group>"; };
+		FA72DAFB1CCE4951000ADC59 /* TokeniserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokeniserTests.swift; sourceTree = "<group>"; };
 		FAA069BB1CC762F50039A495 /* inference-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "inference-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA069BE1CC762F50039A495 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FAA069C91CC763300039A495 /* inference-engine-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "inference-engine-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +45,9 @@
 		FAA069D11CC763AF0039A495 /* BinaryTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeNode.swift; sourceTree = "<group>"; };
 		FAA069D71CC76D760039A495 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
+		FAF28A081CCDF9F500299BA7 /* FileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
+		FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokeniser.swift; sourceTree = "<group>"; };
+		FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalOperators.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +93,10 @@
 				FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */,
 				FAA069BE1CC762F50039A495 /* main.swift */,
 				FAA069D71CC76D760039A495 /* Sentence.swift */,
+				FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */,
 				FA58BAED1CCD101000A3C0FB /* Int+nthBit.swift */,
+				FAF28A081CCDF9F500299BA7 /* FileParser.swift */,
+				FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */,
 			);
 			name = "Inference Engine";
 			path = "inference-engine";
@@ -93,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				FAA069CB1CC763300039A495 /* SentenceTests.swift */,
+				FA72DAFB1CCE4951000ADC59 /* TokeniserTests.swift */,
 				FAA069CD1CC763300039A495 /* Info.plist */,
 			);
 			name = Tests;
@@ -190,7 +204,10 @@
 				FAA069D21CC763AF0039A495 /* BinaryTree.swift in Sources */,
 				FAA069D81CC76D760039A495 /* Sentence.swift in Sources */,
 				FAA069BF1CC762F50039A495 /* main.swift in Sources */,
+				FAF28A0D1CCDFAFF00299BA7 /* LogicalOperators.swift in Sources */,
 				FA58BAEE1CCD101000A3C0FB /* Int+nthBit.swift in Sources */,
+				FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */,
+				FAF28A0B1CCDFA1100299BA7 /* Tokeniser.swift in Sources */,
 				FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,7 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA72DAFE1CCE49B8000ADC59 /* LogicalOperators.swift in Sources */,
+				FA72DAFC1CCE4951000ADC59 /* TokeniserTests.swift in Sources */,
 				FAA069DB1CC774750039A495 /* Sentence.swift in Sources */,
+				FA72DAFD1CCE4965000ADC59 /* Tokeniser.swift in Sources */,
 				FAA069CC1CC763300039A495 /* SentenceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
