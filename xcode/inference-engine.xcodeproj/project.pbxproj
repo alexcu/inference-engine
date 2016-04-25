@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		FAA069BF1CC762F50039A495 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069BE1CC762F50039A495 /* main.swift */; };
-		FAA069CC1CC763300039A495 /* inference_engine_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069CB1CC763300039A495 /* inference_engine_tests.swift */; };
+		FAA069CC1CC763300039A495 /* PropositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069CB1CC763300039A495 /* PropositionTests.swift */; };
+		FAA069D21CC763AF0039A495 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D11CC763AF0039A495 /* BinaryTree.swift */; };
+		FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */; };
+		FAA069D61CC76AE30039A495 /* LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D51CC76AE30039A495 /* LogicalOperators.swift */; };
+		FAA069D81CC76D760039A495 /* Proposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Proposition.swift */; };
+		FAA069DA1CC76E4D0039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D91CC76E4D0039A495 /* Sentence.swift */; };
+		FAA069DB1CC774750039A495 /* Proposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Proposition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,8 +33,13 @@
 		FAA069BB1CC762F50039A495 /* inference-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "inference-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA069BE1CC762F50039A495 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FAA069C91CC763300039A495 /* inference-engine-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "inference-engine-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA069CB1CC763300039A495 /* inference_engine_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inference_engine_tests.swift; sourceTree = "<group>"; };
+		FAA069CB1CC763300039A495 /* PropositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionTests.swift; sourceTree = "<group>"; };
 		FAA069CD1CC763300039A495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAA069D11CC763AF0039A495 /* BinaryTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
+		FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeNode.swift; sourceTree = "<group>"; };
+		FAA069D51CC76AE30039A495 /* LogicalOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalOperators.swift; sourceTree = "<group>"; };
+		FAA069D71CC76D760039A495 /* Proposition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposition.swift; sourceTree = "<group>"; };
+		FAA069D91CC76E4D0039A495 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +81,12 @@
 		FAA069BD1CC762F50039A495 /* Inference Engine */ = {
 			isa = PBXGroup;
 			children = (
+				FAA069D51CC76AE30039A495 /* LogicalOperators.swift */,
+				FAA069D11CC763AF0039A495 /* BinaryTree.swift */,
+				FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */,
 				FAA069BE1CC762F50039A495 /* main.swift */,
+				FAA069D71CC76D760039A495 /* Proposition.swift */,
+				FAA069D91CC76E4D0039A495 /* Sentence.swift */,
 			);
 			name = "Inference Engine";
 			path = "inference-engine";
@@ -79,7 +95,7 @@
 		FAA069CA1CC763300039A495 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				FAA069CB1CC763300039A495 /* inference_engine_tests.swift */,
+				FAA069CB1CC763300039A495 /* PropositionTests.swift */,
 				FAA069CD1CC763300039A495 /* Info.plist */,
 			);
 			name = Tests;
@@ -174,7 +190,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA069D21CC763AF0039A495 /* BinaryTree.swift in Sources */,
+				FAA069D81CC76D760039A495 /* Proposition.swift in Sources */,
 				FAA069BF1CC762F50039A495 /* main.swift in Sources */,
+				FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */,
+				FAA069DA1CC76E4D0039A495 /* Sentence.swift in Sources */,
+				FAA069D61CC76AE30039A495 /* LogicalOperators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +203,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA069CC1CC763300039A495 /* inference_engine_tests.swift in Sources */,
+				FAA069DB1CC774750039A495 /* Proposition.swift in Sources */,
+				FAA069CC1CC763300039A495 /* PropositionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +357,7 @@
 				FAA069D01CC763300039A495 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
