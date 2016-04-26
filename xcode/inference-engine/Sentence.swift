@@ -6,8 +6,6 @@
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
-let foo = 1
-
 // Represents logical entailment (does entail and does NOT entail)
 infix operator |=   { }
 infix operator |/=  { }
@@ -44,7 +42,7 @@ func <=>(lhs: Sentence, rhs: Sentence) -> ComplexSentence {
 /// single atomic sentence consisting of just a propoistional symbol.
 /// - Remarks: Refer to the BNF defined in <i>AIMA</i>, p293
 ///
-protocol Sentence: CustomStringConvertible, CustomDebugStringConvertible {
+protocol Sentence: CustomStringConvertible {
     ///
     /// Bidirectionally implicates this sentence with another sentence
     ///
@@ -73,6 +71,10 @@ protocol Sentence: CustomStringConvertible, CustomDebugStringConvertible {
     /// Returns `true` iff the sentence is positive
     ///
     var isPositive: Bool { get }
+    ///
+    /// Comparator
+    ///
+    func isEqual(other: Sentence) -> Bool
 }
 
 extension Sentence {
@@ -105,4 +107,13 @@ extension Sentence {
     func negate() -> ComplexSentence {
         return ComplexSentence(operator: .Negate, sentences: self)
     }
+}
+
+
+// MARK: Implement Equatable
+func ==(lhs: Sentence, rhs: Sentence) -> Bool {
+    return lhs.isEqual(rhs)
+}
+func !=(lhs: Sentence, rhs: Sentence) -> Bool {
+    return !(lhs == rhs)
 }

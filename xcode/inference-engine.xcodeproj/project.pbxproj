@@ -18,17 +18,20 @@
 		FA6787071CCF08E100EDD988 /* AtomicSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6787011CCF055700EDD988 /* AtomicSentence.swift */; };
 		FA6787081CCF09DF00EDD988 /* AtomicSentenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6787041CCF08C800EDD988 /* AtomicSentenceTests.swift */; };
 		FA72DAFC1CCE4951000ADC59 /* TokeniserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72DAFB1CCE4951000ADC59 /* TokeniserTests.swift */; };
-		FA72DAFD1CCE4965000ADC59 /* Tokeniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */; };
-		FA72DAFE1CCE49B8000ADC59 /* LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */; };
+		FA72DAFD1CCE4965000ADC59 /* SentenceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */; };
+		FA72DAFE1CCE49B8000ADC59 /* LogicalOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* LogicalOperator.swift */; };
 		FAA069BF1CC762F50039A495 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069BE1CC762F50039A495 /* main.swift */; };
 		FAA069CC1CC763300039A495 /* ComplexSentenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069CB1CC763300039A495 /* ComplexSentenceTests.swift */; };
 		FAA069D21CC763AF0039A495 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D11CC763AF0039A495 /* BinaryTree.swift */; };
 		FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */; };
 		FAA069D81CC76D760039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Sentence.swift */; };
 		FAA069DB1CC774750039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Sentence.swift */; };
+		FAD77B4E1CCF375700D513D5 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4D1CCF375700D513D5 /* Queryable.swift */; };
+		FAD77B501CCF37B900D513D5 /* KnowledgeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */; };
+		FAD77B521CCF454C00D513D5 /* ADTs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B511CCF454C00D513D5 /* ADTs.swift */; };
 		FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A081CCDF9F500299BA7 /* FileParser.swift */; };
-		FAF28A0B1CCDFA1100299BA7 /* Tokeniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */; };
-		FAF28A0D1CCDFAFF00299BA7 /* LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */; };
+		FAF28A0B1CCDFA1100299BA7 /* SentenceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */; };
+		FAF28A0D1CCDFAFF00299BA7 /* LogicalOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* LogicalOperator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,9 +63,12 @@
 		FAA069D11CC763AF0039A495 /* BinaryTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeNode.swift; sourceTree = "<group>"; };
 		FAA069D71CC76D760039A495 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
+		FAD77B4D1CCF375700D513D5 /* Queryable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queryable.swift; sourceTree = "<group>"; };
+		FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeBase.swift; sourceTree = "<group>"; };
+		FAD77B511CCF454C00D513D5 /* ADTs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADTs.swift; sourceTree = "<group>"; };
 		FAF28A081CCDF9F500299BA7 /* FileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
-		FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokeniser.swift; sourceTree = "<group>"; };
-		FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalOperators.swift; sourceTree = "<group>"; };
+		FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceParser.swift; sourceTree = "<group>"; };
+		FAF28A0C1CCDFAFF00299BA7 /* LogicalOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalOperator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,11 +125,14 @@
 				FAA069BE1CC762F50039A495 /* main.swift */,
 				FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */,
 				FA6787031CCF080800EDD988 /* Sentences */,
-				FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */,
+				FAF28A0C1CCDFAFF00299BA7 /* LogicalOperator.swift */,
 				FA58BAED1CCD101000A3C0FB /* Int+nthBit.swift */,
 				FAF28A081CCDF9F500299BA7 /* FileParser.swift */,
-				FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */,
+				FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */,
 				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
+				FAD77B4D1CCF375700D513D5 /* Queryable.swift */,
+				FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */,
+				FAD77B511CCF454C00D513D5 /* ADTs.swift */,
 			);
 			name = "Inference Engine";
 			path = "inference-engine";
@@ -231,15 +240,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6786F41CCEF55500EDD988 /* PropositionalSymbol.swift in Sources */,
+				FAD77B521CCF454C00D513D5 /* ADTs.swift in Sources */,
 				FAA069D21CC763AF0039A495 /* BinaryTree.swift in Sources */,
 				FAA069D81CC76D760039A495 /* Sentence.swift in Sources */,
 				FAA069BF1CC762F50039A495 /* main.swift in Sources */,
-				FAF28A0D1CCDFAFF00299BA7 /* LogicalOperators.swift in Sources */,
+				FAF28A0D1CCDFAFF00299BA7 /* LogicalOperator.swift in Sources */,
 				FA58BAEE1CCD101000A3C0FB /* Int+nthBit.swift in Sources */,
 				FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */,
-				FAF28A0B1CCDFA1100299BA7 /* Tokeniser.swift in Sources */,
+				FAD77B501CCF37B900D513D5 /* KnowledgeBase.swift in Sources */,
+				FAF28A0B1CCDFA1100299BA7 /* SentenceParser.swift in Sources */,
 				FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */,
 				FA6787021CCF055700EDD988 /* AtomicSentence.swift in Sources */,
+				FAD77B4E1CCF375700D513D5 /* Queryable.swift in Sources */,
 				FA6787001CCF052600EDD988 /* ComplexSentence.swift in Sources */,
 				FA6786F01CCE4E0000EDD988 /* TruthTable.swift in Sources */,
 			);
@@ -249,14 +261,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA72DAFE1CCE49B8000ADC59 /* LogicalOperators.swift in Sources */,
+				FA72DAFE1CCE49B8000ADC59 /* LogicalOperator.swift in Sources */,
 				FA6787071CCF08E100EDD988 /* AtomicSentence.swift in Sources */,
 				FA6787081CCF09DF00EDD988 /* AtomicSentenceTests.swift in Sources */,
 				FA6787061CCF08E100EDD988 /* ComplexSentence.swift in Sources */,
 				FA6786F71CCEF8A300EDD988 /* PropositionalSymbolTests.swift in Sources */,
 				FA72DAFC1CCE4951000ADC59 /* TokeniserTests.swift in Sources */,
 				FAA069DB1CC774750039A495 /* Sentence.swift in Sources */,
-				FA72DAFD1CCE4965000ADC59 /* Tokeniser.swift in Sources */,
+				FA72DAFD1CCE4965000ADC59 /* SentenceParser.swift in Sources */,
 				FA6786F81CCEF8A500EDD988 /* PropositionalSymbol.swift in Sources */,
 				FAA069CC1CC763300039A495 /* ComplexSentenceTests.swift in Sources */,
 			);

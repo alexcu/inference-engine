@@ -1,40 +1,40 @@
-////
-////  TokeniserTests.swift
-////  inference-engine
-////
-////  Created by Alex on 25/04/2016.
-////  Copyright © 2016 Alex. All rights reserved.
-////
 //
-//import XCTest
+//  TokeniserTests.swift
+//  inference-engine
 //
-//class TokeniserTests: XCTestCase {
+//  Created by Alex on 25/04/2016.
+//  Copyright © 2016 Alex. All rights reserved.
 //
-//    func testTokeniserLarge() {
-//        let stacks = try! tokenise("p1 => p2 & p3 & p6 & p7 | !p4 <=> p5")
-//        XCTAssertEqual(stacks.operators, [
-//            LogicalOperator.Implicate,
-//            LogicalOperator.Conjoin,
-//            LogicalOperator.Conjoin,
-//            LogicalOperator.Conjoin,
-//            LogicalOperator.Disjoin,
-//            LogicalOperator.Negate,
-//            LogicalOperator.Biconditional,
-//        ])
-//        XCTAssertEqual(stacks.symbols, [
-//            "p1",
-//            "p2",
-//            "p3",
-//            "p6",
-//            "p7",
-//            "p4",
-//            "p5"
-//        ])
-//    }
-//    
-//    func testTokeniserSmall() {
-//        let stacks = try! tokenise("p")
-//        XCTAssertEqual(stacks.operators, [])
-//        XCTAssertEqual(stacks.symbols, ["p"])
-//    }
-//}
+
+import XCTest
+
+class TokeniserTests: XCTestCase {
+
+    func testTokeniserLarge() {
+        let stacks = try! tokenise("p1 => p2 & p3 & p6 & p7 | !p4 <=> p5")
+        XCTAssertEqual(stacks.operators, [
+            LogicalOperator.Implicate,
+            LogicalOperator.Conjoin,
+            LogicalOperator.Conjoin,
+            LogicalOperator.Conjoin,
+            LogicalOperator.Disjoin,
+            LogicalOperator.Negate,
+            LogicalOperator.Biconditional,
+        ])
+        XCTAssertEqual(stacks.symbols, [
+            AtomicSentence("p1"),
+            AtomicSentence("p2"),
+            AtomicSentence("p3"),
+            AtomicSentence("p6"),
+            AtomicSentence("p7"),
+            AtomicSentence("p4"),
+            AtomicSentence("p5")
+        ])
+    }
+    
+    func testTokeniserSmall() {
+        let stacks = try! tokenise("p")
+        XCTAssertEqual(stacks.operators, [])
+        XCTAssertEqual(stacks.symbols, [AtomicSentence("p")])
+    }
+}

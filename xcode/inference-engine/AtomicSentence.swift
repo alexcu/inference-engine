@@ -10,13 +10,10 @@
 /// A truthy atomic sentence (a positive literal) or a negated
 /// atomic sentence (a negative literal).
 ///
-struct AtomicSentence: Sentence {
+struct AtomicSentence: Sentence, Equatable {
     // MARK: Implement Custom[Debug]StringConvertible
     var description: String {
         return self.atom.symbol
-    }
-    var debugDescription: String {
-        return self.description
     }
 
     // MARK: Implement Sentence
@@ -25,6 +22,12 @@ struct AtomicSentence: Sentence {
         return !isPositive
     }
     
+    func isEqual(other: Sentence) -> Bool {
+        guard let other = (other as? AtomicSentence) else {
+            return false
+        }
+        return self.atom.symbol == other.atom.symbol && self.isPositive && other.isPositive
+    }
     
     ///
     /// The underlying Propositional Symbol is an atom.
@@ -56,3 +59,7 @@ struct AtomicSentence: Sentence {
     }
 }
 
+// MARK: Implement Equatable
+func ==(lhs: AtomicSentence, rhs: AtomicSentence) -> Bool {
+    return lhs.isEqual(rhs)
+}

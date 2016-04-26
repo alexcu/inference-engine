@@ -6,8 +6,14 @@
 ////  Copyright © 2016 Alex. All rights reserved.
 ////
 //
-//struct TruthTable {
+/////
+///// TruthTable entails query
+//struct TruthTable: Queryable {
+//    ///
+//    /// A model is a set of atomic sentences associated to their boolean assignments
+//    ///
 //    typealias Model = [Symbol:Bool]
+//    
 //    let symbols: Set<Symbol>
 //    init(symbols: [Symbol]) {
 //        self.init(symbols: Set(symbols))

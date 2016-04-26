@@ -6,7 +6,18 @@
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
-enum LogicalOperator: String {
+enum LogicalOperator: String, CustomStringConvertible, Comparable {
+    // MARK: Implement CustomStringConvertible
+    var description: String {
+        return self.rawValue
+    }
+    
+    ///
+    /// Associativity of a Logical Operator
+    ///
+    enum Associativity {
+        case Left, Right
+    }
     ///
     /// A conjoin operator, representing a logical AND
     ///
@@ -76,6 +87,13 @@ enum LogicalOperator: String {
     }
     
     ///
+    /// Associativity of the operator
+    ///
+    var associativity: Associativity {
+        return self == .Negate ? .Right : .Left
+    }
+    
+    ///
     /// Returns `true` iff the operator is an unary operator (i.e., is `Negate`)
     ///
     var isUnary: Bool {
@@ -89,4 +107,10 @@ enum LogicalOperator: String {
     var isBinary: Bool {
         return !self.isUnary
     }
+}
+
+// MARK: Implement Comparable
+func <(lhs: LogicalOperator, rhs: LogicalOperator) -> Bool {
+    return (lhs.associativity == .Left && lhs.precedence == rhs.precedence) ||
+            lhs.precedence < rhs.precedence
 }

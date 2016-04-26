@@ -9,7 +9,12 @@
 ///
 /// A symbol which stands for a proposition that can `true` or `false`.
 ///
-struct PropositionalSymbol: Equatable {
+struct PropositionalSymbol: CustomStringConvertible, Equatable {
+    // MARK: CustomStringConvertible
+    var description: String {
+        return self.symbol
+    }
+    
     ///
     /// A true propsitional symbol that is *always* represented as `true`
     ///

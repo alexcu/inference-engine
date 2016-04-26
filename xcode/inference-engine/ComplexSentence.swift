@@ -10,7 +10,7 @@
 /// The representation language for propositional logic is made up of a number
 /// of sentences.
 ///
-struct ComplexSentence: Sentence {
+struct ComplexSentence: Sentence, Equatable {
     // MARK: Implement Custom[Debug]StringConvertible
     var description: String {
         if self.isBinary {
@@ -19,11 +19,26 @@ struct ComplexSentence: Sentence {
             return "\(self.`operator`.rawValue)\(self.sentences.right)"
         }
     }
-    var debugDescription: String {
-        return self.description
-    }
     
     // MARK: Implement Sentence
+    func isEqual(other: Sentence) -> Bool {
+        guard let other = (other as? ComplexSentence) else {
+            return false
+        }
+        let sameOperator = self.`operator` == other.`operator`
+        let sameRight    = self.sentences.right == other.sentences.right
+        if let leftSentence = self.sentences.left {
+            if let otherLeftSentence = other.sentences.left {
+                let sameLeft = leftSentence == otherLeftSentence
+                return sameLeft && sameRight && sameOperator
+            } else {
+                return false
+            }
+        } else {
+            return sameRight && sameOperator
+        }
+    }
+    
     var isNegative: Bool {
         return !self.isPositive
     }
@@ -108,4 +123,9 @@ struct ComplexSentence: Sentence {
     func isSentenceKind(`operator`: LogicalOperator) -> Bool {
         return `operator` == self.`operator`
     }
+}
+
+// MARK: Implement Equatable
+func ==(lhs: ComplexSentence, rhs: ComplexSentence) -> Bool {
+    return lhs.isEqual(rhs)
 }
