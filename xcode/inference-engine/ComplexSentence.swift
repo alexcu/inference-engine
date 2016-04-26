@@ -13,14 +13,28 @@
 struct ComplexSentence: Sentence, Equatable {
     // MARK: Implement Custom[Debug]StringConvertible
     var description: String {
+        /// Make a description based off of the sentence
+        func makeDescription(sen: Sentence) -> String {
+            if let sen = sen as? ComplexSentence {
+                // For unary sentences with an atomic right sentence, ignore
+                // wrapping parentheses around the sentence
+                if sen.isUnary && sen.sentences.right is AtomicSentence {
+                    return "\(sen.`operator`)\(sen.sentences.right)"
+                } else {
+                    return "(\(sen.description))"
+                }
+            } else {
+                return sen.description
+            }
+        }
+        let rhs = self.sentences.right
+        let rhsDescription = makeDescription(rhs)
         if self.isBinary {
             let lhs = self.sentences.left!
-            let rhs = self.sentences.right
-            let lhsDescription = lhs is ComplexSentence ? "(\(lhs))" : lhs.description
-            let rhsDescription = rhs is ComplexSentence ? "(\(rhs))" : rhs.description
+            let lhsDescription = makeDescription(lhs)
             return "\(lhsDescription) \(self.`operator`.rawValue) \(rhsDescription)"
         } else {
-            return "\(self.`operator`.rawValue)\(self.sentences.right)"
+            return "\(self.`operator`.rawValue)\(rhsDescription)"
         }
     }
     
