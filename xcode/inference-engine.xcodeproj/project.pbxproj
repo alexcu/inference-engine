@@ -9,17 +9,19 @@
 /* Begin PBXBuildFile section */
 		FA58BAEE1CCD101000A3C0FB /* Int+nthBit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58BAED1CCD101000A3C0FB /* Int+nthBit.swift */; };
 		FA6786F01CCE4E0000EDD988 /* TruthTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */; };
-		FA6786F21CCEF48C00EDD988 /* Literal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F11CCEF48C00EDD988 /* Literal.swift */; };
 		FA6786F41CCEF55500EDD988 /* PropositionalSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */; };
 		FA6786F71CCEF8A300EDD988 /* PropositionalSymbolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F51CCEF89A00EDD988 /* PropositionalSymbolTests.swift */; };
 		FA6786F81CCEF8A500EDD988 /* PropositionalSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */; };
-		FA6786FB1CCEF92A00EDD988 /* LiteralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F91CCEF92100EDD988 /* LiteralTests.swift */; };
-		FA6786FC1CCEF94E00EDD988 /* Literal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F11CCEF48C00EDD988 /* Literal.swift */; };
+		FA6787001CCF052600EDD988 /* ComplexSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786FF1CCF052600EDD988 /* ComplexSentence.swift */; };
+		FA6787021CCF055700EDD988 /* AtomicSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6787011CCF055700EDD988 /* AtomicSentence.swift */; };
+		FA6787061CCF08E100EDD988 /* ComplexSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786FF1CCF052600EDD988 /* ComplexSentence.swift */; };
+		FA6787071CCF08E100EDD988 /* AtomicSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6787011CCF055700EDD988 /* AtomicSentence.swift */; };
+		FA6787081CCF09DF00EDD988 /* AtomicSentenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6787041CCF08C800EDD988 /* AtomicSentenceTests.swift */; };
 		FA72DAFC1CCE4951000ADC59 /* TokeniserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72DAFB1CCE4951000ADC59 /* TokeniserTests.swift */; };
 		FA72DAFD1CCE4965000ADC59 /* Tokeniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */; };
 		FA72DAFE1CCE49B8000ADC59 /* LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */; };
 		FAA069BF1CC762F50039A495 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069BE1CC762F50039A495 /* main.swift */; };
-		FAA069CC1CC763300039A495 /* SentenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069CB1CC763300039A495 /* SentenceTests.swift */; };
+		FAA069CC1CC763300039A495 /* ComplexSentenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069CB1CC763300039A495 /* ComplexSentenceTests.swift */; };
 		FAA069D21CC763AF0039A495 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D11CC763AF0039A495 /* BinaryTree.swift */; };
 		FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */; };
 		FAA069D81CC76D760039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Sentence.swift */; };
@@ -44,15 +46,16 @@
 /* Begin PBXFileReference section */
 		FA58BAED1CCD101000A3C0FB /* Int+nthBit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+nthBit.swift"; sourceTree = "<group>"; };
 		FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruthTable.swift; sourceTree = "<group>"; };
-		FA6786F11CCEF48C00EDD988 /* Literal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Literal.swift; sourceTree = "<group>"; };
 		FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropositionalSymbol.swift; sourceTree = "<group>"; };
 		FA6786F51CCEF89A00EDD988 /* PropositionalSymbolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropositionalSymbolTests.swift; sourceTree = "<group>"; };
-		FA6786F91CCEF92100EDD988 /* LiteralTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiteralTests.swift; sourceTree = "<group>"; };
+		FA6786FF1CCF052600EDD988 /* ComplexSentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexSentence.swift; sourceTree = "<group>"; };
+		FA6787011CCF055700EDD988 /* AtomicSentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSentence.swift; sourceTree = "<group>"; };
+		FA6787041CCF08C800EDD988 /* AtomicSentenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSentenceTests.swift; sourceTree = "<group>"; };
 		FA72DAFB1CCE4951000ADC59 /* TokeniserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokeniserTests.swift; sourceTree = "<group>"; };
 		FAA069BB1CC762F50039A495 /* inference-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "inference-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA069BE1CC762F50039A495 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FAA069C91CC763300039A495 /* inference-engine-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "inference-engine-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA069CB1CC763300039A495 /* SentenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceTests.swift; sourceTree = "<group>"; };
+		FAA069CB1CC763300039A495 /* ComplexSentenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSentenceTests.swift; sourceTree = "<group>"; };
 		FAA069CD1CC763300039A495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAA069D11CC763AF0039A495 /* BinaryTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeNode.swift; sourceTree = "<group>"; };
@@ -80,6 +83,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA6787031CCF080800EDD988 /* Sentences */ = {
+			isa = PBXGroup;
+			children = (
+				FAA069D71CC76D760039A495 /* Sentence.swift */,
+				FA6786FF1CCF052600EDD988 /* ComplexSentence.swift */,
+				FA6787011CCF055700EDD988 /* AtomicSentence.swift */,
+			);
+			name = Sentences;
+			sourceTree = "<group>";
+		};
 		FAA069B21CC762F50039A495 = {
 			isa = PBXGroup;
 			children = (
@@ -104,14 +117,13 @@
 				FAA069D11CC763AF0039A495 /* BinaryTree.swift */,
 				FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */,
 				FAA069BE1CC762F50039A495 /* main.swift */,
-				FAA069D71CC76D760039A495 /* Sentence.swift */,
+				FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */,
+				FA6787031CCF080800EDD988 /* Sentences */,
 				FAF28A0C1CCDFAFF00299BA7 /* LogicalOperators.swift */,
 				FA58BAED1CCD101000A3C0FB /* Int+nthBit.swift */,
 				FAF28A081CCDF9F500299BA7 /* FileParser.swift */,
 				FAF28A0A1CCDFA1100299BA7 /* Tokeniser.swift */,
 				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
-				FA6786F11CCEF48C00EDD988 /* Literal.swift */,
-				FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */,
 			);
 			name = "Inference Engine";
 			path = "inference-engine";
@@ -120,11 +132,11 @@
 		FAA069CA1CC763300039A495 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				FAA069CB1CC763300039A495 /* SentenceTests.swift */,
+				FAA069CB1CC763300039A495 /* ComplexSentenceTests.swift */,
+				FA6787041CCF08C800EDD988 /* AtomicSentenceTests.swift */,
+				FAA069CD1CC763300039A495 /* Info.plist */,
 				FA72DAFB1CCE4951000ADC59 /* TokeniserTests.swift */,
 				FA6786F51CCEF89A00EDD988 /* PropositionalSymbolTests.swift */,
-				FA6786F91CCEF92100EDD988 /* LiteralTests.swift */,
-				FAA069CD1CC763300039A495 /* Info.plist */,
 			);
 			name = Tests;
 			path = "inference-engine-tests";
@@ -226,8 +238,9 @@
 				FA58BAEE1CCD101000A3C0FB /* Int+nthBit.swift in Sources */,
 				FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */,
 				FAF28A0B1CCDFA1100299BA7 /* Tokeniser.swift in Sources */,
-				FA6786F21CCEF48C00EDD988 /* Literal.swift in Sources */,
 				FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */,
+				FA6787021CCF055700EDD988 /* AtomicSentence.swift in Sources */,
+				FA6787001CCF052600EDD988 /* ComplexSentence.swift in Sources */,
 				FA6786F01CCE4E0000EDD988 /* TruthTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,14 +250,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA72DAFE1CCE49B8000ADC59 /* LogicalOperators.swift in Sources */,
+				FA6787071CCF08E100EDD988 /* AtomicSentence.swift in Sources */,
+				FA6787081CCF09DF00EDD988 /* AtomicSentenceTests.swift in Sources */,
+				FA6787061CCF08E100EDD988 /* ComplexSentence.swift in Sources */,
 				FA6786F71CCEF8A300EDD988 /* PropositionalSymbolTests.swift in Sources */,
-				FA6786FC1CCEF94E00EDD988 /* Literal.swift in Sources */,
 				FA72DAFC1CCE4951000ADC59 /* TokeniserTests.swift in Sources */,
 				FAA069DB1CC774750039A495 /* Sentence.swift in Sources */,
 				FA72DAFD1CCE4965000ADC59 /* Tokeniser.swift in Sources */,
-				FA6786FB1CCEF92A00EDD988 /* LiteralTests.swift in Sources */,
 				FA6786F81CCEF8A500EDD988 /* PropositionalSymbol.swift in Sources */,
-				FAA069CC1CC763300039A495 /* SentenceTests.swift in Sources */,
+				FAA069CC1CC763300039A495 /* ComplexSentenceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

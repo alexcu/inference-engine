@@ -1,55 +1,56 @@
 //
-//  LiteralTests.swift
+//  AtomicSentenceTests.swift
 //  inference-engine
 //
-//  Created by Alex on 25/04/2016.
+//  Created by Alex on 26/04/2016.
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
 import XCTest
 
-class LiteralTests: XCTestCase {
-    func testLiteralAsTrue() {
-        let symbol = Literal(atom: "p")
+class AtomicSentenceTests: XCTestCase {
+    func testAtomicSentenceAsTrue() {
+        let symbol = AtomicSentence("p")
         XCTAssertEqual(symbol.atom, PropositionalSymbol(symbol: "p"))
         XCTAssertTrue(symbol.isPositive)
         XCTAssertFalse(symbol.isNegative)
     }
     
-    func testLiteralAsFalse() {
-        let symbol = Literal(atom: "p", isPositive: false)
+    func testAtomicSentenceAsFalse() {
+        let symbol = AtomicSentence("p", false)
         XCTAssertEqual(symbol.atom, PropositionalSymbol(symbol: "p"))
         XCTAssertFalse(symbol.isPositive)
         XCTAssertTrue(symbol.isNegative)
     }
     
-    func testLiteralAsPropositionalLiteralTrue() {
+    func testAtomicSentenceAsPropositionalAtomicSentenceTrue() {
         let ps = PropositionalSymbol(symbol: "p")
-        let symbol = Literal(atom: ps)
+        let symbol = AtomicSentence(ps)
         XCTAssertEqual(symbol.atom, ps)
         XCTAssertTrue(symbol.isPositive)
         XCTAssertFalse(symbol.isNegative)
     }
     
-    func testLiteralAsPropositionalLiteralFalse() {
+    func testAtomicSentenceAsPropositionalAtomicSentenceFalse() {
         let ps = PropositionalSymbol(symbol: "p")
-        let symbol = Literal(atom: ps, isPositive: false)
+        let symbol = AtomicSentence(ps, false)
         XCTAssertEqual(symbol.atom, ps)
         XCTAssertFalse(symbol.isPositive)
         XCTAssertTrue(symbol.isNegative)
     }
     
-    func testLiteralAsAlwaysTrue() {
-        let symbol = Literal(atom: PropositionalSymbol.True)
+    func testAtomicSentenceAsAlwaysTrue() {
+        let symbol = AtomicSentence(PropositionalSymbol.True)
         XCTAssertEqual(symbol.atom, PropositionalSymbol.True)
         XCTAssertTrue(symbol.isPositive)
         XCTAssertFalse(symbol.isNegative)
     }
     
-    func testLiteralAsAlwaysFalse() {
-        let symbol = Literal(atom: PropositionalSymbol.False)
+    func testAtomicSentenceAsAlwaysFalse() {
+        let symbol = AtomicSentence(PropositionalSymbol.False)
         XCTAssertEqual(symbol.atom, PropositionalSymbol.False)
         XCTAssertFalse(symbol.isPositive)
         XCTAssertTrue(symbol.isNegative)
     }
 }
+

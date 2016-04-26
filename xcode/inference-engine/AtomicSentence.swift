@@ -1,5 +1,5 @@
 //
-//  Literal.swift
+//  AtomicSentence.swift
 //  inference-engine
 //
 //  Created by Alex on 26/04/2016.
@@ -7,26 +7,29 @@
 //
 
 ///
-/// A literal is either an atomic sentence (a positive literal) or a negated
+/// A truthy atomic sentence (a positive literal) or a negated
 /// atomic sentence (a negative literal).
 ///
-struct Literal {
+struct AtomicSentence: Sentence {
+    // MARK: Implement Custom[Debug]StringConvertible
+    var description: String {
+        return self.atom.symbol
+    }
+    var debugDescription: String {
+        return self.description
+    }
+
+    // MARK: Implement Sentence
+    let isPositive: Bool
+    var isNegative: Bool {
+        return !isPositive
+    }
+    
+    
     ///
     /// The underlying Propositional Symbol is an atom.
     ///
     let atom: PropositionalSymbol
-    
-    ///
-    /// Truth of the literal.
-    ///
-    let isPositive: Bool
-    
-    ///
-    /// False of the literal.
-    ///
-    var isNegative: Bool {
-        return !isPositive
-    }
     
     ///
     /// Initialiser for a literal
@@ -35,7 +38,7 @@ struct Literal {
     /// - Remarks: if atom is `true` or `false` literals, then `isPositive`
     ///            is ignored
     ///
-    init(atom: PropositionalSymbol, isPositive: Bool = true) {
+    init(_ atom: PropositionalSymbol, _ isPositive: Bool = true) {
         self.atom = atom
         // if the atom is `true` or `false`, we need to override the value
         // of isPositive here
@@ -47,8 +50,9 @@ struct Literal {
     /// - Parameter atom: The atomic sentence comprising the literal
     /// - Paramater isPositive: The truth of the symbol; defaults to `true`
     ///
-    init(atom: String, isPositive: Bool = true) {
+    init(_ atom: String, _ isPositive: Bool = true) {
         self.atom = PropositionalSymbol(symbol: atom)
         self.isPositive = isPositive
     }
 }
+

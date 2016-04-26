@@ -24,7 +24,7 @@ class PropositionalSymbolTests: XCTestCase {
     }
     
     func testFalsePropositionalSymbol() {
-        let symbol = PropositionalSymbol.True
+        let symbol = PropositionalSymbol.False
         XCTAssertEqual(symbol.symbol, "false")
         XCTAssertTrue(symbol.isFalse)
         XCTAssertFalse(symbol.isTrue)

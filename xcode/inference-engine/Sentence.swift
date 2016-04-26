@@ -6,68 +6,103 @@
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
+let foo = 1
+
 // Represents logical entailment (does entail and does NOT entail)
 infix operator |=   { }
 infix operator |/=  { }
 
+// Represents logical negation (NOT)
+infix operator ! { precedence 1 }
+prefix func !(lhs: Sentence) -> ComplexSentence {
+    return lhs.negate()
+}
+// Represents logical conjunction (AND)
+infix operator & { precedence 2 }
+func &(lhs: Sentence, rhs: Sentence) -> ComplexSentence {
+    return lhs.conjunctWith(rhs)
+}
+// Represents logical disjunction (OR)
+infix operator | { precedence 3 }
+func |(lhs: Sentence, rhs: Sentence) -> ComplexSentence {
+    return lhs.disjoinWith(rhs)
+}
+// Represents logical implication
+infix operator  => { precedence 4 }
+func =>(lhs: Sentence, rhs: Sentence) -> ComplexSentence {
+    return lhs.implicateWith(rhs)
+}
 // Represents logical biconditional
-infix operator <=> { }
-func <=>(lhs: Sentence, rhs: Sentence) -> Sentence {
+infix operator <=> { precedence 5 }
+func <=>(lhs: Sentence, rhs: Sentence) -> ComplexSentence {
     return lhs.biconditionallyImplicateWith(rhs)
 }
 
-// Represents logical implication
-infix operator  => { }
-func =>(lhs: Sentence, rhs: Sentence) -> Sentence {
-    return lhs.implicateWith(rhs)
+///
+/// A sentence is the basic unit of logical expression. It is either a
+/// complex sentence, consisting of operators and other sentences, or a 
+/// single atomic sentence consisting of just a propoistional symbol.
+/// - Remarks: Refer to the BNF defined in <i>AIMA</i>, p293
+///
+protocol Sentence: CustomStringConvertible, CustomDebugStringConvertible {
+    ///
+    /// Bidirectionally implicates this sentence with another sentence
+    ///
+    func biconditionallyImplicateWith(other: Sentence) -> ComplexSentence
+    ///
+    /// Implicates this sentence with another sentence
+    ///
+    func implicateWith(other: Sentence) -> ComplexSentence
+    ///
+    /// Disjoins this sentence with another sentence
+    ///
+    func disjoinWith(other: Sentence) -> ComplexSentence
+    ///
+    /// Conjuncts this sentence with another sentence
+    ///
+    func conjunctWith(other: Sentence) -> ComplexSentence
+    ///
+    /// Negates this sentence
+    ///
+    func negate() -> ComplexSentence
+    ///
+    /// Returns `true` iff the sentence is negative
+    ///
+    var isNegative: Bool { get }
+    ///
+    /// Returns `true` iff the sentence is positive
+    ///
+    var isPositive: Bool { get }
 }
 
-// Represents logical disjunction (OR)
-func |(lhs: Sentence, rhs: Sentence) -> Sentence {
-    return lhs.disjoinWith(rhs)
-}
-
-// Represents logical conjunction (AND)
-func &(lhs: Sentence, rhs: Sentence) -> Sentence {
-    return lhs.conjunctWith(rhs)
-}
-// Represents logical negation (NOT)
-prefix func !(lhs: Sentence) -> Sentence {
-    return lhs.negate()
-}
-
-struct Sentence {
-    let symbol: String
-    let truth: Bool
-
-    init(symbol: String, truth: Bool = true) {
-        self.symbol = symbol
-        self.truth = truth
+extension Sentence {
+    var isNegative: Bool {
+        return !self.isPositive
     }
-
-    func biconditionallyImplicateWith(other: Sentence) -> Sentence {
+    
+    func biconditionallyImplicateWith(other: Sentence) -> ComplexSentence {
         // Bidirectional eliminiation equivalence
         return (self => other) & (other => self)
     }
 
-    func implicateWith(other: Sentence) -> Sentence {
+    func implicateWith(other: Sentence) -> ComplexSentence {
         // Implication elimination equivalence
         return !self | other
     }
 
-    func disjoinWith(other: Sentence) -> Sentence {
-        let symbol = "\(self.symbol)|\(other.symbol)"
-        let truth = self.truth || other.truth
-        return Sentence(symbol: symbol, truth: truth)
+    func disjoinWith(other: Sentence) -> ComplexSentence {
+        return ComplexSentence(leftSentence: self,
+                               operator: .Disjoin,
+                               rightSentence: other)
     }
 
-    func conjunctWith(other: Sentence) -> Sentence {
-        let symbol = "\(self.symbol)&\(other.symbol)"
-        let truth = self.truth && other.truth
-        return Sentence(symbol: symbol, truth: truth)
+    func conjunctWith(other: Sentence) -> ComplexSentence {
+        return ComplexSentence(leftSentence: self,
+                               operator: .Conjoin,
+                               rightSentence: other)
     }
 
-    func negate() -> Sentence {
-        return Sentence(symbol: "!\(self.symbol)", truth: !self.truth)
+    func negate() -> ComplexSentence {
+        return ComplexSentence(operator: .Negate, sentences: self)
     }
 }
