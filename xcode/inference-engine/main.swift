@@ -7,7 +7,7 @@
 //
 
 do {
-    let sentence = try SentenceParser.sharedParser.parse("!u => (q & b) | a")
+    let sentence = try SentenceParser.sharedParser.parse("(!u => q) & b | a")    
     print(sentence)
 } catch {
     print(error)

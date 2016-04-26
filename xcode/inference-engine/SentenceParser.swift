@@ -118,82 +118,65 @@ struct SentenceParser {
     /// returns `nil`
     ///
     private func topAsOperator(stack: Stack<Expressionable>) -> LogicalOperator? {
-        if stack.isEmpty {
-            return nil
-        } else {
-            let topOfStack = stack.top()!
+        if let topOfStack = stack.top {
             // Is the top of the stack an operator?
             if LogicalOperator.isOperator(topOfStack) {
                 return topOfStack as? LogicalOperator
-            } else {
-                return nil
             }
         }
+        return nil
     }
-    
-    ///
-    /// Returns the top of the stack as a `LogicalOperator` if possible, else
-    /// returns `nil`
-    ///
-    private func topAsParenthesis(stack: Stack<Expressionable>) -> Parenthesis? {
-        if stack.isEmpty {
-            return nil
-        } else {
-            let topOfStack = stack.top()!
-            // Is the top of the stack an operator?
-            if let paren = Parenthesis.init(rawValue: topOfStack.description) {
-                return paren
-            } else {
-                return nil
-            }
-        }
-    }
-    
+
     ///
     /// Tries to form a sentence with the stacks provided
     /// - Paramater symbols: The symbols parsed
     /// - Paramater operators: The operators parsed
     ///
-    private func formSentence(symbols: [PropositionalSymbol], operators: [LogicalOperator]) throws -> Sentence {
-        var symbols   = Array(symbols.reverse())
-        var operators = Array(operators.reverse())
-        if symbols.isEmpty {
+    private func formSentence(queue: Queue<Expressionable>) throws -> Sentence {
+        var queue = queue
+        var sentenceStack = Stack<Sentence>()
+        if queue.isEmpty {
             throw ParserError.NeedOneSymbol
         }
-        var sentence: Sentence = AtomicSentence(symbols.popLast()!)
-        while !symbols.isEmpty {
-            let next = (
-                symbol: symbols.popLast()!,
-                oper:   operators.popLast()
-            )
+        if !(queue.first is PropositionalSymbol) {
+            fatalError("Cannot have operator at start... something went wrong")
+        }
+        while !queue.isEmpty {
+            let next = queue.dequeue()
+            // Unwrap the next propoisitonal symbol
+            if let symbol = next as? PropositionalSymbol {
+                sentenceStack.push(AtomicSentence(symbol))
+            }
             // Unwrap the next operator
-            if let oper = next.oper {
+            else if let oper = next as? LogicalOperator {
                 // If operator is binary, then we apply the operator and pop the
                 // next symbol to apply it to the sentence
                 // (i.e., P & Q)
                 if oper.isBinary {
                     // Can't pop?
                     // (i.e., P &)
-                    let rhsEl = AtomicSentence(next.symbol)
-                    sentence = ComplexSentence(leftSentence: sentence,
-                                               operator: oper,
-                                               rightSentence: rhsEl)
+                    let rhsSentence = sentenceStack.pop()
+                    let lhsSentence = sentenceStack.pop()
+                    let complexSentence = ComplexSentence(leftSentence: lhsSentence,
+                                                          operator: oper,
+                                                          rightSentence: rhsSentence)
+                    sentenceStack.push(complexSentence)
                 } else {
                     // Unary operator? Expect next symbol to be .Negate
                     if oper != .Negate {
                         throw ParserError.InvalidSyntax
                     } else {
-                        sentence = !sentence
+                        sentenceStack.push(!sentenceStack.pop())
                     }
                 }
-            } else if !symbols.isEmpty && operators.isEmpty {
+            } else if !(queue.isEmpty) || sentenceStack.elements.count != 1 {
                 // Still have more symbols and no more operators?
                 // (i.e., P Q R)
                 throw ParserError.InvalidSyntax
             }
 
         }
-        return sentence
+        return sentenceStack.pop()
     }
 
     
@@ -204,7 +187,7 @@ struct SentenceParser {
     /// - Throws: A `SentenceParser.ParserError` if could not be parsed
     /// - Returns: A new sentence parsed from the expression
     ///
-    func parse(expression: String) throws -> String {
+    func parse(expression: String) throws -> Sentence {
         // Remove all whitespace from expression
         let expression = String(expression.lowercaseString.characters.filter({$0 != " "}))
 
@@ -244,7 +227,7 @@ struct SentenceParser {
                     stack.push(Parenthesis.Left)
                 } else {
                     // Until the token at the top of the stack is a left parenthesis
-                    while !stack.isEmpty && stack.top()!.description != Parenthesis.Left.rawValue {
+                    while !stack.isEmpty && stack.top!.description != Parenthesis.Left.rawValue {
                         // pop operators off the stack onto the output queue
                         output.enqueue(stack.pop())
                     }
@@ -263,7 +246,7 @@ struct SentenceParser {
         }
         
         // While there are still operator tokens in the stack:
-        while let topOfStack = stack.top() where LogicalOperator.isOperator(topOfStack) {
+        while let topOfStack = stack.top where LogicalOperator.isOperator(topOfStack) {
             output.enqueue(stack.pop())
         }
         
@@ -272,6 +255,6 @@ struct SentenceParser {
             throw ParserError.MismatchedParentheses
         }
         
-        return output.elements.description
+        return try formSentence(output)
     }
 }

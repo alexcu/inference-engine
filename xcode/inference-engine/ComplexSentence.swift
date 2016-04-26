@@ -14,7 +14,11 @@ struct ComplexSentence: Sentence, Equatable {
     // MARK: Implement Custom[Debug]StringConvertible
     var description: String {
         if self.isBinary {
-            return "(\(self.sentences.left!))\(self.`operator`.rawValue)(\(self.sentences.right))"
+            let lhs = self.sentences.left!
+            let rhs = self.sentences.right
+            let lhsDescription = lhs is ComplexSentence ? "(\(lhs))" : lhs.description
+            let rhsDescription = rhs is ComplexSentence ? "(\(rhs))" : rhs.description
+            return "\(lhsDescription) \(self.`operator`.rawValue) \(rhsDescription)"
         } else {
             return "\(self.`operator`.rawValue)\(self.sentences.right)"
         }

@@ -21,7 +21,15 @@ struct Stack<T> {
     var isEmpty: Bool {
         return elements.isEmpty
     }
-    
+
+    ///
+    /// Returns the topmost element on the top of the stack
+    /// - Returns: An optional element that was at the top
+    ///
+    var top: T? {
+        return elements.last
+    }
+
     ///
     /// Push a new element onto the top of the stack
     /// - Paramater element: The element to push
@@ -36,14 +44,6 @@ struct Stack<T> {
     ///
     mutating func pop() -> T {
         return elements.removeLast()
-    }
-    
-    ///
-    /// Returns the topmost element on the top of the stack
-    /// - Returns: An optional element that was at the top
-    ///
-    func top() -> T? {
-        return elements.last
     }
 }
 
@@ -62,7 +62,15 @@ struct Queue<T> {
     var isEmpty: Bool {
         return elements.isEmpty
     }
-    
+
+    ///
+    /// Returns the firstmost element at the start of the queue
+    /// - Returns: An optional element that was at the start
+    ///
+    var first: T? {
+        return elements.first
+    }
+
     ///
     /// Enqueues a new element at the start of the queue
     /// - Paramater element: The element to enqueue
@@ -78,4 +86,13 @@ struct Queue<T> {
     mutating func dequeue() -> T {
         return elements.removeFirst()
     }
+
+    func reverse() -> Queue<T> {
+        var newQueue = Queue<T>()
+        for el in self.elements.reverse() {
+            newQueue.enqueue(el)
+        }
+        return newQueue
+    }
+
 }
