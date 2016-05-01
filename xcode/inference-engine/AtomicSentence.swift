@@ -29,6 +29,16 @@ struct AtomicSentence: Sentence, Equatable {
         return self.atom.symbol == other.atom.symbol && self.isPositive && other.isPositive
     }
     
+    func applyModel(model: Model) -> Sentence {
+        // Truth exists in this model for this atom?
+        if let truth = model[self.atom] {
+            // Return a new atomic sentence with this atom with the truth found
+            return AtomicSentence(self.atom, truth)
+        } else {
+            return self
+        }
+    }
+    
     var symbols: Set<PropositionalSymbol> {
         return Set(arrayLiteral: self.atom)
     }

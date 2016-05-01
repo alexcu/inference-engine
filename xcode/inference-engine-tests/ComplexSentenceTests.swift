@@ -133,4 +133,40 @@ class ComplexSentenceTests: XCTestCase {
         ])
         XCTAssertEqual(expected, actual)
     }
+    
+    func testModelApplication() {
+        var model = [
+            PropositionalSymbol(symbol: "B"): false
+        ]
+        
+        var sentence = try! SentenceParser.sharedParser.parse("A & B")
+        XCTAssert(sentence.applyModel(model).isNegative) // A & !B
+        
+        sentence = try! SentenceParser.sharedParser.parse("A | B")
+        XCTAssert(sentence.applyModel(model).isPositive) // A | !B
+        
+        sentence = try! SentenceParser.sharedParser.parse("A & !B")
+        XCTAssert(sentence.applyModel(model).isPositive) // A & !!B
+        
+        sentence = try! SentenceParser.sharedParser.parse("A & B => C")
+        XCTAssert(sentence.applyModel(model).isPositive) // A & !B => C
+        
+        sentence = try! SentenceParser.sharedParser.parse("A & B => C")
+        XCTAssert(sentence.applyModel(model).isPositive) // A & !B => C
+        
+        model = [
+            PropositionalSymbol(symbol: "C"): false
+        ]
+        
+        sentence = try! SentenceParser.sharedParser.parse("A & B => C")
+        XCTAssert(sentence.applyModel(model).isNegative) // A & B => !C
+        
+        model = [
+            PropositionalSymbol(symbol: "B"): false,
+            PropositionalSymbol(symbol: "C"): false
+        ]
+        
+        sentence = try! SentenceParser.sharedParser.parse("A & B <=> C")
+        XCTAssert(sentence.applyModel(model).isPositive) // A & !B => !C
+    }
 }

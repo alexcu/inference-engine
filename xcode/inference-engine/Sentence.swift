@@ -6,10 +6,6 @@
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
-// Represents logical entailment (does entail and does NOT entail)
-infix operator |=   { }
-infix operator |/=  { }
-
 // Represents logical negation (NOT)
 infix operator ! { precedence 1 }
 prefix func !(lhs: Sentence) -> ComplexSentence {
@@ -79,6 +75,18 @@ protocol Sentence: CustomStringConvertible {
     /// Comparator
     ///
     func isEqual(other: Sentence) -> Bool
+    ///
+    /// Applies the model provided to the sentence
+    /// - Paramater model: The model to apply
+    /// - Returns: A new sentence that has the model applied to it
+    ///
+    func applyModel(model: Model) -> Sentence
+    ///
+    /// Applies the model provided to the sentence
+    /// - Paramater model: The model to apply
+    /// - Returns: A new sentence that has the model applied to it
+    ///
+    func applyModel(model: ModelLiteralType) -> Sentence
 }
 
 extension Sentence {
@@ -110,6 +118,11 @@ extension Sentence {
 
     func negate() -> ComplexSentence {
         return ComplexSentence(operator: .Negate, sentences: self)
+    }
+    
+    func applyModel(model: ModelLiteralType) -> Sentence {
+        let model = Model(elements: model)
+        return self.applyModel(model)
     }
 }
 

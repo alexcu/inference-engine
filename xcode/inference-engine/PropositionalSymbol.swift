@@ -53,7 +53,7 @@ struct PropositionalSymbol: Hashable, CustomStringConvertible, Equatable {
     /// Initialises a new symbol with the given textual representation
     ///
     init(symbol: String) {
-        self.symbol = symbol
+        self.symbol = symbol.lowercaseString // always lowercase symbols for convenience
         if [PropositionalSymbol.True.symbol,
             PropositionalSymbol.False.symbol].contains(self.symbol) {
             fatalError("Cannot construct symbols with true or false. Use the singletons instead")

@@ -1,57 +1,66 @@
-////
-////  TruthTable.swift
-////  inference-engine
-////
-////  Created by Alex on 25/04/2016.
-////  Copyright © 2016 Alex. All rights reserved.
-////
 //
-/////
-///// TruthTable entails query
-//struct TruthTable: Queryable {
-//    ///
-//    /// A model is a set of atomic sentences associated to their boolean assignments
-//    ///
-//    typealias Model = [Symbol:Bool]
-//    
-//    let symbols: Set<Symbol>
-//    init(symbols: [Symbol]) {
-//        self.init(symbols: Set(symbols))
-//    }
-//    init(symbols: Set<Symbol>) {
-//        self.symbols = symbols
-//    }
-//    func query(query: Symbol) -> Bool {
-//        let symbols = Array(self.symbols)
-//        let model  = Model()
-//        
-//        return self.query(query, symbols: symbols, model: model)
-//    }
-//    private func query(query: Symbol, symbols: [Symbol], model: Model) -> Bool {
-//        var symbols = symbols
-//        let model = model
-//        func extendModel(proposition: Symbol, _ value: Bool) -> Model {
-//            var newModel = model
-//            newModel[proposition] = value
-//            return newModel
-//        }
-//        if !symbols.isEmpty {
-//            let proposition = symbols.removeFirst()
-//            let truthyBranch = self.query(query,
-//                                          symbols: symbols,
-//                                          model: extendModel(proposition, true))
-//            let falsyBranch = self.query(query,
-//                                         symbols: symbols,
-//                                         model: extendModel(proposition, true))
-//            return truthyBranch && falsyBranch
-//        } else {
-////            if KnowledgeBase.sharedKnowledgeBase() |= query {
-////                return query |= model
-////            } else {
-////                return true
-////            }
-//            print(model)
-//            return true
-//        }
-//    }
-//}
+//  TruthTable.swift
+//  inference-engine
+//
+//  Created by Alex on 25/04/2016.
+//  Copyright © 2016 Alex. All rights reserved.
+//
+
+// Represents logical entailment (does entail and does NOT entail)
+infix operator |=   { }
+
+func |=(sentence: Sentence, model: Model) -> Bool {
+    return sentence.applyModel(model).isPositive
+}
+func |=(knowledgeBase: KnowledgeBase, model: Model) -> Bool {
+    return knowledgeBase.sentence.applyModel(model).isPositive
+}
+
+///
+/// TruthTable entails query
+///
+struct TruthTable {
+    ///
+    /// Symbols is a set of propositional symbols
+    ///
+    private typealias Symbols = Set<PropositionalSymbol>
+    
+    ///
+    /// Use the truth table method to see if the provided `query` can be entailed
+    /// from the given knowledge base, `kb`
+    ///
+    func entails(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> Bool {
+        let model  = Model()
+        let symbols = kb.symbols
+
+        return self.entails(kb, query: query, symbols: symbols, model: model)
+    }
+    
+    ///
+    /// Recursive entailment function
+    ///
+    private func entails(kb: KnowledgeBase, query: Sentence, symbols: Symbols, model: Model) -> Bool {
+        var symbols = symbols        
+        if symbols.isEmpty {
+            // Knowledge base is positive when model applied?
+            if kb.sentence.applyModel(model).isPositive {
+                // Query is positive when model applied?
+                return query.applyModel(model).isPositive
+            } else {
+                // when KB does not entail model always return true
+                return true
+            }
+        } else {
+            let proposition = symbols.removeFirst()
+            let truthyBranch = self.entails(kb,
+                                            query: query,
+                                            symbols: symbols,
+                                            model: model.extend(proposition, true))
+            let falsyBranch = self.entails(kb,
+                                           query: query,
+                                           symbols: symbols,
+                                           model: model.extend(proposition, true))
+            return truthyBranch && falsyBranch
+        }
+    }
+}

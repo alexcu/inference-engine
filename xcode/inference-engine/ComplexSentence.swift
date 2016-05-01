@@ -57,6 +57,18 @@ struct ComplexSentence: Sentence, Equatable {
         }
     }
     
+    func applyModel(model: Model) -> Sentence {
+        let newRhsSentence = self.sentences.right.applyModel(model)
+        if self.isBinary {
+            let newLhsSentence = self.sentences.left!.applyModel(model)
+            return ComplexSentence(leftSentence: newLhsSentence,
+                                   operator: self.`operator`,
+                                   rightSentence: newRhsSentence)
+        } else {
+            return ComplexSentence(operator: self.`operator`, sentences: newRhsSentence)
+        }
+    }
+    
     var isNegative: Bool {
         return !self.isPositive
     }
