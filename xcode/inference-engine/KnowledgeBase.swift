@@ -26,11 +26,9 @@ struct KnowledgeBase {
     ///
     var sentence: Sentence {
         // Always at least two sentences
-        let sentence = ComplexSentence(leftSentence: self.sentences.first!,
-                                       operator: .Conjoin,
-                                       rightSentence: self.sentences.last!)
+        let sentence = self.sentences.first!
         // Reduce the rest
-        return sentences.reduce(sentence) { (memo: ComplexSentence, sentence: Sentence) in
+        return sentences.dropFirst().reduce(sentence) { (memo: Sentence, sentence: Sentence) in
             ComplexSentence(leftSentence: memo,
                             operator: .Conjoin,
                             rightSentence: sentence)
@@ -41,8 +39,8 @@ struct KnowledgeBase {
     /// Initialises a KB with a set of percepts
     ///
     init(percepts: [Sentence]) {
-        if percepts.count < 2 {
-            fatalError("Must initialise knowledge base with at least two percepts")
+        if percepts.isEmpty {
+            fatalError("Must initialise knowledge base with at least one percept")
         }
         self.sentences = percepts
         self.symbols = Set(percepts.flatMap { $0.symbols })
