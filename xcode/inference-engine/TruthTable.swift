@@ -29,38 +29,40 @@ struct TruthTable {
     /// Use the truth table method to see if the provided `query` can be entailed
     /// from the given knowledge base, `kb`
     ///
-    func entails(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> Bool {
+    func entailCount(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> Int {
         let model  = Model()
         let symbols = kb.symbols
 
-        return self.entails(kb, query: query, symbols: symbols, model: model)
+        return self.entailCount(kb, query: query, symbols: symbols, model: model, count: 0)
     }
     
     ///
     /// Recursive entailment function
     ///
-    private func entails(kb: KnowledgeBase, query: Sentence, symbols: Symbols, model: Model) -> Bool {
-        var symbols = symbols        
+    private func entailCount(kb: KnowledgeBase, query: Sentence, symbols: Symbols, model: Model, count: Int) -> Int {
+        var symbols = symbols
         if symbols.isEmpty {
             // Knowledge base is positive when model applied?
             if kb.sentence.applyModel(model).isPositive {
                 // Query is positive when model applied?
-                return query.applyModel(model).isPositive
+                if query.applyModel(model).isPositive {
+                    return count + 1
+                }
             } else {
-                // when KB does not entail model always return true
-                return true
+                return count
             }
-        } else {
-            let proposition = symbols.removeFirst()
-            let truthyBranch = self.entails(kb,
+        }
+        let proposition = symbols.popFirst()!
+        let truthyBranch = self.entailCount(kb,
                                             query: query,
                                             symbols: symbols,
-                                            model: model.extend(proposition, true))
-            let falsyBranch = self.entails(kb,
+                                            model: model.extend(proposition, true),
+                                            count: count)
+        let falsyBranch = self.entailCount(kb,
                                            query: query,
                                            symbols: symbols,
-                                           model: model.extend(proposition, true))
-            return truthyBranch && falsyBranch
-        }
+                                           model: model.extend(proposition, false),
+                                           count: count)
+        return count + truthyBranch + falsyBranch
     }
 }
