@@ -18,6 +18,7 @@
 		FA6787081CCF09DF00EDD988 /* AtomicSentenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6787041CCF08C800EDD988 /* AtomicSentenceTests.swift */; };
 		FA6857821CD5EAD5005B5F01 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6857811CD5EAD5005B5F01 /* Model.swift */; };
 		FA6857831CD5ED56005B5F01 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6857811CD5EAD5005B5F01 /* Model.swift */; };
+		FA6857861CD5F0A8005B5F01 /* TruthTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6857841CD5F0A6005B5F01 /* TruthTableTests.swift */; };
 		FA72DAFC1CCE4951000ADC59 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72DAFB1CCE4951000ADC59 /* ParserTests.swift */; };
 		FA963A731CCF914600C424F5 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D11CC763AF0039A495 /* BinaryTree.swift */; };
 		FA963A741CCF914600C424F5 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */; };
@@ -66,6 +67,7 @@
 		FA6787011CCF055700EDD988 /* AtomicSentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSentence.swift; sourceTree = "<group>"; };
 		FA6787041CCF08C800EDD988 /* AtomicSentenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSentenceTests.swift; sourceTree = "<group>"; };
 		FA6857811CD5EAD5005B5F01 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		FA6857841CD5F0A6005B5F01 /* TruthTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruthTableTests.swift; sourceTree = "<group>"; };
 		FA72DAFB1CCE4951000ADC59 /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		FAA069BB1CC762F50039A495 /* inference-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "inference-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA069BE1CC762F50039A495 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				FAA069CD1CC763300039A495 /* Info.plist */,
 				FA72DAFB1CCE4951000ADC59 /* ParserTests.swift */,
 				FA6786F51CCEF89A00EDD988 /* PropositionalSymbolTests.swift */,
+				FA6857841CD5F0A6005B5F01 /* TruthTableTests.swift */,
 			);
 			name = Tests;
 			path = "inference-engine-tests";
@@ -286,6 +289,7 @@
 				FA6786F71CCEF8A300EDD988 /* PropositionalSymbolTests.swift in Sources */,
 				FA963A7D1CCF914600C424F5 /* KnowledgeBase.swift in Sources */,
 				FA963A7C1CCF914600C424F5 /* Queryable.swift in Sources */,
+				FA6857861CD5F0A8005B5F01 /* TruthTableTests.swift in Sources */,
 				FA963A741CCF914600C424F5 /* BinaryTreeNode.swift in Sources */,
 				FA963A7E1CCF914600C424F5 /* ADTs.swift in Sources */,
 				FA963A7B1CCF914600C424F5 /* TruthTable.swift in Sources */,
