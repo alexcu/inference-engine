@@ -72,6 +72,10 @@ protocol Sentence: CustomStringConvertible {
     ///
     var isPositive: Bool { get }
     ///
+    /// Returns the propositional symbols in this sentence
+    ///
+    var symbols: Set<PropositionalSymbol> { get }
+    ///
     /// Comparator
     ///
     func isEqual(other: Sentence) -> Bool

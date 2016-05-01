@@ -9,10 +9,15 @@
 ///
 /// A symbol which stands for a proposition that can `true` or `false`.
 ///
-struct PropositionalSymbol: CustomStringConvertible, Equatable {
+struct PropositionalSymbol: Hashable, CustomStringConvertible, Equatable {
     // MARK: CustomStringConvertible
     var description: String {
         return self.symbol
+    }
+    
+    // MARK: Hashable
+    var hashValue: Int {
+        return self.symbol.hashValue
     }
     
     ///

@@ -29,6 +29,10 @@ struct AtomicSentence: Sentence, Equatable {
         return self.atom.symbol == other.atom.symbol && self.isPositive && other.isPositive
     }
     
+    var symbols: Set<PropositionalSymbol> {
+        return Set(arrayLiteral: self.atom)
+    }
+    
     ///
     /// The underlying Propositional Symbol is an atom.
     ///

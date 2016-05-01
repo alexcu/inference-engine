@@ -78,6 +78,16 @@ struct ComplexSentence: Sentence, Equatable {
         }
     }
     
+    var symbols: Set<PropositionalSymbol> {
+        var set = Set<PropositionalSymbol>()
+        let rhsSymbols = self.sentences.right.symbols
+        set.unionInPlace(rhsSymbols)
+        if let lhsSymbols = self.sentences.left?.symbols {
+            set.unionInPlace(lhsSymbols)
+        }
+        return set
+    }
+    
     ///
     /// The logical operator that connects this sentence
     ///

@@ -119,4 +119,18 @@ class ComplexSentenceTests: XCTestCase {
         XCTAssert((try3a | try3b).isPositive)
         XCTAssert((p & q | !r | p & q | p & !r).isPositive)
     }
+    
+    func testSymbols() {
+        let actual = try! SentenceParser.sharedParser.parse("p1 => p2 & (p3 & p6) & p7 | !p4 <=> p5").symbols
+        let expected = Set<PropositionalSymbol>([
+            PropositionalSymbol(symbol: "p1"),
+            PropositionalSymbol(symbol: "p2"),
+            PropositionalSymbol(symbol: "p3"),
+            PropositionalSymbol(symbol: "p6"),
+            PropositionalSymbol(symbol: "p7"),
+            PropositionalSymbol(symbol: "p4"),
+            PropositionalSymbol(symbol: "p5")
+        ])
+        XCTAssertEqual(expected, actual)
+    }
 }
