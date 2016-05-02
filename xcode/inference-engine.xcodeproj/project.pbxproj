@@ -29,7 +29,7 @@
 		FA963A791CCF914600C424F5 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A081CCDF9F500299BA7 /* FileParser.swift */; };
 		FA963A7A1CCF914600C424F5 /* SentenceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */; };
 		FA963A7B1CCF914600C424F5 /* TruthTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */; };
-		FA963A7C1CCF914600C424F5 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4D1CCF375700D513D5 /* Queryable.swift */; };
+		FA963A7C1CCF914600C424F5 /* EntailmentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */; };
 		FA963A7D1CCF914600C424F5 /* KnowledgeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */; };
 		FA963A7E1CCF914600C424F5 /* ADTs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B511CCF454C00D513D5 /* ADTs.swift */; };
 		FAA069BF1CC762F50039A495 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069BE1CC762F50039A495 /* main.swift */; };
@@ -38,7 +38,7 @@
 		FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */; };
 		FAA069D81CC76D760039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Sentence.swift */; };
 		FAA069DB1CC774750039A495 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069D71CC76D760039A495 /* Sentence.swift */; };
-		FAD77B4E1CCF375700D513D5 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4D1CCF375700D513D5 /* Queryable.swift */; };
+		FAD77B4E1CCF375700D513D5 /* EntailmentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */; };
 		FAD77B501CCF37B900D513D5 /* KnowledgeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */; };
 		FAD77B521CCF454C00D513D5 /* ADTs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B511CCF454C00D513D5 /* ADTs.swift */; };
 		FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A081CCDF9F500299BA7 /* FileParser.swift */; };
@@ -77,7 +77,7 @@
 		FAA069D11CC763AF0039A495 /* BinaryTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		FAA069D31CC763BB0039A495 /* BinaryTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeNode.swift; sourceTree = "<group>"; };
 		FAA069D71CC76D760039A495 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
-		FAD77B4D1CCF375700D513D5 /* Queryable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queryable.swift; sourceTree = "<group>"; };
+		FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntailmentMethod.swift; sourceTree = "<group>"; };
 		FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeBase.swift; sourceTree = "<group>"; };
 		FAD77B511CCF454C00D513D5 /* ADTs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADTs.swift; sourceTree = "<group>"; };
 		FAF28A081CCDF9F500299BA7 /* FileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */,
 				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
 				FA6857811CD5EAD5005B5F01 /* Model.swift */,
-				FAD77B4D1CCF375700D513D5 /* Queryable.swift */,
+				FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */,
 				FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */,
 				FAD77B511CCF454C00D513D5 /* ADTs.swift */,
 			);
@@ -268,7 +268,7 @@
 				FAF28A0B1CCDFA1100299BA7 /* SentenceParser.swift in Sources */,
 				FAA069D41CC763BB0039A495 /* BinaryTreeNode.swift in Sources */,
 				FA6787021CCF055700EDD988 /* AtomicSentence.swift in Sources */,
-				FAD77B4E1CCF375700D513D5 /* Queryable.swift in Sources */,
+				FAD77B4E1CCF375700D513D5 /* EntailmentMethod.swift in Sources */,
 				FA6787001CCF052600EDD988 /* ComplexSentence.swift in Sources */,
 				FA6786F01CCE4E0000EDD988 /* TruthTable.swift in Sources */,
 			);
@@ -288,7 +288,7 @@
 				FA6787061CCF08E100EDD988 /* ComplexSentence.swift in Sources */,
 				FA6786F71CCEF8A300EDD988 /* PropositionalSymbolTests.swift in Sources */,
 				FA963A7D1CCF914600C424F5 /* KnowledgeBase.swift in Sources */,
-				FA963A7C1CCF914600C424F5 /* Queryable.swift in Sources */,
+				FA963A7C1CCF914600C424F5 /* EntailmentMethod.swift in Sources */,
 				FA6857861CD5F0A8005B5F01 /* TruthTableTests.swift in Sources */,
 				FA963A741CCF914600C424F5 /* BinaryTreeNode.swift in Sources */,
 				FA963A7E1CCF914600C424F5 /* ADTs.swift in Sources */,

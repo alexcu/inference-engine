@@ -6,40 +6,38 @@
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
-// Represents logical entailment (does entail and does NOT entail)
-infix operator |=   { }
-
-func |=(sentence: Sentence, model: Model) -> Bool {
-    return sentence.applyModel(model).isPositive
-}
-func |=(knowledgeBase: KnowledgeBase, model: Model) -> Bool {
-    return knowledgeBase.sentence.applyModel(model).isPositive
-}
-
 ///
-/// TruthTable entails query
+/// A truth table is an entailment method that uses truth tables to entail an
+/// `EntailmentResponse` when queried
 ///
-struct TruthTable {
+struct TruthTable: EntailmentMethod {
+    // MARK: Implement EntailmentMethod
+    func entail(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> EntailmentResponse {
+        // Use private entail using the kb's symbols, a fresh model, and a count of 0
+        return self.entail(query: query,
+                           fromKnowledgeBase: kb,
+                           usingSymbols: kb.symbols,
+                           usingModel: Model(),
+                           previousCount: 0)
+    }
+
     ///
     /// Symbols is a set of propositional symbols
     ///
     private typealias Symbols = Set<PropositionalSymbol>
     
     ///
-    /// Use the truth table method to see if the provided `query` can be entailed
-    /// from the given knowledge base, `kb`
+    /// Recursive entailment function that returns a count of the number of models the
+    /// query can be entailed from the knowledge base
+    /// - Remarks: Equivalent to the `TT-CHECK-ALL` function
+    /// - Parameter kb: The knowledge base to entail from
+    /// - Parameter query: The query to ask
+    /// - Parameter symbols: The current symbols that can be used to entail the response
+    /// - Parameter model: The existing model that is being used in the entailment
+    /// - Parameter count: The current count of the number of models in the truth table
+    /// - Returns: The number of times the query can be entailed from the knowledge base
     ///
-    func entailCount(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> Int {
-        let model  = Model()
-        let symbols = kb.symbols
-
-        return self.entailCount(kb, query: query, symbols: symbols, model: model, count: 0)
-    }
-    
-    ///
-    /// Recursive entailment function
-    ///
-    private func entailCount(kb: KnowledgeBase, query: Sentence, symbols: Symbols, model: Model, count: Int) -> Int {
+    private func entail(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase, usingSymbols symbols: Symbols, usingModel model: Model, previousCount count: Int) -> Int {
         var symbols = symbols
         if symbols.isEmpty {
             // Knowledge base is positive when model applied?
@@ -53,16 +51,15 @@ struct TruthTable {
             }
         }
         let proposition = symbols.popFirst()!
-        let truthyBranch = self.entailCount(kb,
-                                            query: query,
-                                            symbols: symbols,
-                                            model: model.extend(proposition, true),
-                                            count: count)
-        let falsyBranch = self.entailCount(kb,
-                                           query: query,
-                                           symbols: symbols,
-                                           model: model.extend(proposition, false),
-                                           count: count)
-        return count + truthyBranch + falsyBranch
+        // Recursively use the entail count using both truth and false branches
+        // extending the model with the proposition popped above from the symbols
+        // and assigning it to the current truth from the truth array below
+        return [true, false].reduce(count) { reducedCount, truth in
+            reducedCount + self.entail(query: query,
+                                fromKnowledgeBase: kb,
+                                usingSymbols: symbols,
+                                usingModel: model.extend(proposition, truth),
+                                previousCount: count)
+        }
     }
 }

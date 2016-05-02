@@ -18,7 +18,7 @@ class TruthTableTests: XCTestCase {
         
         let kb = KnowledgeBase.init(percepts: sentences)
         let query = try! SentenceParser.sharedParser.parse("w")
-        XCTAssertEqual(TruthTable().entailCount(query: query, fromKnowledgeBase: kb), 1)
+        XCTAssertEqual(TruthTable().entail(query: query, fromKnowledgeBase: kb) as? Int, 1)
     }
     func testComplex() {
         let sentences = [
@@ -36,7 +36,7 @@ class TruthTableTests: XCTestCase {
         
         let kb = KnowledgeBase.init(percepts: sentences)
         let query = try! SentenceParser.sharedParser.parse("d")
-        XCTAssertEqual(TruthTable().entailCount(query: query, fromKnowledgeBase: kb), 3)
+        XCTAssertEqual(TruthTable().entail(query: query, fromKnowledgeBase: kb) as? Int, 3)
     }
 }
 
