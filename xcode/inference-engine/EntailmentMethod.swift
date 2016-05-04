@@ -16,7 +16,7 @@ extension Int: EntailmentResponse {}
 extension AtomicSentence: EntailmentResponse {}
 
 ///
-/// An entailment method s
+/// An entailment method
 ///
 protocol EntailmentMethod {
     ///

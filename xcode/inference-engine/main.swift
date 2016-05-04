@@ -14,6 +14,9 @@ struct Launcher {
     // MARK: Singleton
     static let sharedLauncher = Launcher()
 
+    // MARK: Type aliases
+    private typealias KnowledgeQueryPair = (kb: KnowledgeBase, query: Sentence)
+
     // MARK: Launch Errors
 
     ///
@@ -48,7 +51,29 @@ struct Launcher {
         }
     }
 
-    // MARK: GUI Type
+    // MARK: Entailment Method Codes
+
+    ///
+    /// Possible parsable methods from the command line
+    ///
+    private enum EntailmentMethodLiteral: String, EntailmentMethod {
+        case TruthTable = "TT"
+
+        // Implement EntailmentMethod
+        func entail(kbQueryPair: KnowledgeQueryPair) -> EntailmentResponse {
+            return self.entail(query: kbQueryPair.query,
+                               fromKnowledgeBase: kbQueryPair.kb)
+        }
+
+        func entail(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> EntailmentResponse {
+            switch self {
+            case .TruthTable:
+                return TruthTable.entail(query: query,
+                                         fromKnowledgeBase: kb)
+            }
+        }
+
+    }
 
     // MARK: Help descriptions
 
@@ -100,7 +125,7 @@ struct Launcher {
     /// - Parameter path: The path of the file to parse
     /// - Returns: A tuple containing the knowledge base and query to ask
     ///
-    private func parseFile(path: String) throws -> (kb: KnowledgeBase, query: Sentence) {
+    private func parseFile(path: String) throws -> KnowledgeQueryPair {
         // Read the file
         guard let contents = FileParser.readFile(path) else {
             throw LaunchError.FileUnreadable
@@ -108,10 +133,10 @@ struct Launcher {
         // Support Windows carriage–returns
         let splitBy = Character(contents.characters.contains("\r\n") ? "\r\n" : "\n")
         let lines = contents.characters .split(splitBy)
-                                        .filter({!$0.isEmpty})
+                                        .filter({!$0.isEmpty}) // remove empty lines
                                         .map({String($0)})
         // Count of lines must be 4
-        let correctFormat = lines.count == 4 && lines[0] == "ASK" && lines[2] == "TELL"
+        let correctFormat = lines.count == 4 && lines[0] == "TELL" && lines[2] == "ASK"
         if !correctFormat {
             throw LaunchError.UnexpectedFileFormat
         }
@@ -127,4 +152,62 @@ struct Launcher {
             query: query
         )
     }
+
+    ///
+    /// Parses program argumenrts
+    /// - Returns: An entailment method literal
+    ///
+    private func parseArgs() throws -> (EntailmentMethodLiteral, KnowledgeQueryPair) {
+        // Strip the args
+        var args = Process.arguments.enumerate().generate()
+        var kbQueryPair: KnowledgeQueryPair?
+        var entailmentMethod: EntailmentMethodLiteral?
+        // Look for extra arguments
+        while let arg = args.next() {
+            // Default to index positions
+            switch arg.index {
+            // Filename
+            case 1:
+                let filename = arg.element
+                // Try parse provided file
+                kbQueryPair = try parseFile(filename)
+            // Entailment method
+            case 2:
+                if let tryEntailmentMethod = EntailmentMethodLiteral(rawValue: arg.element) {
+                    entailmentMethod = tryEntailmentMethod
+                } else {
+                    throw LaunchError.InvalidMethodProvided
+                }
+            default:
+                // Don't handle
+                break
+            }
+        }
+        return (entailmentMethod!, kbQueryPair!)
+    }
+
+    // MARK: Entry point
+
+    ///
+    /// Entry point of the solver
+    ///
+    func run() throws {
+        do {
+            // Process args when argc is at least 2 else print help
+            if Process.argc > 2 {
+                let (entailmentMethod, kbQueryPair) = try parseArgs()
+                entailmentMethod.entail(kbQueryPair)
+            }
+            print(self.helpText)
+        } catch let error as Launcher.LaunchError {
+            throw error
+        }
+    }
+}
+
+
+do {
+    try Launcher.sharedLauncher.run()
+} catch let error as Launcher.LaunchError {
+    print(error.message)
 }
