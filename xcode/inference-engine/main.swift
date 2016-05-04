@@ -57,7 +57,7 @@ struct Launcher {
     /// Possible parsable methods from the command line
     ///
     private enum EntailmentMethodLiteral: String, EntailmentMethod {
-        case TruthTable = "TT"
+        case TruthTableLiteral = "TT"
 
         // Implement EntailmentMethod
         func entail(kbQueryPair: KnowledgeQueryPair) -> EntailmentResponse {
@@ -67,8 +67,8 @@ struct Launcher {
 
         func entail(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> EntailmentResponse {
             switch self {
-            case .TruthTable:
-                return TruthTable.entail(query: query,
+            case .TruthTableLiteral:
+                return TruthTable().entail(query: query,
                                          fromKnowledgeBase: kb)
             }
         }
@@ -196,7 +196,7 @@ struct Launcher {
             // Process args when argc is at least 2 else print help
             if Process.argc > 2 {
                 let (entailmentMethod, kbQueryPair) = try parseArgs()
-                entailmentMethod.entail(kbQueryPair)
+                return print(entailmentMethod.entail(kbQueryPair))
             }
             print(self.helpText)
         } catch let error as Launcher.LaunchError {
