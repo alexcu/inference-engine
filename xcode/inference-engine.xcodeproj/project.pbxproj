@@ -104,6 +104,52 @@
 			name = Sentences;
 			sourceTree = "<group>";
 		};
+		FA6AEF541CD97A2C00C38764 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FAF28A081CCDF9F500299BA7 /* FileParser.swift */,
+				FAD77B511CCF454C00D513D5 /* ADTs.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		FA6AEF551CD97A6900C38764 /* Tokeniser */ = {
+			isa = PBXGroup;
+			children = (
+				FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */,
+				FAF28A0C1CCDFAFF00299BA7 /* LogicalOperator.swift */,
+				FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */,
+			);
+			name = Tokeniser;
+			sourceTree = "<group>";
+		};
+		FA6AEF561CD97A7800C38764 /* Propositional Logic */ = {
+			isa = PBXGroup;
+			children = (
+				FA6AEF571CD97A8400C38764 /* Entailment Methods */,
+				FA6AEF581CD97A8B00C38764 /* ADTs */,
+			);
+			name = "Propositional Logic";
+			sourceTree = "<group>";
+		};
+		FA6AEF571CD97A8400C38764 /* Entailment Methods */ = {
+			isa = PBXGroup;
+			children = (
+				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
+				FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */,
+			);
+			name = "Entailment Methods";
+			sourceTree = "<group>";
+		};
+		FA6AEF581CD97A8B00C38764 /* ADTs */ = {
+			isa = PBXGroup;
+			children = (
+				FA6857811CD5EAD5005B5F01 /* Model.swift */,
+				FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */,
+			);
+			name = ADTs;
+			sourceTree = "<group>";
+		};
 		FAA069B21CC762F50039A495 = {
 			isa = PBXGroup;
 			children = (
@@ -126,16 +172,10 @@
 			isa = PBXGroup;
 			children = (
 				FAA069BE1CC762F50039A495 /* main.swift */,
-				FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */,
+				FA6AEF551CD97A6900C38764 /* Tokeniser */,
 				FA6787031CCF080800EDD988 /* Sentences */,
-				FAF28A0C1CCDFAFF00299BA7 /* LogicalOperator.swift */,
-				FAF28A081CCDF9F500299BA7 /* FileParser.swift */,
-				FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */,
-				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
-				FA6857811CD5EAD5005B5F01 /* Model.swift */,
-				FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */,
-				FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */,
-				FAD77B511CCF454C00D513D5 /* ADTs.swift */,
+				FA6AEF541CD97A2C00C38764 /* Utilities */,
+				FA6AEF561CD97A7800C38764 /* Propositional Logic */,
 			);
 			name = "Inference Engine";
 			path = "inference-engine";
