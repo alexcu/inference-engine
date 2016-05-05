@@ -103,7 +103,7 @@ struct ComplexSentence: Sentence, Equatable {
     ///
     /// The logical operator that connects this sentence
     ///
-    let `operator`: LogicalOperator
+    let `operator`: Connective
     
     ///
     /// The set of other sentences that comprise this sentence
@@ -129,7 +129,7 @@ struct ComplexSentence: Sentence, Equatable {
     /// - Paramater operator: The operator of these sentences
     /// - Paramater sentences: The other sentences that make up this sentence
     ///
-    init(`operator`: LogicalOperator, sentences: Sentence...) {
+    init(`operator`: Connective, sentences: Sentence...) {
         // Check validity
         if sentences.isEmpty {
             fatalError("A complex sentence needs at least one sentence")
@@ -152,7 +152,7 @@ struct ComplexSentence: Sentence, Equatable {
     /// - Paramater operator: The operator in between these two sentence
     /// - Paramater rightSentence: The sentence on the right-hand side of the operator
     ///
-    init(leftSentence: Sentence, `operator`: LogicalOperator, rightSentence: Sentence) {
+    init(leftSentence: Sentence, `operator`: Connective, rightSentence: Sentence) {
         // Construct using the other constructor
         self = ComplexSentence.init(operator: `operator`, sentences: leftSentence, rightSentence)
     }
@@ -160,7 +160,7 @@ struct ComplexSentence: Sentence, Equatable {
     ///
     /// Returns `true` iff the `operator` specified is this part of this sentence
     ///
-    func isSentenceKind(`operator`: LogicalOperator) -> Bool {
+    func isSentenceKind(`operator`: Connective) -> Bool {
         return `operator` == self.`operator`
     }
 }

@@ -1,12 +1,12 @@
 //
-//  LogicalOperators.swift
+//  Connectives.swift
 //  inference-engine
 //
 //  Created by Alex on 25/04/2016.
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
-enum LogicalOperator: String, CustomStringConvertible, Comparable {
+enum Connective: String, CustomStringConvertible, Comparable {
     // MARK: Implement CustomStringConvertible
     var description: String {
         return self.rawValue
@@ -26,12 +26,12 @@ enum LogicalOperator: String, CustomStringConvertible, Comparable {
     ///
     /// A disjoin operator, representing a logical OR
     ///
-    case Disjoin = "|"
+    case Disjoin = "\\/"
     
     ///
     /// A negate operator, representing a logical NOT
     ///
-    case Negate = "!"
+    case Negate = "~"
     
     ///
     /// A implication operator, represetning a logical implication
@@ -44,16 +44,16 @@ enum LogicalOperator: String, CustomStringConvertible, Comparable {
     case Biconditional = "<=>"
     
     ///
-    /// Checks if the string provided represents a case of a `LogicalOperator`
-    /// - Returns: `true` iff `string` is a `LogicalOperator`
+    /// Checks if the string provided represents a case of a `Connective`
+    /// - Returns: `true` iff `string` is a `Connective`
     ///
     static func isOperator(string: String) -> Bool {
-        return LogicalOperator(rawValue: string) != nil
+        return Connective(rawValue: string) != nil
     }
     
     ///
-    /// Checks if the character provided represents a case of a `LogicalOperator`
-    /// - Returns: `true` iff `char` is a `LogicalOperator`
+    /// Checks if the character provided represents a case of a `Connective`
+    /// - Returns: `true` iff `char` is a `Connective`
     ///
     static func isOperator(char: Character) -> Bool {
         return self.isOperator(String(char))
@@ -62,13 +62,13 @@ enum LogicalOperator: String, CustomStringConvertible, Comparable {
     ///
     /// Returns all logical operators sorted by their `precedence` value
     ///
-    static var all: [LogicalOperator] {
+    static var all: [Connective] {
         return [
-            LogicalOperator.Biconditional,
-            LogicalOperator.Implicate,
-            LogicalOperator.Conjoin,
-            LogicalOperator.Disjoin,
-            LogicalOperator.Negate
+            Connective.Biconditional,
+            Connective.Implicate,
+            Connective.Conjoin,
+            Connective.Disjoin,
+            Connective.Negate
         ].sort({$0.precedence < $1.precedence})
     }
     
@@ -78,11 +78,11 @@ enum LogicalOperator: String, CustomStringConvertible, Comparable {
     ///
     var precedence: Int {
         return [
-            LogicalOperator.Negate:         1,
-            LogicalOperator.Conjoin:        2,
-            LogicalOperator.Disjoin:        3,
-            LogicalOperator.Implicate:      4,
-            LogicalOperator.Biconditional:  5
+            Connective.Negate:         1,
+            Connective.Conjoin:        2,
+            Connective.Disjoin:        3,
+            Connective.Implicate:      4,
+            Connective.Biconditional:  5
         ][self]!
     }
     
@@ -110,7 +110,7 @@ enum LogicalOperator: String, CustomStringConvertible, Comparable {
 }
 
 // MARK: Implement Comparable
-func <(lhs: LogicalOperator, rhs: LogicalOperator) -> Bool {
+func <(lhs: Connective, rhs: Connective) -> Bool {
     return (lhs.associativity == .Left && lhs.precedence == rhs.precedence) ||
             lhs.precedence < rhs.precedence
 }

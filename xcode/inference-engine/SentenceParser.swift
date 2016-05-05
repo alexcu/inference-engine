@@ -9,16 +9,16 @@
 ///
 /// Expressional is a private protocol representing anything which can
 /// be expressed in parsing, that is, a `PropositionalSymbol` and a
-/// `LogicalOperator`, as well as `Parentheses`s
+/// `Connective`, as well as `Parentheses`s
 ///
 private protocol Expressionable: CustomStringConvertible {}
 extension PropositionalSymbol   : Expressionable {}
-extension LogicalOperator       : Expressionable {
+extension Connective       : Expressionable {
     ///
     /// Provide an isOperator function for expressionable value types
     ///
     private static func isOperator(expression: Expressionable) -> Bool {
-        return LogicalOperator.isOperator(expression.description)
+        return Connective.isOperator(expression.description)
     }
 }
 
@@ -66,7 +66,7 @@ struct SentenceParser {
         (alpha: [Character], numeric: [Character], operators: [Character]) = (
         alpha: (97...97+25).map({ Character(UnicodeScalar($0)) }),
         numeric: (0...9).map { Character(String($0)) },
-        operators: Array(Set(LogicalOperator.all.map({$0.rawValue.characters}).flatMap({$0})))
+        operators: Array(Set(Connective.all.map({$0.rawValue.characters}).flatMap({$0})))
     )
     
     ///
@@ -89,7 +89,7 @@ struct SentenceParser {
         }
         return SentenceParser.parserCharacters.operators.contains(char)
             // not a operator iteself... parsing part of a token!
-            && !LogicalOperator.isOperator(char)
+            && !Connective.isOperator(char)
     }
     
     ///
@@ -114,14 +114,14 @@ struct SentenceParser {
     }
     
     ///
-    /// Returns the top of the stack as a `LogicalOperator` if possible, else
+    /// Returns the top of the stack as a `Connective` if possible, else
     /// returns `nil`
     ///
-    private func topAsOperator(stack: Stack<Expressionable>) -> LogicalOperator? {
-        if let topOfStack = stack.top {
+    private func topAsOperator(stack: Stack<Expressionable>) -> Connective? {
+    if let topOfStack = stack.top {
             // Is the top of the stack an operator?
-            if LogicalOperator.isOperator(topOfStack) {
-                return topOfStack as? LogicalOperator
+            if Connective.isOperator(topOfStack) {
+                return topOfStack as? Connective
             }
         }
         return nil
@@ -148,7 +148,7 @@ struct SentenceParser {
                 sentenceStack.push(AtomicSentence(symbol))
             }
             // Unwrap the next operator
-            else if let oper = next as? LogicalOperator {
+            else if let oper = next as? Connective {
                 // If operator is binary, then we apply the operator and pop the
                 // next symbol to apply it to the sentence
                 // (i.e., P & Q)
@@ -207,10 +207,10 @@ struct SentenceParser {
                 output.enqueue(PropositionalSymbol(symbol: symbol))
             }
             // Is the token an operator?
-            else if isOperator(nextToken) || LogicalOperator.isOperator(nextToken) {
+            else if isOperator(nextToken) || Connective.isOperator(nextToken) {
                 // Form a token from this
                 let oper = parseToken(&tokens, token: nextToken, until: isOperator)
-                if let oper = LogicalOperator(rawValue: oper) {
+                if let oper = Connective(rawValue: oper) {
                     // While there is a operator on the top of the stack and it
                     // has a lower precedence than oper?
                     while let topOfStack = topAsOperator(stack) where oper > topOfStack {
@@ -246,7 +246,7 @@ struct SentenceParser {
         }
         
         // While there are still operator tokens in the stack:
-        while let topOfStack = stack.top where LogicalOperator.isOperator(topOfStack) {
+        while let topOfStack = stack.top where Connective.isOperator(topOfStack) {
             output.enqueue(stack.pop())
         }
         

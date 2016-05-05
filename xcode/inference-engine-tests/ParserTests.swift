@@ -13,10 +13,10 @@ class ParserTests: XCTestCase {
         let sentenceDict: [String: String] = [
             "p => q": "p => q",
             "p & q => r": "(p & q) => r",
-            "p | q & r => s": "(p | (q & r)) => s",
-            "p <=> q & r & !s | !t": "p <=> (((q & r) & !s) | !t)",
-            "!p | !s & r <=> q & t & !p => !t": "(!p | (!s & r)) <=> (((q & t) & !p) => !t)",
-            "(p | q) & (!s => r & t | v)": "(p | q) & (!s => ((r & t) | v))"
+            "p \\/ q & r => s": "(p \\/ (q & r)) => s",
+            "p <=> q & r & ~s \\/ ~t": "p <=> (((q & r) & ~s) \\/ ~t)",
+            "~p \\/ ~s & r <=> q & t & ~p => ~t": "(~p \\/ (~s & r)) <=> (((q & t) & ~p) => ~t)",
+            "(p \\/ q) & (~s => r & t \\/ v)": "(p \\/ q) & (~s => ((r & t) \\/ v))"
         ]
 
         for (sentence, desc) in sentenceDict {

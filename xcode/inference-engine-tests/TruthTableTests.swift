@@ -12,8 +12,8 @@ class TruthTableTests: XCTestCase {
     func testRainWet() {
         let sentences = [
             "r",
-            "!u",
-            "r&!u=>w"
+            "~u",
+            "r&~u=>w"
         ].map({try! SentenceParser.sharedParser.parse($0)})
         
         let kb = KnowledgeBase.init(percepts: sentences)
