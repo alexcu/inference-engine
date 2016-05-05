@@ -87,13 +87,29 @@ protocol Sentence: CustomStringConvertible {
     /// - Returns: A new sentence that has the model applied to it
     ///
     func applyModel(model: ModelLiteralType) -> Sentence
+    ///
+    /// Description of truth
+    ///
+    var truthDescription: String { get }
 }
 
 extension Sentence {
     var isNegative: Bool {
         return !self.isPositive
     }
-    
+
+    var truthDescription: String {
+        return String(self.description.characters.map({ char in
+            if let sym = self.symbols.filter({ symbol in
+                symbol.symbol == String(char)
+            }).first {
+                return sym.isTrue ? "t" : "f"
+            } else {
+                return char
+            }
+        }))
+    }
+
     func biconditionallyImplicateWith(other: Sentence) -> ComplexSentence {
         // Bidirectional eliminiation equivalence
         return (self => other) & (other => self)

@@ -45,13 +45,4 @@ struct KnowledgeBase {
         self.sentences = percepts
         self.symbols = Set(percepts.flatMap { $0.symbols })
     }
-    
-    ///
-    /// Ask the knowledge base a query
-    /// - Paramater query: The query to ask
-    /// - Returns: `true` iff the knowledge base entails the query
-    ///
-//    func ask(query: Sentence) -> Bool {
-//        
-//    }
 }

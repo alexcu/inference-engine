@@ -18,6 +18,7 @@
 		FA6857821CD5EAD5005B5F01 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6857811CD5EAD5005B5F01 /* Model.swift */; };
 		FA6857831CD5ED56005B5F01 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6857811CD5EAD5005B5F01 /* Model.swift */; };
 		FA6857861CD5F0A8005B5F01 /* TruthTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6857841CD5F0A6005B5F01 /* TruthTableTests.swift */; };
+		FA6AEF5A1CD97ABB00C38764 /* ForwardChaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AEF591CD97ABB00C38764 /* ForwardChaining.swift */; };
 		FA72DAFC1CCE4951000ADC59 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72DAFB1CCE4951000ADC59 /* ParserTests.swift */; };
 		FA963A751CCF914600C424F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA069BE1CC762F50039A495 /* main.swift */; };
 		FA963A761CCF914600C424F5 /* PropositionalSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */; };
@@ -61,6 +62,7 @@
 		FA6787041CCF08C800EDD988 /* AtomicSentenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSentenceTests.swift; sourceTree = "<group>"; };
 		FA6857811CD5EAD5005B5F01 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FA6857841CD5F0A6005B5F01 /* TruthTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruthTableTests.swift; sourceTree = "<group>"; };
+		FA6AEF591CD97ABB00C38764 /* ForwardChaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardChaining.swift; sourceTree = "<group>"; };
 		FA72DAFB1CCE4951000ADC59 /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		FAA069BB1CC762F50039A495 /* inference-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "inference-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA069BE1CC762F50039A495 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
 				FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */,
+				FA6AEF591CD97ABB00C38764 /* ForwardChaining.swift */,
 			);
 			name = "Entailment Methods";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				FA6857821CD5EAD5005B5F01 /* Model.swift in Sources */,
 				FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */,
 				FAD77B501CCF37B900D513D5 /* KnowledgeBase.swift in Sources */,
+				FA6AEF5A1CD97ABB00C38764 /* ForwardChaining.swift in Sources */,
 				FAF28A0B1CCDFA1100299BA7 /* SentenceParser.swift in Sources */,
 				FA6787021CCF055700EDD988 /* AtomicSentence.swift in Sources */,
 				FAD77B4E1CCF375700D513D5 /* EntailmentMethod.swift in Sources */,

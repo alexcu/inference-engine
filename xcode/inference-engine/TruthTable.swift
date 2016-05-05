@@ -40,6 +40,8 @@ struct TruthTable: EntailmentMethod {
     private func entail(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase, usingSymbols symbols: Symbols, usingModel model: Model, previousCount count: Int) -> Int {
         var symbols = symbols
         if symbols.isEmpty {
+            //print(model)
+            //print(kb.sentence.applyModel(model).truthDescription)
             // Knowledge base is positive when model applied?
             if kb.sentence.applyModel(model).isPositive {
                 // Query is positive when model applied?
