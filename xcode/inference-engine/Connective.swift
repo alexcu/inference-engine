@@ -13,33 +13,33 @@ enum Connective: String, CustomStringConvertible, Comparable {
     }
     
     ///
-    /// Associativity of a Logical Operator
+    /// Associativity of a Logical Connective
     ///
     enum Associativity {
         case Left, Right
     }
     ///
-    /// A conjoin operator, representing a logical AND
+    /// A conjoin connective, representing a logical AND
     ///
     case Conjoin = "&"
     
     ///
-    /// A disjoin operator, representing a logical OR
+    /// A disjoin connective, representing a logical OR
     ///
     case Disjoin = "\\/"
     
     ///
-    /// A negate operator, representing a logical NOT
+    /// A negate connective, representing a logical NOT
     ///
     case Negate = "~"
     
     ///
-    /// A implication operator, represetning a logical implication
+    /// A implication connective, represetning a logical implication
     ///
     case Implicate = "=>"
     
     ///
-    /// A biconditional operator, representing if and only if (`iff`)
+    /// A biconditional connective, representing if and only if (`iff`)
     ///
     case Biconditional = "<=>"
     
@@ -47,7 +47,7 @@ enum Connective: String, CustomStringConvertible, Comparable {
     /// Checks if the string provided represents a case of a `Connective`
     /// - Returns: `true` iff `string` is a `Connective`
     ///
-    static func isOperator(string: String) -> Bool {
+    static func isConnective(string: String) -> Bool {
         return Connective(rawValue: string) != nil
     }
     
@@ -55,12 +55,12 @@ enum Connective: String, CustomStringConvertible, Comparable {
     /// Checks if the character provided represents a case of a `Connective`
     /// - Returns: `true` iff `char` is a `Connective`
     ///
-    static func isOperator(char: Character) -> Bool {
-        return self.isOperator(String(char))
+    static func isConnective(char: Character) -> Bool {
+        return self.isConnective(String(char))
     }
     
     ///
-    /// Returns all logical operators sorted by their `precedence` value
+    /// Returns all logical connectives sorted by their `precedence` value
     ///
     static var all: [Connective] {
         return [
@@ -73,7 +73,7 @@ enum Connective: String, CustomStringConvertible, Comparable {
     }
     
     ///
-    /// Returns the precedence of this operator
+    /// Returns the precedence of this connective
     /// - Remarks: See [Order Of Precdence](https://en.wikipedia.org/wiki/Logical_connective#Order_of_precedence)
     ///
     var precedence: Int {
@@ -87,22 +87,22 @@ enum Connective: String, CustomStringConvertible, Comparable {
     }
     
     ///
-    /// Associativity of the operator
+    /// Associativity of the connective
     ///
     var associativity: Associativity {
         return self == .Negate ? .Right : .Left
     }
     
     ///
-    /// Returns `true` iff the operator is an unary operator (i.e., is `Negate`)
+    /// Returns `true` iff the connective is an unary connective (i.e., is `Negate`)
     ///
     var isUnary: Bool {
-        // Only prefix is a negate operator
+        // Only prefix is a negate connective
         return self == .Negate
     }
     
     ///
-    /// Returns `true` iff the operator is a binary operator (i.e., is not `Negate`)
+    /// Returns `true` iff the connective is a binary connective (i.e., is not `Negate`)
     ///
     var isBinary: Bool {
         return !self.isUnary

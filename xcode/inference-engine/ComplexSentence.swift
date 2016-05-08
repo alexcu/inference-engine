@@ -19,7 +19,7 @@ struct ComplexSentence: Sentence, Equatable {
                 // For unary sentences with an atomic right sentence, ignore
                 // wrapping parentheses around the sentence
                 if sen.isUnary && sen.sentences.right is AtomicSentence {
-                    return "\(sen.`operator`)\(sen.sentences.right)"
+                    return "\(sen.connective)\(sen.sentences.right)"
                 } else {
                     return "(\(sen.description))"
                 }
@@ -32,9 +32,9 @@ struct ComplexSentence: Sentence, Equatable {
         if self.isBinary {
             let lhs = self.sentences.left!
             let lhsDescription = makeDescription(lhs)
-            return "\(lhsDescription) \(self.`operator`.rawValue) \(rhsDescription)"
+            return "\(lhsDescription) \(self.connective.rawValue) \(rhsDescription)"
         } else {
-            return "\(self.`operator`.rawValue)\(rhsDescription)"
+            return "\(self.connective.rawValue)\(rhsDescription)"
         }
     }
     
@@ -43,17 +43,17 @@ struct ComplexSentence: Sentence, Equatable {
         guard let other = (other as? ComplexSentence) else {
             return false
         }
-        let sameOperator = self.`operator` == other.`operator`
+        let sameConnective = self.connective == other.connective
         let sameRight    = self.sentences.right == other.sentences.right
         if let leftSentence = self.sentences.left {
             if let otherLeftSentence = other.sentences.left {
                 let sameLeft = leftSentence == otherLeftSentence
-                return sameLeft && sameRight && sameOperator
+                return sameLeft && sameRight && sameConnective
             } else {
                 return false
             }
         } else {
-            return sameRight && sameOperator
+            return sameRight && sameConnective
         }
     }
     
@@ -62,10 +62,10 @@ struct ComplexSentence: Sentence, Equatable {
         if self.isBinary {
             let newLhsSentence = self.sentences.left!.applyModel(model)
             return ComplexSentence(leftSentence: newLhsSentence,
-                                   operator: self.`operator`,
+                                   connective: self.connective,
                                    rightSentence: newRhsSentence)
         } else {
-            return ComplexSentence(operator: self.`operator`, sentences: newRhsSentence)
+            return ComplexSentence(connective: self.connective, sentences: newRhsSentence)
         }
     }
     
@@ -74,7 +74,7 @@ struct ComplexSentence: Sentence, Equatable {
     }
     
     var isPositive: Bool {
-        switch self.`operator` {
+        switch self.connective {
         case .Negate:
             return !sentences.right.isPositive
         case .Conjoin:
@@ -101,9 +101,9 @@ struct ComplexSentence: Sentence, Equatable {
     }
     
     ///
-    /// The logical operator that connects this sentence
+    /// The logical connective that connects this sentence
     ///
-    let `operator`: Connective
+    let connective: Connective
     
     ///
     /// The set of other sentences that comprise this sentence
@@ -114,33 +114,33 @@ struct ComplexSentence: Sentence, Equatable {
     /// Returns `true` iff the sentence has two sentences and is binary
     ///
     var isBinary: Bool {
-        return self.`operator`.isBinary
+        return self.connective.isBinary
     }
     
     ///
     /// Returns `true` iff the sentence has one sentence is and unary
     ///
     var isUnary: Bool {
-        return self.`operator`.isUnary
+        return self.connective.isUnary
     }
     
     ///
     /// Constructor for a set of sentences
-    /// - Paramater operator: The operator of these sentences
+    /// - Paramater connective: The connective of these sentences
     /// - Paramater sentences: The other sentences that make up this sentence
     ///
-    init(`operator`: Connective, sentences: Sentence...) {
+    init(connective: Connective, sentences: Sentence...) {
         // Check validity
         if sentences.isEmpty {
             fatalError("A complex sentence needs at least one sentence")
-        } else if `operator`.isUnary && sentences.count != 1 {
-            fatalError("Can only provide an unary operator to a sentence with one sentence")
-        } else if `operator`.isBinary && sentences.count != 2 {
-            fatalError("Can only provide a binary operator to two sentences only")
+        } else if connective.isUnary && sentences.count != 1 {
+            fatalError("Can only provide an unary connective to a sentence with one sentence")
+        } else if connective.isBinary && sentences.count != 2 {
+            fatalError("Can only provide a binary connective to two sentences only")
         } else if sentences.count > 2 {
             fatalError("Complex sentences only consist of two sentences")
         }
-        self.`operator` = `operator`
+        self.connective = connective
         let isBinary = sentences.count == 2
         self.sentences.left  = isBinary ? sentences.first! : nil
         self.sentences.right = isBinary ?  sentences.last! : sentences.first!
@@ -148,20 +148,53 @@ struct ComplexSentence: Sentence, Equatable {
     
     ///
     /// Constructs a binary sentence
-    /// - Paramater leftSentence: The sentence on the left-hand side of the operator
-    /// - Paramater operator: The operator in between these two sentence
-    /// - Paramater rightSentence: The sentence on the right-hand side of the operator
+    /// - Paramater leftSentence: The sentence on the left-hand side of the connective
+    /// - Paramater connective: The connective in between these two sentence
+    /// - Paramater rightSentence: The sentence on the right-hand side of the connective
     ///
-    init(leftSentence: Sentence, `operator`: Connective, rightSentence: Sentence) {
+    init(leftSentence: Sentence, connective: Connective, rightSentence: Sentence) {
         // Construct using the other constructor
-        self = ComplexSentence.init(operator: `operator`, sentences: leftSentence, rightSentence)
+        self = ComplexSentence.init(connective: connective, sentences: leftSentence, rightSentence)
     }
     
     ///
-    /// Returns `true` iff the `operator` specified is this part of this sentence
+    /// Returns `true` iff the connective specified is this part of this sentence
     ///
-    func isSentenceKind(`operator`: Connective) -> Bool {
-        return `operator` == self.`operator`
+    func isSentenceKind(connective: Connective) -> Bool {
+        return connective == self.connective
+    }
+    
+    ///
+    /// Returns the count of the connective provided in the complex sentence
+    /// - Paramater connective: The connective to get count of
+    ///
+    func countOfConnective(connective: Connective) -> Int {
+        var count = 0
+        
+        if self.isSentenceKind(connective) {
+            count += 1
+        }
+        if let lhs = sentences.left as? ComplexSentence {
+            count += lhs.countOfConnective(connective)
+        }
+        if let rhs = sentences.right as? ComplexSentence {
+            count += rhs.countOfConnective(connective)
+        }
+        
+        return count
+    }
+    
+    ///
+    /// Returns `true` iff the premise is contained in this complex sentence
+    ///
+    func containsPremise(premise: AtomicSentence) -> Bool {
+        // Only applicable to implication sentences
+        if !self.isSentenceKind(.Implicate) {
+            return false
+        }
+        return sentences.left!.symbols.contains(premise.atom)
+        
+        
     }
 }
 

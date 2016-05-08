@@ -15,10 +15,10 @@ private protocol Expressionable: CustomStringConvertible {}
 extension PropositionalSymbol   : Expressionable {}
 extension Connective       : Expressionable {
     ///
-    /// Provide an isOperator function for expressionable value types
+    /// Provide an isConnective function for expressionable value types
     ///
-    private static func isOperator(expression: Expressionable) -> Bool {
-        return Connective.isOperator(expression.description)
+    private static func isConnective(expression: Expressionable) -> Bool {
+        return Connective.isConnective(expression.description)
     }
 }
 
@@ -47,7 +47,7 @@ struct SentenceParser {
     /// Parser errors when parsing a sentence
     ///
     enum ParserError: ErrorType {
-        case UnknownOperator
+        case UnknownConnective
         case UnknownToken
         case InvalidSyntax
         case NeedOneSymbol
@@ -63,10 +63,10 @@ struct SentenceParser {
     /// The characters which are parsable by the parser
     ///
     static private let parserCharacters:
-        (alpha: [Character], numeric: [Character], operators: [Character]) = (
+        (alpha: [Character], numeric: [Character], connectives: [Character]) = (
         alpha: (97...97+25).map({ Character(UnicodeScalar($0)) }),
         numeric: (0...9).map { Character(String($0)) },
-        operators: Array(Set(Connective.all.map({$0.rawValue.characters}).flatMap({$0})))
+        connectives: Array(Set(Connective.all.map({$0.rawValue.characters}).flatMap({$0})))
     )
     
     ///
@@ -81,15 +81,15 @@ struct SentenceParser {
     }
     
     ///
-    /// Returns `true` iff the token specified is a logical operator character
+    /// Returns `true` iff the token specified is a logical connective character
     ///
-    private func isOperator(token: Token) -> Bool {
+    private func isConnective(token: Token) -> Bool {
         guard let char = token.characters.first else {
             return false
         }
-        return SentenceParser.parserCharacters.operators.contains(char)
-            // not a operator iteself... parsing part of a token!
-            && !Connective.isOperator(char)
+        return SentenceParser.parserCharacters.connectives.contains(char)
+            // not a connective iteself... parsing part of a token!
+            && !Connective.isConnective(char)
     }
     
     ///
@@ -117,10 +117,10 @@ struct SentenceParser {
     /// Returns the top of the stack as a `Connective` if possible, else
     /// returns `nil`
     ///
-    private func topAsOperator(stack: Stack<Expressionable>) -> Connective? {
+    private func topAsConnective(stack: Stack<Expressionable>) -> Connective? {
     if let topOfStack = stack.top {
-            // Is the top of the stack an operator?
-            if Connective.isOperator(topOfStack) {
+            // Is the top of the stack an connective?
+            if Connective.isConnective(topOfStack) {
                 return topOfStack as? Connective
             }
         }
@@ -130,7 +130,7 @@ struct SentenceParser {
     ///
     /// Tries to form a sentence with the stacks provided
     /// - Paramater symbols: The symbols parsed
-    /// - Paramater operators: The operators parsed
+    /// - Paramater connectives: The connectives parsed
     ///
     private func formSentence(queue: Queue<Expressionable>) throws -> Sentence {
         var queue = queue
@@ -139,7 +139,7 @@ struct SentenceParser {
             throw ParserError.NeedOneSymbol
         }
         if !(queue.first is PropositionalSymbol) {
-            fatalError("Cannot have operator at start... something went wrong")
+            fatalError("Cannot have connective at start... something went wrong")
         }
         while !queue.isEmpty {
             let next = queue.dequeue()
@@ -147,9 +147,9 @@ struct SentenceParser {
             if let symbol = next as? PropositionalSymbol {
                 sentenceStack.push(AtomicSentence(symbol))
             }
-            // Unwrap the next operator
+            // Unwrap the next connective
             else if let oper = next as? Connective {
-                // If operator is binary, then we apply the operator and pop the
+                // If connective is binary, then we apply the connective and pop the
                 // next symbol to apply it to the sentence
                 // (i.e., P & Q)
                 if oper.isBinary {
@@ -158,11 +158,11 @@ struct SentenceParser {
                     let rhsSentence = sentenceStack.pop()
                     let lhsSentence = sentenceStack.pop()
                     let complexSentence = ComplexSentence(leftSentence: lhsSentence,
-                                                          operator: oper,
+                                                          connective: oper,
                                                           rightSentence: rhsSentence)
                     sentenceStack.push(complexSentence)
                 } else {
-                    // Unary operator? Expect next symbol to be .Negate
+                    // Unary connective? Expect next symbol to be .Negate
                     if oper != .Negate {
                         throw ParserError.InvalidSyntax
                     } else {
@@ -170,7 +170,7 @@ struct SentenceParser {
                     }
                 }
             } else if !(queue.isEmpty) || sentenceStack.elements.count != 1 {
-                // Still have more symbols and no more operators?
+                // Still have more symbols and no more connectives?
                 // (i.e., P Q R)
                 throw ParserError.InvalidSyntax
             }
@@ -195,7 +195,7 @@ struct SentenceParser {
         var stack  = Stack<Expressionable>()
         var output = Queue<Expressionable>()
         
-        // Decompose the string and parse operators
+        // Decompose the string and parse connectives
         var tokens = expression.characters
         
         // Parse every token
@@ -206,19 +206,19 @@ struct SentenceParser {
                 let symbol = parseToken(&tokens, token: nextToken, until: isSymbol)
                 output.enqueue(PropositionalSymbol(symbol: symbol))
             }
-            // Is the token an operator?
-            else if isOperator(nextToken) || Connective.isOperator(nextToken) {
+            // Is the token an connective?
+            else if isConnective(nextToken) || Connective.isConnective(nextToken) {
                 // Form a token from this
-                let oper = parseToken(&tokens, token: nextToken, until: isOperator)
+                let oper = parseToken(&tokens, token: nextToken, until: isConnective)
                 if let oper = Connective(rawValue: oper) {
-                    // While there is a operator on the top of the stack and it
+                    // While there is a connective on the top of the stack and it
                     // has a lower precedence than oper?
-                    while let topOfStack = topAsOperator(stack) where oper > topOfStack {
+                    while let topOfStack = topAsConnective(stack) where oper > topOfStack {
                         output.enqueue(stack.pop())
                     }
                     stack.push(oper)
                 } else {
-                    throw ParserError.UnknownOperator
+                    throw ParserError.UnknownConnective
                 }
             }
             // Handle parentheses
@@ -228,7 +228,7 @@ struct SentenceParser {
                 } else {
                     // Until the token at the top of the stack is a left parenthesis
                     while !stack.isEmpty && stack.top!.description != Parenthesis.Left.rawValue {
-                        // pop operators off the stack onto the output queue
+                        // pop connectives off the stack onto the output queue
                         output.enqueue(stack.pop())
                     }
                     // If the stack runs out, mismatch in parens
@@ -245,8 +245,8 @@ struct SentenceParser {
             }
         }
         
-        // While there are still operator tokens in the stack:
-        while let topOfStack = stack.top where Connective.isOperator(topOfStack) {
+        // While there are still connective tokens in the stack:
+        while let topOfStack = stack.top where Connective.isConnective(topOfStack) {
             output.enqueue(stack.pop())
         }
         

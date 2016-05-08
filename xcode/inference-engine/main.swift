@@ -58,6 +58,7 @@ struct Launcher {
     ///
     private enum EntailmentMethodLiteral: String, EntailmentMethod {
         case TruthTableLiteral = "TT"
+        case ForwardChainingLiteral = "FC"
 
         // Implement EntailmentMethod
         func entail(kbQueryPair: KnowledgeQueryPair) -> EntailmentResponse {
@@ -70,6 +71,9 @@ struct Launcher {
             case .TruthTableLiteral:
                 return TruthTable().entail(query: query,
                                          fromKnowledgeBase: kb)
+            case .ForwardChainingLiteral:
+                return ForwardChaining().entail(query: query,
+                                                fromKnowledgeBase: kb)
             }
         }
 
@@ -196,7 +200,7 @@ struct Launcher {
             // Process args when argc is at least 2 else print help
             if Process.argc > 2 {
                 let (entailmentMethod, kbQueryPair) = try parseArgs()
-                return print(entailmentMethod.entail(kbQueryPair))
+                return print(entailmentMethod.entail(kbQueryPair).description)
             }
             print(self.helpText)
         } catch let error as Launcher.LaunchError {

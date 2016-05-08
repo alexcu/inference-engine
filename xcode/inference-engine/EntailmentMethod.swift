@@ -39,7 +39,7 @@ extension Array: EntailmentResponse {
     
     var description: String {
         if self.doesEntail {
-            let elements = self.map({"\($0); "})
+            let elements = self.map({"\($0)"}).joinWithSeparator("; ")
             return "YES: \(elements)"
         } else {
             return "NO"

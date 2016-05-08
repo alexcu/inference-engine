@@ -30,7 +30,7 @@ struct KnowledgeBase {
         // Reduce the rest
         return sentences.dropFirst().reduce(sentence) { (memo: Sentence, sentence: Sentence) in
             ComplexSentence(leftSentence: memo,
-                            operator: .Conjoin,
+                            connective: .Conjoin,
                             rightSentence: sentence)
         }
     }

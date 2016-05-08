@@ -34,7 +34,7 @@ func <=>(lhs: Sentence, rhs: Sentence) -> ComplexSentence {
 
 ///
 /// A sentence is the basic unit of logical expression. It is either a
-/// complex sentence, consisting of operators and other sentences, or a 
+/// complex sentence, consisting of connectives and other sentences, or a 
 /// single atomic sentence consisting of just a propoistional symbol.
 /// - Remarks: Refer to the BNF defined in <i>AIMA</i>, p293
 ///
@@ -122,18 +122,18 @@ extension Sentence {
 
     func disjoinWith(other: Sentence) -> ComplexSentence {
         return ComplexSentence(leftSentence: self,
-                               operator: .Disjoin,
+                               connective: .Disjoin,
                                rightSentence: other)
     }
 
     func conjunctWith(other: Sentence) -> ComplexSentence {
         return ComplexSentence(leftSentence: self,
-                               operator: .Conjoin,
+                               connective: .Conjoin,
                                rightSentence: other)
     }
 
     func negate() -> ComplexSentence {
-        return ComplexSentence(operator: .Negate, sentences: self)
+        return ComplexSentence(connective: .Negate, sentences: self)
     }
     
     func applyModel(model: ModelLiteralType) -> Sentence {
