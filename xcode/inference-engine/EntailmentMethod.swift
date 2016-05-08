@@ -7,13 +7,45 @@
 //
 
 ///
-/// An empty protocol that represents an answer that can be deduced from an
+/// A protocol that represents an answer that can be deduced from an
 /// entailment method
 ///
-protocol EntailmentResponse: CustomStringConvertible {}
+protocol EntailmentResponse: CustomStringConvertible {
+    ///
+    /// Whether or not the response does actually entail the result
+    ///
+    var doesEntail: Bool { get }
+    
+    var description: String { get }
+}
 // An integer and atomic sentence can be responses for TT, BC and FC, respectively
-extension Int: EntailmentResponse {}
-extension AtomicSentence: EntailmentResponse {}
+extension Int: EntailmentResponse {
+    var doesEntail: Bool {
+        return self > 0
+    }
+    
+    var description: String {
+        if self.doesEntail {
+            return "YES: \(self)"
+        } else {
+            return "NO"
+        }
+    }
+}
+extension Array: EntailmentResponse {
+    var doesEntail: Bool {
+        return !self.isEmpty
+    }
+    
+    var description: String {
+        if self.doesEntail {
+            let elements = self.map({"\($0); "})
+            return "YES: \(elements)"
+        } else {
+            return "NO"
+        }
+    }
+}
 
 ///
 /// An entailment method
