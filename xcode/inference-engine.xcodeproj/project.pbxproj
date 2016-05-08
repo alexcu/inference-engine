@@ -36,6 +36,7 @@
 		FAD77B4E1CCF375700D513D5 /* EntailmentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */; };
 		FAD77B501CCF37B900D513D5 /* KnowledgeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */; };
 		FAD77B521CCF454C00D513D5 /* ADTs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD77B511CCF454C00D513D5 /* ADTs.swift */; };
+		FADA423E1CDEC7140033C02D /* BackwardChaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADA423D1CDEC7140033C02D /* BackwardChaining.swift */; };
 		FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A081CCDF9F500299BA7 /* FileParser.swift */; };
 		FAF28A0B1CCDFA1100299BA7 /* SentenceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */; };
 		FAF28A0D1CCDFAFF00299BA7 /* Connective.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF28A0C1CCDFAFF00299BA7 /* Connective.swift */; };
@@ -73,6 +74,7 @@
 		FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntailmentMethod.swift; sourceTree = "<group>"; };
 		FAD77B4F1CCF37B900D513D5 /* KnowledgeBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeBase.swift; sourceTree = "<group>"; };
 		FAD77B511CCF454C00D513D5 /* ADTs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADTs.swift; sourceTree = "<group>"; };
+		FADA423D1CDEC7140033C02D /* BackwardChaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackwardChaining.swift; sourceTree = "<group>"; };
 		FAF28A081CCDF9F500299BA7 /* FileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
 		FAF28A0A1CCDFA1100299BA7 /* SentenceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceParser.swift; sourceTree = "<group>"; };
 		FAF28A0C1CCDFAFF00299BA7 /* Connective.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connective.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
 				FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */,
 				FA6AEF591CD97ABB00C38764 /* ForwardChaining.swift */,
+				FADA423D1CDEC7140033C02D /* BackwardChaining.swift */,
 			);
 			name = "Entailment Methods";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				FAA069D81CC76D760039A495 /* Sentence.swift in Sources */,
 				FAA069BF1CC762F50039A495 /* main.swift in Sources */,
 				FAF28A0D1CCDFAFF00299BA7 /* Connective.swift in Sources */,
+				FADA423E1CDEC7140033C02D /* BackwardChaining.swift in Sources */,
 				FA6857821CD5EAD5005B5F01 /* Model.swift in Sources */,
 				FAF28A091CCDF9F500299BA7 /* FileParser.swift in Sources */,
 				FAD77B501CCF37B900D513D5 /* KnowledgeBase.swift in Sources */,

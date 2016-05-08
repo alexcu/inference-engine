@@ -59,6 +59,7 @@ struct Launcher {
     private enum EntailmentMethodLiteral: String, EntailmentMethod {
         case TruthTableLiteral = "TT"
         case ForwardChainingLiteral = "FC"
+        case BackwardChainingLiteral = "BC"
 
         // Implement EntailmentMethod
         func entail(kbQueryPair: KnowledgeQueryPair) -> EntailmentResponse {
@@ -74,6 +75,9 @@ struct Launcher {
             case .ForwardChainingLiteral:
                 return ForwardChaining().entail(query: query,
                                                 fromKnowledgeBase: kb)
+            case .BackwardChainingLiteral:
+                return BackwardChaining().entail(query: query,
+                                                 fromKnowledgeBase: kb)
             }
         }
 

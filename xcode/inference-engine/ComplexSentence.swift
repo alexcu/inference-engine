@@ -193,8 +193,17 @@ struct ComplexSentence: Sentence, Equatable {
             return false
         }
         return sentences.left!.symbols.contains(premise.atom)
-        
-        
+    }
+    
+    ///
+    /// Returns `true` iff the conclusion is contained in this complex sentence
+    ///
+    func containsConclusion(conclusion: AtomicSentence) -> Bool {
+        // Only applicable to implication sentences
+        if !self.isSentenceKind(.Implicate) {
+            return false
+        }
+        return sentences.right.symbols.contains(conclusion.atom)
     }
 }
 
