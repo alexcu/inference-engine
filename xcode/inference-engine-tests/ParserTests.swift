@@ -21,7 +21,7 @@ class ParserTests: XCTestCase {
 
         for (sentence, desc) in sentenceDict {
             let sentence = try! SentenceParser.sharedParser.parse(sentence)
-            XCTAssertEqual(sentence.description, desc)
+            XCTAssertEqual(sentence.description, desc.stringByReplacingOccurrencesOfString("\\/", withString: "|"))
         }
 
     }

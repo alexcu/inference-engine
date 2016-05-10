@@ -121,7 +121,7 @@ class ComplexSentenceTests: XCTestCase {
     }
     
     func testSymbols() {
-        let actual = try! SentenceParser.sharedParser.parse("p1 => p2 & (p3 & p6) & p7 \\/ ~p4 <=> p5").symbols
+        let actual = try! SentenceParser.sharedParser.parse("p1 => p2 & (p3 & p6) & p7 | ~p4 <=> p5").symbols
         let expected = Set<PropositionalSymbol>([
             PropositionalSymbol(symbol: "p1"),
             PropositionalSymbol(symbol: "p2"),
@@ -142,7 +142,7 @@ class ComplexSentenceTests: XCTestCase {
         var sentence = try! SentenceParser.sharedParser.parse("A & B")
         XCTAssert(sentence.applyModel(model).isNegative) // A & ~B
         
-        sentence = try! SentenceParser.sharedParser.parse("A \\/ B")
+        sentence = try! SentenceParser.sharedParser.parse("A | B")
         XCTAssert(sentence.applyModel(model).isPositive) // A \/s ~B
         
         sentence = try! SentenceParser.sharedParser.parse("A & ~B")
@@ -171,7 +171,7 @@ class ComplexSentenceTests: XCTestCase {
     }
     
     func testNNF() {
-        let sentence = try! SentenceParser.sharedParser.parse("A <=> B \\/ C \\/ D \\/ E")
+        let sentence = try! SentenceParser.sharedParser.parse("A <=> B | C | D | E")
         sentence.inNegationNormalForm
     }
 }

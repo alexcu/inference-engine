@@ -26,7 +26,7 @@ enum Connective: String, CustomStringConvertible, Comparable {
     ///
     /// A disjoin connective, representing a logical OR
     ///
-    case Disjoin = "\\/"
+    case Disjoin = "|"
     
     ///
     /// A negate connective, representing a logical NOT
@@ -44,11 +44,21 @@ enum Connective: String, CustomStringConvertible, Comparable {
     case Biconditional = "<=>"
     
     ///
+    /// Returns the characters that are acceptable for connectives
+    ///
+    static let characters: Set<Character> = {
+        var chars = Connective.all.map({$0.rawValue.characters})
+                                  .flatMap({$0})
+        chars.appendContentsOf(["\\", "/"])
+        return Set(chars)
+    }()
+    
+    ///
     /// Checks if the string provided represents a case of a `Connective`
     /// - Returns: `true` iff `string` is a `Connective`
     ///
     static func isConnective(string: String) -> Bool {
-        return Connective(rawValue: string) != nil
+        return Connective(rawString: string) != nil
     }
     
     ///
@@ -106,6 +116,15 @@ enum Connective: String, CustomStringConvertible, Comparable {
     ///
     var isBinary: Bool {
         return !self.isUnary
+    }
+    
+    init?(rawString: String) {
+        // Convert \/ to |
+        if rawString == "\\/" {
+            self.init(rawValue: "|")
+        } else {
+            self.init(rawValue: rawString)
+        }
     }
 }
 

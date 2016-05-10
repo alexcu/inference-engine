@@ -12,8 +12,8 @@
 /// `Connective`, as well as `Parentheses`s
 ///
 private protocol Expressionable: CustomStringConvertible {}
-extension PropositionalSymbol   : Expressionable {}
-extension Connective       : Expressionable {
+extension PropositionalSymbol: Expressionable {}
+extension Connective: Expressionable {
     ///
     /// Provide an isConnective function for expressionable value types
     ///
@@ -66,7 +66,7 @@ struct SentenceParser {
         (alpha: [Character], numeric: [Character], connectives: [Character]) = (
         alpha: (97...97+25).map({ Character(UnicodeScalar($0)) }),
         numeric: (0...9).map { Character(String($0)) },
-        connectives: Array(Set(Connective.all.map({$0.rawValue.characters}).flatMap({$0})))
+        connectives: Array(Connective.characters)
     )
     
     ///
@@ -210,7 +210,7 @@ struct SentenceParser {
             else if isConnective(nextToken) || Connective.isConnective(nextToken) {
                 // Form a token from this
                 let oper = parseToken(&tokens, token: nextToken, until: isConnective)
-                if let oper = Connective(rawValue: oper) {
+                if let oper = Connective(rawString: oper) {
                     // While there is a connective on the top of the stack and it
                     // has a lower precedence than oper?
                     while let topOfStack = topAsConnective(stack) where oper > topOfStack {
