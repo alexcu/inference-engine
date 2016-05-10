@@ -44,7 +44,7 @@ struct ComplexSentence: Sentence, Equatable {
             return false
         }
         let sameConnective = self.connective == other.connective
-        let sameRight    = self.sentences.right == other.sentences.right
+        let sameRight      = self.sentences.right == other.sentences.right
         if let leftSentence = self.sentences.left {
             if let otherLeftSentence = other.sentences.left {
                 let sameLeft = leftSentence == otherLeftSentence
@@ -107,7 +107,7 @@ struct ComplexSentence: Sentence, Equatable {
     
     var inNegationNormalForm: Sentence {
         var result: Sentence = self
-        // Convert P  -> Q to ~P & Q
+        // Convert P  => Q to ~P & Q
         if result.isSentenceKind(.Implicate) {
             let lhs = sentences.left!.inNegationNormalForm
             let rhs = sentences.right.inNegationNormalForm
@@ -126,21 +126,22 @@ struct ComplexSentence: Sentence, Equatable {
             if let negated = resultAsComplex.sentences.right as? ComplexSentence {
                 // A == (~P)
                 let rhsIsNegated =
-                    negated.sentences.right.isSentenceKind(.Negate)
+                    negated.isSentenceKind(.Negate)
                 // A == (P & Q) or (P | Q)
                 let rhsIsConjoinOrDisjoin =
-                    negated.sentences.right.isSentenceKind(.Conjoin) ||
-                        negated.sentences.right.isSentenceKind(.Disjoin)
+                    negated.isSentenceKind(.Conjoin) ||
+                    negated.isSentenceKind(.Disjoin)
                 // ~A = ~(~P) = P
                 if rhsIsNegated {
                     // Hence result is just P
                     result = (negated.sentences.right).inNegationNormalForm
                 }
-                    // ~(P & Q) or ~(P | Q)
+                // ~(P & Q) or ~(P | Q)
                 else if rhsIsConjoinOrDisjoin {
-                    // Convert P & Q in NNF and support double negation
-                    let lhs = ~(negated.sentences.left!).inNegationNormalForm
-                    let rhs = ~(negated.sentences.right).inNegationNormalForm
+                    // Convert P & Q in NNF and support double negation (hence why
+                    // we negate at the start)
+                    let lhs = (~(negated.sentences.left!)).inNegationNormalForm
+                    let rhs = (~(negated.sentences.right)).inNegationNormalForm
                     if negated.isSentenceKind(.Conjoin) {
                         // ~(P & Q) == ~P | ~Q
                         result = lhs | rhs
@@ -150,7 +151,8 @@ struct ComplexSentence: Sentence, Equatable {
                     }
                 }
             } else {
-                result = resultAsComplex.sentences.right
+                // Else cannot perform any changes
+                result = resultAsComplex
             }
         }
         return result
@@ -161,28 +163,30 @@ struct ComplexSentence: Sentence, Equatable {
         var result = self.inNegationNormalForm
         // (P | (Q & R)) == (P | Q) & (P & R)
         if result.isSentenceKind(.Disjoin) {
-            let lhs = (result as! ComplexSentence).sentences.left!
-            let rhs = (result as! ComplexSentence).sentences.right
+            let lhs = ((result as! ComplexSentence).sentences.left!).inConjunctiveNormalForm
+            let rhs = ((result as! ComplexSentence).sentences.right).inConjunctiveNormalForm
             // Either side is an Conjoin
             if lhs.isSentenceKind(.Conjoin) || rhs.isSentenceKind(.Conjoin) {
-                let lhs = lhs as! ComplexSentence
-                let rhs = rhs as! ComplexSentence
                 // if rhs is conjoin then P | (Q & R) == p  | qr
                 // if lhs is conjoin then (Q & R) | P == qr | p
-                let p  = rhs.isSentenceKind(.Conjoin) ? lhs : rhs
-                let qr = rhs.isSentenceKind(.Conjoin) ? rhs : lhs
+                let p  =  rhs.isSentenceKind(.Conjoin) ? lhs : rhs
+                let qr = (rhs.isSentenceKind(.Conjoin) ? rhs : lhs) as! ComplexSentence
                 let q  = qr.sentences.left!
                 let r  = qr.sentences.right
                 
                 // (p | q) & (p | r)
                 if rhs.isSentenceKind(.Conjoin) {
-                    result = ((p | q) & (p | r)).inConjunctiveNormalForm
+                    result =
+                        (p | q).inConjunctiveNormalForm &
+                        (p | r).inConjunctiveNormalForm
                 // (q | p) & (r | p)
                 } else {
-                    result = ((q | p) & (r | q)).inConjunctiveNormalForm
+                    result =
+                        (q | p).inConjunctiveNormalForm &
+                        (r | p).inConjunctiveNormalForm
                 }
             } else {
-                result = lhs | rhs
+                result = lhs.inConjunctiveNormalForm | rhs.inConjunctiveNormalForm
             }
         }
         return result
