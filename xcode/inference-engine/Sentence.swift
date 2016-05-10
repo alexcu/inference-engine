@@ -7,8 +7,8 @@
 //
 
 // Represents logical negation (NOT)
-infix operator ! { precedence 1 }
-prefix func !(lhs: Sentence) -> ComplexSentence {
+infix operator ~ { precedence 1 }
+prefix func ~(lhs: Sentence) -> ComplexSentence {
     return lhs.negate()
 }
 // Represents logical conjunction (AND)
@@ -91,6 +91,18 @@ protocol Sentence: CustomStringConvertible {
     /// Description of truth
     ///
     var truthDescription: String { get }
+    ///
+    /// Returns the CNF representation of this sentence
+    ///
+    var inConjunctiveNormalForm: Sentence { get }
+    ///
+    /// Returns the NNF representation of this sentence
+    ///
+    var inNegationNormalForm: Sentence { get }
+    ///
+    /// Returns `true` iff the connective specified is this part of this sentence
+    ///
+    func isSentenceKind(connective: Connective) -> Bool
 }
 
 extension Sentence {
@@ -117,7 +129,7 @@ extension Sentence {
 
     func implicateWith(other: Sentence) -> ComplexSentence {
         // Implication elimination equivalence
-        return !self | other
+        return ~self | other
     }
 
     func disjoinWith(other: Sentence) -> ComplexSentence {

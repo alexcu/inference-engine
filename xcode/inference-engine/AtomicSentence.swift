@@ -43,6 +43,21 @@ struct AtomicSentence: Sentence, Equatable {
         return Set(arrayLiteral: self.atom)
     }
     
+    var inConjunctiveNormalForm: Sentence {
+        // Atomic in CNF is just itself
+        return self
+    }
+    
+    var inNegationNormalForm: Sentence {
+        // Atomic in NNF is just itself
+        return self
+    }
+    
+    func isSentenceKind(connective: Connective) -> Bool {
+        // It has no connectives! So it can't be that kind of sentence
+        return false
+    }
+    
     ///
     /// The underlying Propositional Symbol is an atom.
     ///

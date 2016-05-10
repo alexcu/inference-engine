@@ -11,10 +11,10 @@ import XCTest
 class ComplexSentenceTests: XCTestCase {
 
     func testNegate() {
-        // P    !P
+        // P    ~P
         // t     f
         let p = AtomicSentence("p")
-        XCTAssert(!p.isNegative)
+        XCTAssert((~p).isNegative)
     }
     func testConjoin() {
         // P    Q   P & Q
@@ -25,9 +25,9 @@ class ComplexSentenceTests: XCTestCase {
         let p = AtomicSentence("P")
         let q = AtomicSentence("Q")
         XCTAssert((p & q).isPositive)
-        XCTAssert((!p & !q).isNegative)
-        XCTAssert((p & !q).isNegative)
-        XCTAssert((!p & q).isNegative)
+        XCTAssert((~p & ~q).isNegative)
+        XCTAssert((p & ~q).isNegative)
+        XCTAssert((~p & q).isNegative)
     }
     func testDisjoin() {
         // P    Q   P | Q
@@ -38,9 +38,9 @@ class ComplexSentenceTests: XCTestCase {
         let p = AtomicSentence("P")
         let q = AtomicSentence("Q")
         XCTAssert((p | q).isPositive)
-        XCTAssert((p | !q).isPositive)
-        XCTAssert((!p | q).isPositive)
-        XCTAssert((!p | !q).isNegative)
+        XCTAssert((p | ~q).isPositive)
+        XCTAssert((~p | q).isPositive)
+        XCTAssert((~p | ~q).isNegative)
     }
     func testImplicates() {
         // P    Q   P => Q
@@ -51,9 +51,9 @@ class ComplexSentenceTests: XCTestCase {
         let p = AtomicSentence("P")
         let q = AtomicSentence("Q")
         XCTAssert((p => q).isPositive)
-        XCTAssert((!p => q).isPositive)
-        XCTAssert((!p => !q).isPositive)
-        XCTAssert((p => !q).isNegative)
+        XCTAssert((~p => q).isPositive)
+        XCTAssert((~p => ~q).isPositive)
+        XCTAssert((p => ~q).isNegative)
     }
     func testBidirectionalImplicate() {
         // P    Q   P <=> Q
@@ -64,9 +64,9 @@ class ComplexSentenceTests: XCTestCase {
         let p = AtomicSentence("P")
         let q = AtomicSentence("Q")
         XCTAssert((p <=> q).isPositive)
-        XCTAssert((!p <=> !q).isPositive)
-        XCTAssert((!p <=> q).isNegative)
-        XCTAssert((p <=> !q).isNegative)
+        XCTAssert((~p <=> ~q).isPositive)
+        XCTAssert((~p <=> q).isNegative)
+        XCTAssert((p <=> ~q).isNegative)
     }
     
     func test3Predicates() {
@@ -81,12 +81,12 @@ class ComplexSentenceTests: XCTestCase {
         
         // P    Q   R    P & Q | R
         // f    t   f   (f & t)| f = f
-        let try2a = !p & q | r
+        let try2a = ~p & q | r
         XCTAssert(try2a.isNegative)
         
         // P    Q   R    P & Q | R
         // f    t   t   (f & t)| t = t
-        let try3a = p & q | !r
+        let try3a = p & q | ~r
         XCTAssert(try3a.isPositive)
         
         // P    Q   R   P & Q | P & R
@@ -96,12 +96,12 @@ class ComplexSentenceTests: XCTestCase {
         
         // P    Q   R   P & Q | P & R
         // f    t   f   f     | f     = f
-        let try2b = !p & q | !p & r
+        let try2b = ~p & q | ~p & r
         XCTAssert(try2b.isNegative)
         
         // P    Q   R   P & Q | P & R
         // f    t   t   f     | f     = f
-        let try3b = !p & q | !p & !r
+        let try3b = ~p & q | ~p & ~r
         XCTAssert(try3b.isNegative)
         
         // P    Q   R   P & Q | R | P & Q | P & R
@@ -112,12 +112,12 @@ class ComplexSentenceTests: XCTestCase {
         // P    Q   R   P & Q | R | P & Q | P & R
         // f    t   f   f         | f     = f
         XCTAssert((try2a | try2b).isNegative)
-        XCTAssert((!p & q | r | !p & q | !p & r).isNegative)
+        XCTAssert((~p & q | r | ~p & q | ~p & r).isNegative)
         
         // P    Q   R   P & Q | R | P & Q | P & R
         // t    t   t   t         | f     = t
         XCTAssert((try3a | try3b).isPositive)
-        XCTAssert((p & q | !r | p & q | p & !r).isPositive)
+        XCTAssert((p & q | ~r | p & q | p & ~r).isPositive)
     }
     
     func testSymbols() {
@@ -140,26 +140,26 @@ class ComplexSentenceTests: XCTestCase {
         ]
         
         var sentence = try! SentenceParser.sharedParser.parse("A & B")
-        XCTAssert(sentence.applyModel(model).isNegative) // A & !B
+        XCTAssert(sentence.applyModel(model).isNegative) // A & ~B
         
         sentence = try! SentenceParser.sharedParser.parse("A \\/ B")
-        XCTAssert(sentence.applyModel(model).isPositive) // A \/s !B
+        XCTAssert(sentence.applyModel(model).isPositive) // A \/s ~B
         
         sentence = try! SentenceParser.sharedParser.parse("A & ~B")
-        XCTAssert(sentence.applyModel(model).isPositive) // A & !!B
+        XCTAssert(sentence.applyModel(model).isPositive) // A & ~~B
         
         sentence = try! SentenceParser.sharedParser.parse("A & B => C")
-        XCTAssert(sentence.applyModel(model).isPositive) // A & !B => C
+        XCTAssert(sentence.applyModel(model).isPositive) // A & ~B => C
         
         sentence = try! SentenceParser.sharedParser.parse("A & B => C")
-        XCTAssert(sentence.applyModel(model).isPositive) // A & !B => C
+        XCTAssert(sentence.applyModel(model).isPositive) // A & ~B => C
         
         model = [
             PropositionalSymbol(symbol: "C"): false
         ]
         
         sentence = try! SentenceParser.sharedParser.parse("A & B => C")
-        XCTAssert(sentence.applyModel(model).isNegative) // A & B => !C
+        XCTAssert(sentence.applyModel(model).isNegative) // A & B => ~C
         
         model = [
             PropositionalSymbol(symbol: "B"): false,
@@ -167,6 +167,11 @@ class ComplexSentenceTests: XCTestCase {
         ]
         
         sentence = try! SentenceParser.sharedParser.parse("A & B <=> C")
-        XCTAssert(sentence.applyModel(model).isPositive) // A & !B => !C
+        XCTAssert(sentence.applyModel(model).isPositive) // A & ~B => ~C
+    }
+    
+    func testNNF() {
+        let sentence = try! SentenceParser.sharedParser.parse("A <=> B \\/ C \\/ D \\/ E")
+        sentence.inNegationNormalForm
     }
 }

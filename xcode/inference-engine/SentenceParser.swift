@@ -166,7 +166,7 @@ struct SentenceParser {
                     if oper != .Negate {
                         throw ParserError.InvalidSyntax
                     } else {
-                        sentenceStack.push(!sentenceStack.pop())
+                        sentenceStack.push(~sentenceStack.pop())
                     }
                 }
             } else if !(queue.isEmpty) || sentenceStack.elements.count != 1 {
