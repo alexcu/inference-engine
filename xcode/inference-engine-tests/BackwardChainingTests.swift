@@ -13,12 +13,12 @@ class BackwardChainingTests: XCTestCase {
         entailmentTest(usingMethod: BackwardChaining(),
                        tell: XCTestCase.rainWetKB,
                        ask: "w",
-                       expected: "YES: r")
+                       expected: "YES: u; w")
     }
     func testComplex() {
         entailmentTest(usingMethod: BackwardChaining(),
-                       tell: XCTestCase.exampleKB,
+                       tell: XCTestCase.testFileKB,
                        ask: "d",
-                       expected: "YES: p2, p3, p1, d")
+                       expected: "YES: p2; p3; p1; d")
     }
 }

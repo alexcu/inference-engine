@@ -17,9 +17,15 @@ class TruthTableTests: XCTestCase {
     }
     func testComplex() {
         entailmentTest(usingMethod: TruthTable(),
-                       tell: XCTestCase.exampleKB,
+                       tell: XCTestCase.testFileKB,
                        ask: "d",
                        expected: "YES: 3")
+    }
+    func testParens() {
+        entailmentTest(usingMethod: TruthTable(),
+                       tell: XCTestCase.smokeHeatFireKB,
+                       ask: "smoke",
+                       expected: "YES: 4")
     }
 }
 

@@ -17,7 +17,7 @@ class ForwardChainingTests: XCTestCase {
     }
     func testComplex() {
         entailmentTest(usingMethod: ForwardChaining(),
-                       tell: XCTestCase.exampleKB,
+                       tell: XCTestCase.testFileKB,
                        ask: "d",
                        expected: "YES: a; b; p2; p3; p1; d")
     }

@@ -40,17 +40,14 @@ struct TruthTable: EntailmentMethod {
     private func entail(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase, usingSymbols symbols: Symbols, usingModel model: Model, previousCount count: Int) -> Int {
         var symbols = symbols
         if symbols.isEmpty {
-            //print(model)
-            //print(kb.sentence.applyModel(model).truthDescription)
             // Knowledge base is positive when model applied?
             if kb.sentence.applyModel(model).isPositive {
                 // Query is positive when model applied?
                 if query.applyModel(model).isPositive {
                     return count + 1
                 }
-            } else {
-                return count
             }
+            return count
         }
         let proposition = symbols.popFirst()!
         // Recursively use the entail count using both truth and false branches

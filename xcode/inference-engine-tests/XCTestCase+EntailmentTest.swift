@@ -19,7 +19,7 @@ extension XCTestCase {
         return KnowledgeBase.init(percepts: percepts)
     }()
 
-    static let exampleKB: KnowledgeBase = {
+    static let testFileKB: KnowledgeBase = {
         let percepts = [
             "p2=> p3",
             "p3 => p1",
@@ -31,6 +31,14 @@ extension XCTestCase {
             "a",
             "b",
             "p2"
+        ].map({try! SentenceParser.sharedParser.parse($0)})
+
+        return KnowledgeBase.init(percepts: percepts)
+    }()
+
+    static let smokeHeatFireKB: KnowledgeBase = {
+        let percepts = [
+            "((Smoke & Heat) => Fire) <=> ((Smoke => Fire) | (Heat => Fire))"
         ].map({try! SentenceParser.sharedParser.parse($0)})
 
         return KnowledgeBase.init(percepts: percepts)
