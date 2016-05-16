@@ -191,6 +191,19 @@ struct ComplexSentence: Sentence, Equatable {
         }
         return result
     }
+
+    func split(connective: Connective) -> [Sentence] {
+        if self.isSentenceKind(connective) {
+            let lhs = self.sentences.left!
+            let rhs = self.sentences.right
+            let lhsSplit = lhs.split(connective)
+            let rhsSplit = rhs.split(connective)
+            return [lhsSplit, rhsSplit].flatMap({$0})
+        } else {
+            // Doesn't have the connective, so return the sentence
+            return [self]
+        }
+    }
     
     ///
     /// The logical connective that connects this sentence

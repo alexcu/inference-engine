@@ -10,6 +10,7 @@
 		FA2E0D8E1CE4158D00C23797 /* ForwardChainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E0D8C1CE414D100C23797 /* ForwardChainingTests.swift */; };
 		FA2E0D911CE4182D00C23797 /* XCTestCase+EntailmentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E0D8F1CE4172A00C23797 /* XCTestCase+EntailmentTest.swift */; };
 		FA2E0D941CE4194200C23797 /* BackwardChainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E0D921CE4193B00C23797 /* BackwardChainingTests.swift */; };
+		FA3C0F781CE9439E00C8C250 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C0F771CE9439E00C8C250 /* Resolution.swift */; };
 		FA6786F01CCE4E0000EDD988 /* TruthTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */; };
 		FA6786F41CCEF55500EDD988 /* PropositionalSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */; };
 		FA6786F71CCEF8A300EDD988 /* PropositionalSymbolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6786F51CCEF89A00EDD988 /* PropositionalSymbolTests.swift */; };
@@ -63,6 +64,7 @@
 		FA2E0D8C1CE414D100C23797 /* ForwardChainingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardChainingTests.swift; sourceTree = "<group>"; };
 		FA2E0D8F1CE4172A00C23797 /* XCTestCase+EntailmentTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+EntailmentTest.swift"; sourceTree = "<group>"; };
 		FA2E0D921CE4193B00C23797 /* BackwardChainingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackwardChainingTests.swift; sourceTree = "<group>"; };
+		FA3C0F771CE9439E00C8C250 /* Resolution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
 		FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruthTable.swift; sourceTree = "<group>"; };
 		FA6786F31CCEF55500EDD988 /* PropositionalSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropositionalSymbol.swift; sourceTree = "<group>"; };
 		FA6786F51CCEF89A00EDD988 /* PropositionalSymbolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropositionalSymbolTests.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */,
 				FA6AEF591CD97ABB00C38764 /* ForwardChaining.swift */,
 				FADA423D1CDEC7140033C02D /* BackwardChaining.swift */,
+				FA3C0F771CE9439E00C8C250 /* Resolution.swift */,
 			);
 			name = "Entailment Methods";
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				FAD77B4E1CCF375700D513D5 /* EntailmentMethod.swift in Sources */,
 				FA6787001CCF052600EDD988 /* ComplexSentence.swift in Sources */,
 				FA6786F01CCE4E0000EDD988 /* TruthTable.swift in Sources */,
+				FA3C0F781CE9439E00C8C250 /* Resolution.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

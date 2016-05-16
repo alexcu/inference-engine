@@ -103,6 +103,11 @@ protocol Sentence: CustomStringConvertible {
     /// Returns `true` iff the connective specified is this part of this sentence
     ///
     func isSentenceKind(connective: Connective) -> Bool
+    ///
+    /// Splits the sentence using the specified connective
+    /// - Paramater connective: The connective to which to split the sentence on
+    ///
+    func split(connective: Connective) -> [Sentence]
 }
 
 extension Sentence {

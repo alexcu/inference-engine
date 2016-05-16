@@ -121,7 +121,7 @@ class ComplexSentenceTests: XCTestCase {
     }
     
     func testSymbols() {
-        let actual = try! SentenceParser.sharedParser.parse("p1 => p2 & (p3 & p6) & p7 | ~p4 <=> p5").symbols
+        let actual = sentenceFrom("p1 => p2 & (p3 & p6) & p7 | ~p4 <=> p5").symbols
         let expected = Set<PropositionalSymbol>([
             PropositionalSymbol(symbol: "p1"),
             PropositionalSymbol(symbol: "p2"),
@@ -139,26 +139,26 @@ class ComplexSentenceTests: XCTestCase {
             PropositionalSymbol(symbol: "B"): false
         ]
         
-        var sentence = try! SentenceParser.sharedParser.parse("A & B")
+        var sentence = sentenceFrom("A & B")
         XCTAssert(sentence.applyModel(model).isNegative) // A & ~B
         
-        sentence = try! SentenceParser.sharedParser.parse("A | B")
+        sentence = sentenceFrom("A | B")
         XCTAssert(sentence.applyModel(model).isPositive) // A \/s ~B
         
-        sentence = try! SentenceParser.sharedParser.parse("A & ~B")
+        sentence = sentenceFrom("A & ~B")
         XCTAssert(sentence.applyModel(model).isPositive) // A & ~~B
         
-        sentence = try! SentenceParser.sharedParser.parse("A & B => C")
+        sentence = sentenceFrom("A & B => C")
         XCTAssert(sentence.applyModel(model).isPositive) // A & ~B => C
         
-        sentence = try! SentenceParser.sharedParser.parse("A & B => C")
+        sentence = sentenceFrom("A & B => C")
         XCTAssert(sentence.applyModel(model).isPositive) // A & ~B => C
         
         model = [
             PropositionalSymbol(symbol: "C"): false
         ]
         
-        sentence = try! SentenceParser.sharedParser.parse("A & B => C")
+        sentence = sentenceFrom("A & B => C")
         XCTAssert(sentence.applyModel(model).isNegative) // A & B => ~C
         
         model = [
@@ -166,89 +166,89 @@ class ComplexSentenceTests: XCTestCase {
             PropositionalSymbol(symbol: "C"): false
         ]
         
-        sentence = try! SentenceParser.sharedParser.parse("A & B <=> C")
+        sentence = sentenceFrom("A & B <=> C")
         XCTAssert(sentence.applyModel(model).isPositive) // A & ~B => ~C
     }
     
     func testNNF_Implication() {
         // P <=> Q to ~P & Q
-        let sentence = try! SentenceParser.sharedParser.parse("P => Q")
-        let expected = try! SentenceParser.sharedParser.parse("~P & Q")
+        let sentence = sentenceFrom("P => Q")
+        let expected = sentenceFrom("~P & Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Bidirectional() {
         // P <=> Q to (P | ~Q) & (~P & Q)
-        let sentence = try! SentenceParser.sharedParser.parse("P <=> Q")
-        let expected = try! SentenceParser.sharedParser.parse("(P | ~Q) & (~P & Q)")
+        let sentence = sentenceFrom("P <=> Q")
+        let expected = sentenceFrom("(P | ~Q) & (~P & Q)")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_DoubleNegation() {
         // Double negation
-        let sentence = try! SentenceParser.sharedParser.parse("~(~P)")
-        let expected = try! SentenceParser.sharedParser.parse("P")
+        let sentence = sentenceFrom("~(~P)")
+        let expected = sentenceFrom("P")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_DoubleNegation2() {
         // Double negation
-        let sentence = try! SentenceParser.sharedParser.parse("~~~P")
-        let expected = try! SentenceParser.sharedParser.parse("~P")
+        let sentence = sentenceFrom("~~~P")
+        let expected = sentenceFrom("~P")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_Disjoin() {
         // ~(A) where A = (P & Q)
-        let sentence = try! SentenceParser.sharedParser.parse("~(P & Q)")
-        let expected = try! SentenceParser.sharedParser.parse("~P | ~Q")
+        let sentence = sentenceFrom("~(P & Q)")
+        let expected = sentenceFrom("~P | ~Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_Disjoin2() {
         // ~(A) where A = (~(P & R) | Q)
-        let sentence = try! SentenceParser.sharedParser.parse("~(~(P & R) | Q)")
-        let expected = try! SentenceParser.sharedParser.parse("P & R & ~Q")
+        let sentence = sentenceFrom("~(~(P & R) | Q)")
+        let expected = sentenceFrom("P & R & ~Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_Disjoin3() {
         // ~(A) where A = (~(P | R) | Q)
-        let sentence = try! SentenceParser.sharedParser.parse("~(~(P | R) | Q)")
-        let expected = try! SentenceParser.sharedParser.parse("(P | R) & ~Q")
+        let sentence = sentenceFrom("~(~(P | R) | Q)")
+        let expected = sentenceFrom("(P | R) & ~Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_Conjoin() {
         // ~(A) where A = (P | Q)
-        let sentence = try! SentenceParser.sharedParser.parse("~(P | Q)")
-        let expected = try! SentenceParser.sharedParser.parse("~P & ~Q")
+        let sentence = sentenceFrom("~(P | Q)")
+        let expected = sentenceFrom("~P & ~Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_Conjoin2() {
         // ~(A) where A = (~(P | R) & Q)
-        let sentence = try! SentenceParser.sharedParser.parse("~(~(P | R) & Q)")
-        let expected = try! SentenceParser.sharedParser.parse("P | R | ~Q")
+        let sentence = sentenceFrom("~(~(P | R) & Q)")
+        let expected = sentenceFrom("P | R | ~Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Demorgan_Conjoin3() {
         // ~(A) where A = (~(P & R) & Q)
-        let sentence = try! SentenceParser.sharedParser.parse("~(~(P & R) & Q)")
-        let expected = try! SentenceParser.sharedParser.parse("(P & R) | ~Q")
+        let sentence = sentenceFrom("~(~(P & R) & Q)")
+        let expected = sentenceFrom("(P & R) | ~Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testCNF() {
-        let sentence = try! SentenceParser.sharedParser.parse("(P | (Q & R))")
-        let expected = try! SentenceParser.sharedParser.parse("(P | Q) & (P | R)")
+        let sentence = sentenceFrom("(P | (Q & R))")
+        let expected = sentenceFrom("(P | Q) & (P | R)")
         XCTAssert(sentence.inConjunctiveNormalForm == expected)
     }
 
     func testCNF2() {
-        let sentence = try! SentenceParser.sharedParser.parse("(p & q) | (p & ~q)")
-        let expected = try! SentenceParser.sharedParser.parse("((p | p) & (q | p)) & ((p | ~q) & (q | ~q))")
+        let sentence = sentenceFrom("(p & q) | (p & ~q)")
+        let expected = sentenceFrom("((p | p) & (q | p)) & ((p | ~q) & (q | ~q))")
         XCTAssert(sentence.inConjunctiveNormalForm == expected)
     }
     
@@ -265,10 +265,20 @@ class ComplexSentenceTests: XCTestCase {
         
         let expectedSentence = "(\(firstHalf)) & (\(secondHalf))"
         
-        let sentence = try! SentenceParser.sharedParser.parse("((p & q) | (r & s)) | (~q & (p | t))")
-        let expected = try! SentenceParser.sharedParser.parse(expectedSentence)
+        let sentence = sentenceFrom("((p & q) | (r & s)) | (~q & (p | t))")
+        let expected = sentenceFrom(expectedSentence)
         XCTAssert(sentence.inConjunctiveNormalForm == expected)
     }
 
+    func testSplit() {
+        let actual = sentenceFrom("a & (b | c) & (d => e) & g").split(.Conjoin).map({$0.description})
+        let expected  = [
+            "a",
+            "b | c",
+            "d => e",
+            "g"
+        ]
+        XCTAssertEqual(actual, expected)
+    }
 
 }

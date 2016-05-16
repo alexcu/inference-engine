@@ -20,7 +20,7 @@ class ParserTests: XCTestCase {
         ]
 
         for (sentence, desc) in sentenceDict {
-            let sentence = try! SentenceParser.sharedParser.parse(sentence)
+            let sentence = sentenceFrom(sentence)
             XCTAssertEqual(sentence.description, desc.stringByReplacingOccurrencesOfString("\\/", withString: "|"))
         }
 

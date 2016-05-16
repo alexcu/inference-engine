@@ -9,6 +9,10 @@
 import XCTest
 
 extension XCTestCase {
+    func sentenceFrom(sentence: String) -> Sentence {
+        return try! SentenceParser.sharedParser.parse(sentence)
+    }
+
     static let rainWetKB: KnowledgeBase = {
         let percepts = [
             "r",
@@ -45,7 +49,7 @@ extension XCTestCase {
     }()
 
     func entailmentTest(usingMethod entailmentMethod: EntailmentMethod, tell knowledgeBase: KnowledgeBase, ask query: String, expected: String) {
-        let query = try! SentenceParser.sharedParser.parse(query)
+        let query = sentenceFrom(query)
         let entail = entailmentMethod.entail(query: query, fromKnowledgeBase: knowledgeBase)
         XCTAssertEqual(entail.description, expected)
     }

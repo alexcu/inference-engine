@@ -57,6 +57,11 @@ struct AtomicSentence: Sentence, Equatable {
         // It has no connectives! So it can't be that kind of sentence
         return false
     }
+
+    func split(connective: Connective) -> [Sentence] {
+        // Cannot split an atomic sentence
+        return [self]
+    }
     
     ///
     /// The underlying Propositional Symbol is an atom.
