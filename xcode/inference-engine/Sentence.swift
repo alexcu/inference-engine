@@ -167,3 +167,24 @@ func ==(lhs: Sentence, rhs: Sentence) -> Bool {
 func !=(lhs: Sentence, rhs: Sentence) -> Bool {
     return !(lhs == rhs)
 }
+
+// MARK: Extension to Array for Sentences
+extension Array where Element: ComplexSentence {
+    ///
+    /// Joins an array of Sentences using the connective provided
+    ///
+    func join(connective: Connective) -> Sentence {
+        if self.count < 2 {
+            fatalError("Cannot join with less than two elements")
+        }
+        var result = self.first!
+        var selff = self
+        while !selff.isEmpty {
+            let next = selff.removeFirst()
+            result = ComplexSentence(leftSentence: result,
+                                     connective: connective,
+                                     rightSentence: next)
+        }
+        return result
+    }
+}
