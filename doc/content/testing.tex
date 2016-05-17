@@ -1,0 +1,60 @@
+\section{Testing}
+\label{sec:Testing}
+
+\subsection{Unit Testing}
+\label{sub:Unit Testing}
+
+The codebase was developed using a test-driven develop strategy. Test coverage
+for the majority of the codebase was factored in. All tests are located within
+the the \texttt{test} subdirectory.
+
+\subsection{Extended Parsing Entailment}
+\label{sub:Extended Parsing Entailment}
+
+\subsubsection{Truth Table Entailment}
+\label{subs:Truth Table Entailment}
+
+Extended propositional logic parsing was initially tested using the truth
+table parser. An that was used in the testing strategy was the \emph{Smoke, Heat and Fire}
+example that was provided in a previous tutorial. For example:
+\begin{align*}
+  KB     =& \; \{ ((Smoke \wedge Heat) \Rightarrow Fire) \Leftrightarrow ((Smoke \Rightarrow Fire) \vee (Heat \Rightarrow Fire)) \}\\
+  \alpha =& \; Smoke
+\end{align*}
+This would produce a truth table similar to that shown in Table~\ref{tab:smoketable}.
+As $r_{5}$ shows that the all models in the knowledge base holds, there would be
+only four models in this entailment (the underlined $true$s in the $Smoke$ column).
+Hence, it is shown that $KB \models \alpha$, and therefore output of the program is:
+
+\begin{verbatim}
+    YES: 4
+\end{verbatim}
+
+This is tested under the unit tests which are described in the
+\texttt{TruthTableTests.swift} and \texttt{XCTestCase+EntailmentTest.swift}
+files under the \texttt{test} directory.
+
+While this test only contains one sentence in the knowledge base, it is to be
+noted that this test aims to only test the extended parsing entailment using the
+truth table method, and not the truth table method itself. There already exists
+test which are to test the logic for the truth table, which are described in the
+aformentioned files.
+
+\begin{sidewaystable}
+    \centering
+    \caption{Truth table describe the \emph{Smoke, Heat and Fire} example}
+    \label{tab:smoketable}
+    \begin{tabular}{l|l|l||l|l|l|l|l|l}
+    \hline
+    \multirow{2}{*}{\textbf{$Smoke$}} & \multirow{2}{*}{\textbf{$Heat$}} & \multirow{2}{*}{\textbf{$Fire$}} & \textbf{$r_{0}$}             & \textbf{$r_{1}$}                  & \textbf{$r_{2}$}                  & \textbf{$r_{3}$}                 & \textbf{$r_{4}$}            & \textbf{$r_{5}$}                       \\ \cline{4-9}
+                                      &                                  &                                  & \textbf{$Smoke \wedge Heat$} & \textbf{$r_{0} \Rightarrow Fire$} & \textbf{$Smoke \Rightarrow Fire$} & \textbf{$Heat \Rightarrow Fire$} & \textbf{$r_{2} \vee r_{4}$} & \textbf{$r_{1} \Leftrightarrow r_{4}$} \\ \hline
+    $false$                           & $false$                          & $false$                          & $false$                      & $true$                            & $true$                            & $true$                           & $true$                      & $true$                                 \\
+    $false$                           & $false$                          & $true$                           & $false$                      & $true$                            & $true$                            & $true$                           & $true$                      & $true$                                 \\
+    $false$                           & $true$                           & $false$                          & $false$                      & $true$                            & $true$                            & $false$                          & $true$                      & $true$                                 \\
+    $false$                           & $true$                           & $true$                           & $false$                      & $true$                            & $true$                            & $true$                           & $true$                      & $true$                                 \\
+    \underline{$true$}                & $false$                          & $false$                          & $false$                      & $true$                            & $false$                           & $true$                           & $true$                      & $true$                                 \\
+    \underline{$true$}                & $false$                          & $true$                           & $false$                      & $true$                            & $true$                            & $true$                           & $true$                      & $true$                                 \\
+    \underline{$true$}                & $true$                           & $false$                          & $true$                       & $false$                           & $false$                           & $false$                          & $false$                     & $true$                                 \\
+    \underline{$true$}                & $true$                           & $true$                           & $true$                       & $true$                            & $true$                            & $true$                           & $true$                      & $true$                                 \\ \hline
+    \end{tabular}
+\end{sidewaystable}

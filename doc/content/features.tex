@@ -1,6 +1,6 @@
 \section{Features}
 
-A more extensive list of search features can be shown using the \texttt{--help}
+A more extensive list of search features can be shown using the \verb`--help`
 switch.
 
 \subsection{Search Algorithms}
@@ -15,7 +15,7 @@ The solver implements the following entailment methods:
   \item Resolution Method, \texttt{RE}
 \end{itemize}
 
-\subsubsection{Full Token Parser}
+\subsection{Extended Propositional Logic Token Parser}
 \label{subs:tokenparser}
 
 Full token parsing is used when parsing the knowledge base from the source file.
@@ -50,7 +50,7 @@ been used---the parser associates $Q \wedge (\neg S \Rightarrow ((T \vee W) \wed
 over $P \vee Q$ shown by the output parentheses. However, $T \vee W$ takes
 precedence over $W \wedge P$ as it is in a set of parentheses unless overriden by braces.
 
-\subsubsection{Conjunctive and Negation Normal Form}
+\subsection{Conjunctive and Negation Normal Form}
 \label{subs:CNF}
 
 To properly implement the Resolution Method, sentences must be resolved to their
