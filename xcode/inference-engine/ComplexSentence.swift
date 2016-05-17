@@ -178,16 +178,22 @@ struct ComplexSentence: Sentence, Equatable {
     var inConjunctiveNormalForm: Sentence {
         // First convert to NNF
         var result = self.inNegationNormalForm
+        // Recursively convert non-disjoint sentences
+        guard let resultAsComplex = result as? ComplexSentence else {
+            // If cannot represent as complex, then nothing else to do
+            return result
+        }
         // (P | (Q & R)) == (P | Q) & (P & R)
         if result.isSentenceKind(.Disjoin) {
-            let lhs = ((result as! ComplexSentence).sentences.left!).inConjunctiveNormalForm
-            let rhs = ((result as! ComplexSentence).sentences.right).inConjunctiveNormalForm
+            let lhs = resultAsComplex.sentences.left!.inConjunctiveNormalForm
+            let rhs = resultAsComplex.sentences.right.inConjunctiveNormalForm
             // Either side is an Conjoin
             if lhs.isSentenceKind(.Conjoin) || rhs.isSentenceKind(.Conjoin) {
                 // if rhs is conjoin then P | (Q & R) == p  | qr
                 // if lhs is conjoin then (Q & R) | P == qr | p
                 let p  =  rhs.isSentenceKind(.Conjoin) ? lhs : rhs
-                let qr = (rhs.isSentenceKind(.Conjoin) ? rhs : lhs) as! ComplexSentence
+                let qr =
+                    (rhs.isSentenceKind(.Conjoin) ? rhs : lhs) as! ComplexSentence
                 let q  = qr.sentences.left!
                 let r  = qr.sentences.right
                 
@@ -206,11 +212,6 @@ struct ComplexSentence: Sentence, Equatable {
                 result = lhs.inConjunctiveNormalForm | rhs.inConjunctiveNormalForm
             }
         } else {
-            // Recursively convert non-disjoint sentences
-            guard let resultAsComplex = result as? ComplexSentence else {
-                // If cannot represent as complex, then nothing else to do
-                return result
-            }
             let rhs = resultAsComplex.sentences.right.inConjunctiveNormalForm
             if resultAsComplex.isBinary {
                 let lhs = resultAsComplex.sentences.left!.inConjunctiveNormalForm
