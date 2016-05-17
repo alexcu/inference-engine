@@ -6,6 +6,10 @@
 //  Copyright © 2016 Alex. All rights reserved.
 //
 
+///
+/// Implements the backward chaining algorithm for entailing information. Refer to
+/// p.257 of AIMA for more.
+///
 struct BackwardChaining: EntailmentMethod {
     // MARK: Implement EntailmentMethod
     func entail(query query: Sentence, fromKnowledgeBase kb: KnowledgeBase) -> EntailmentResponse {

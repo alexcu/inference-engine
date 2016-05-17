@@ -206,9 +206,9 @@ extension _ArrayType where Generator.Element == Sentence {
     ///
     /// Returns the elements of this array not in the other array
     ///
-    func difference(other: Self) -> [Sentence] {
-        return self.filter({ sentence in
-            !other.contains({sentence == $0})
+    func difference(other: Self) -> [Self.Generator.Element] {
+        return other.filter({ sentence in
+            !self.contains({sentence == $0})
         })
     }
     
@@ -217,7 +217,7 @@ extension _ArrayType where Generator.Element == Sentence {
     ///
     func union(other: Self) -> Self {
         var selff = self
-        selff.appendContentsOf(other.difference(selff))
+        selff.appendContentsOf(selff.difference(other))
         return selff
     }
 }

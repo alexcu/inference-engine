@@ -152,8 +152,8 @@
 		FA6AEF571CD97A8400C38764 /* Entailment Methods */ = {
 			isa = PBXGroup;
 			children = (
-				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
 				FAD77B4D1CCF375700D513D5 /* EntailmentMethod.swift */,
+				FA6786EE1CCE4D9B00EDD988 /* TruthTable.swift */,
 				FA6AEF591CD97ABB00C38764 /* ForwardChaining.swift */,
 				FADA423D1CDEC7140033C02D /* BackwardChaining.swift */,
 				FA3C0F771CE9439E00C8C250 /* Resolution.swift */,

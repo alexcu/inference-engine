@@ -7,7 +7,8 @@
 //
 
 ///
-/// Uses the resolution method to make a general entailment for general PL
+/// Uses the resolution method to make a general entailment for general PL. Refer to
+/// p.254 of AIMA for more.
 ///
 struct Resolution: EntailmentMethod {
     // MARK: Implement EntailmentMethod

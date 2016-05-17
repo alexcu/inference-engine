@@ -60,6 +60,7 @@ struct Launcher {
         case TruthTableLiteral = "TT"
         case ForwardChainingLiteral = "FC"
         case BackwardChainingLiteral = "BC"
+        case ResolutionLiteral = "RE"
 
         // Implement EntailmentMethod
         func entail(kbQueryPair: KnowledgeQueryPair) -> EntailmentResponse {
@@ -78,6 +79,9 @@ struct Launcher {
             case .BackwardChainingLiteral:
                 return BackwardChaining().entail(query: query,
                                                  fromKnowledgeBase: kb)
+            case .ResolutionLiteral:
+                return Resolution().entail(query: query,
+                                                  fromKnowledgeBase: kb)
             }
         }
 
@@ -122,6 +126,7 @@ struct Launcher {
             "  [TT] infer using truth table method",
             "  [BC] infer using backward chaning method",
             "  [FC] infer using forward chaining method",
+            "  [RE] infer using resolution method",
         ]
         return str.joinWithSeparator("\n")
     }

@@ -287,4 +287,29 @@ class ComplexSentenceTests: XCTestCase {
         XCTAssertEqual(actual, expected)
     }
 
+    func testSetOps() {
+        let s1 = [
+            sentenceFrom("a"),
+            sentenceFrom("b"),
+            sentenceFrom("c"),
+            sentenceFrom("d"),
+            sentenceFrom("e")
+        ]
+        let s2 = [
+            sentenceFrom("d"),
+            sentenceFrom("e")
+        ]
+        let s3 = [
+            sentenceFrom("a"),
+            sentenceFrom("b"),
+            sentenceFrom("c")
+        ]
+        
+        let union = s3.union(s2)
+        XCTAssertEqual(union.description, s1.description)
+        
+        let difference = s2.difference(s1)
+        XCTAssertEqual(difference.description, s3.description)
+    }
+
 }
