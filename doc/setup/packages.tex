@@ -1,0 +1,131 @@
+%
+% Line Spread, Page Markings & Hyperlinked Documents
+%
+\linespread{1.2}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+
+%
+% Graphics inclusion packages
+% The default path for all images is images/
+%
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\graphicspath{{images/}{../images/}}
+
+%
+% Basic Page Geometry and Header & Footer
+%
+% Margin:
+\usepackage[top=1.5in, bottom=1.5in, right=1in, left=1in]{geometry}
+
+% To silence too small headheight warning
+\setlength{\headheight}{25.23402pt}
+
+% Header & Footer:
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[LO,RE]{\authorname, \studentid\\{\vspace{-2pt}\scriptsize\doccdate}}
+\fancyhead[LE,RO]{\leftmark\\{\vspace{-4pt}\scriptsize\unitdesc}}
+\fancyfoot[LE,RO]{\thepage}
+
+%
+% Code Listings
+%
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{color}
+% Color Definition for Comment
+\definecolor{string-color}{rgb}{0.77,0.1,0.09} % for strings
+\definecolor{comment-color}{rgb}{0.0,0.46,0.0} % comments
+\definecolor{dark-gray}{gray}{0.35}
+\definecolor{keyword-color}{rgb}{0.66,0.05,0.57} % keywords
+\definecolor{doxy-color}{rgb}{0.25,0.35,0.75} % javadoc
+\lstset
+{
+  % Style of the code
+  basicstyle=\ttfamily\color{black}\scriptsize,
+  % Flexible Columns
+  columns=fullflexible,
+  % Caption of code at top and bottom padding of margin
+  captionpos=t,
+  belowcaptionskip=0.02\textwidth,
+  % Left & Right Margin of code block
+  xleftmargin=0.025\textwidth,
+  xrightmargin=0.025\textwidth,
+  % Frame: Round, single frame around the code block
+  frameround=tttt,
+  frame=single,
+  rulecolor=\color{black},
+  % Line sizes
+  aboveskip=15pt,
+  belowskip=15pt,
+  lineskip=1pt,
+  fontadjust=true,
+  % Non-smart/curly quotes
+  upquote=true,
+  % Automatic line breaks
+  breaklines=true,
+  breakatwhitespace=true,
+  % Non-ASCII Characters (Incompatible with UTF-8)
+  extendedchars=true,
+  % Keep multiple spaces in the text (i.e. code indented using spaces)
+  keepspaces=true,
+  % How big are the tabs (1 tab = X spaces)
+  tabsize=4,
+  % Expand code keyword base here
+  morekeywords={*,@synthesize},
+  % Line number styling
+  numberstyle=\scriptsize\ttfamily\color{gray},
+  % Line numbers positioning {none, left, right}
+  numbers=none,
+  % How frequent are line numbers shown? 1=Every line, 2=Every second line etc.
+  stepnumber=1,
+  % Emphasise a space by replacing it with an underscore-styled character
+  showspaces=false,
+  % Above, only in strings
+  showstringspaces=false,
+  % Above, but with tabs
+  showtabs=false,
+  % Styling
+  commentstyle=\color{comment-color} \slshape \scriptsize,
+  keywordstyle=\color{keyword-color} \bfseries,
+  stringstyle=\color{string-color},
+  morecomment=[s][\color{doxy-color}]{/**}{*/},
+}
+
+%
+% Better Captioning Packages
+%
+\usepackage{amsmath}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\usepackage[small,labelfont={bf}, justification=centering]{caption}
+
+%
+% Bibliography for URL
+%
+\usepackage{url}
+
+%
+% Miscellaneous Packages
+%
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{pdfpages}
+\usepackage{newclude}
+\usepackage{setspace}
+\usepackage{gensymb}
+\usepackage{etoolbox} % For if statements
+
+% Math
+\usepackage{amsmath}
+\usepackage{amssymb}

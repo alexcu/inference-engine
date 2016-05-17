@@ -1,0 +1,314 @@
+%
+% Simple title command; just header and subheader
+% Use for documents in which cover pages are not
+% a requirement.
+%
+\newcommand{\makesimpletitle}
+{
+\begin{spacing}{1.7}
+
+  \noindent  {\LARGE    \bfseries   \doctitle   }\\
+  \noindent  {\Large    \itshape    \docsubtitle}
+  \vspace{-15pt}
+
+\end{spacing}
+}
+
+%
+% Generate the full unit description
+%
+\def \unitdesc {\slshape\unitcode--\unitname}
+
+%
+% Blank page command. Use to insert an intentionally blank page
+%
+\newcommand{\blankpage}
+{
+\newpage
+\vspace*{\fill}
+\begin{center}This page is intentionally blank.\end{center}
+\vspace*{\fill}
+\newpage
+}
+
+%
+% Summary Command - A simple TL;DR for a section of text
+% Usage: \summary{SummaryText}
+%
+% Package lmodern required for bold and emph text
+\usepackage{lmodern}
+\newcommand{\summary}[1]
+{
+\begin{quotation}{\noindent \bfseries \sffamily \large #1}\end{quotation}
+\\
+}
+
+%
+% Pretty C++ and C# Command. Places a `pretty' version of C++ and C#
+% Usage: \Cpp, \CPP, \Csh
+%
+% Package required for relative sizes:
+\usepackage{relsize}
+\newcommand{\Cpp}{C\nolinebreak\hspace{-.05em}\raisebox{.2ex}{\footnotesize\bf +}\nolinebreak\hspace{-.10em}\raisebox{.2ex}{\footnotesize\bf +}\hspace{0.1ex}}
+\newcommand{\Csh}{C\nolinebreak\hspace{-.05em}\raisebox{.3ex}{\footnotesize\bf \#}\hspace{0.1ex}}
+
+%
+% Small Verbatim Environment
+% Usage: \begin{smverb} ... \end{smverb}
+%
+\newenvironment{smverb}
+  {\vspace{-8pt}\endgraf\color{dark-gray}\footnotesize\verbatim}
+  {\endverbatim\vspace{-25pt}}
+
+%
+% Input Class Command
+% Use for class (both .h and .cpp etc. files) importing that looks nicer
+% Usage:  \newpage \noindent
+%         \inputclass
+%         {ClassName}
+%         {ClassSummary\\}
+%         {HeaderFile}
+%         {ImplementationFile}
+%         {PrintLanguage}
+%         {ActualLanguage}
+% Parameter: ClassName The name of this class
+% Parameter: ClassSummary A simple summary of this class to print
+% Parameter: HeaderFile The relative-to-root location of the header file
+% Parameter: ImplementationFile The relative-to-root implementation file location
+% Parameter: PrintLanguage The language to print, e.g. Obj-C
+% Parameter: ActualLanguage The actual language for syntax highlighting, e.g. [Objective]C
+\newcommand{\inputclass}[6]
+{
+
+  \begin{minipage}[t]{0.70\textwidth}
+    {\noindent \bfseries \sffamily \large #1\\}
+    { \noindent \small #2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.28\textwidth}
+    \begin{flushright}
+    \sffamily \color{dark-gray} \Huge #5
+    \end{flushright}
+  \end{minipage}
+  % \\
+
+  % #2 being summary of this input
+  \ifx&#2&%
+  % #2 is empty
+  \vspace{-20pt}
+  \else
+  % #2 is nonempty
+  \vspace{-5pt}
+  \fi
+
+  \hrule
+  \vspace{5pt}
+  \begin{center} {\noindent \bfseries \small Header File} \end{center}
+  \vspace{-20pt}
+  \lstinputlisting
+  [language={#6},
+  morecomment={[is]{/**}{*/}},
+  morecomment={[l][\color{white}]{//!}},
+  morecomment={[l][\color{white}]{//!<}}]
+  {#3}
+
+  \begin{center} {\noindent \bfseries \small Implementation File} \end{center}
+  \vspace{-20pt}
+  \lstinputlisting
+  [language={#6},
+  morecomment={[is]{/**}{*/}},
+  morecomment={[l][\color{white}]{//!}},
+  morecomment={[l][\color{white}]{//!<}}]
+  {#4}
+
+}
+
+%
+% Input File Command - Use for singular file importation (e.g. .h only)
+% Usage:  \newpage \noindent
+%         \inputfile
+%         {FileName}
+%         {FileSummary\\}
+%         {File}
+%         {PrintLanguage}
+%         {ActualLanguage}
+% Parameter: ClassName The name of this file
+% Parameter: ClassSummary A simple summary of this file to print
+% Parameter: File The relative-to-root location of this file
+% Parameter: PrintLanguage The language to print, e.g. Obj-C
+% Parameter: ActualLanguage The actual language for syntax highlighting, e.g. [Objective]C
+\newcommand{\inputfile}[5]
+{
+
+  \begin{minipage}[t]{0.70\textwidth}
+    {\noindent \bfseries \sffamily \large #1\\}
+    {\noindent \small #2\\}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.28\textwidth}
+    \begin{flushright}
+    \noindent \sffamily \color{dark-gray} \Huge #4
+    \end{flushright}
+  \end{minipage}
+  % \\
+
+  % #2 being summary of this input
+  \ifx&#2&%
+  % #2 is empty
+  \vspace{-20pt}
+  \else
+  % #2 is nonempty
+  \vspace{-5pt}
+  \fi
+
+  \hrule
+  \lstinputlisting
+  [language={#5},
+  morecomment={[is]{/**}{*/}},
+  morecomment={[l][\color{white}]{//!}},
+  morecomment={[l][\color{white}]{//!<}}]
+  {#3}
+  % \\
+
+}
+
+%
+% Input Class Command and Strip Doxygen Commenting
+% Use for class (both .h and .cpp etc. files) importing that looks nicer, and
+% strip the doxygen commenting (/** */, /*! */, //!, //!<, ///)
+% Usage:  \newpage \noindent
+%         \inputclassdox
+%         {ClassName}
+%         {ClassSummary\\}
+%         {HeaderFile}
+%         {ImplementationFile}
+%         {PrintLanguage}
+%         {ActualLanguage}
+% Paramater: ClassName The name of this class
+% Paramater: ClassSummary A simple summary of this class to print
+% Paramater: HeaderFile The relative-to-root location of the header file
+% Paramater: ImplementationFile The relative-to-root implementation file location
+% Paramater: PrintLanguage The language to print, e.g. Obj-C
+% Paramater: ActualLanguage The actual language for syntax highlighting, e.g. [Objective]C
+\newcommand{\inputclassdox}[6]
+{
+
+  \begin{minipage}[t]{0.70\textwidth}
+    { \noindent \bfseries \sffamily \large #1\\}
+    { \noindent \small #2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.28\textwidth}
+    \begin{flushright}
+    \sffamily \color{dark-gray} \Huge #5
+    \end{flushright}
+  \end{minipage}
+  % \\
+
+  % #2 being summary of this input
+  \ifx&#2&%
+  % #2 is empty
+  \vspace{-20pt}
+  \else
+  % #2 is nonempty
+  \vspace{-5pt}
+  \fi
+
+
+  \hrule
+  \vspace{5pt}
+  \begin{center} {\noindent \bfseries \small Header File} \end{center}
+  \vspace{-20pt}
+  \lstinputlisting
+  [language={#6},
+  morecomment={[s][\color{doxy-color}\bfseries]{/**}{*/}},
+  morecomment={[l][\color{doxy-color}\bfseries]{//!}},
+  morecomment={[l][\color{doxy-color}\bfseries]{///}}]
+  {#3}
+
+  \begin{center} {\noindent \bfseries \small Implementation File} \end{center}
+  \vspace{-20pt}
+  \lstinputlisting
+  [language={#6},
+  morecomment={[s][\color{doxy-color}\bfseries]{/**}{*/}},
+  morecomment={[l][\color{doxy-color}\bfseries]{//!}},
+  morecomment={[l][\color{doxy-color}\bfseries]{///}}]
+  {#4}
+
+}
+
+%
+% Input File Command - Strip Doxygen Commenting
+% Use for singular file importation (e.g. .h only) importing that looks nicer,
+% and strip the doxygen commenting (/** */, /*! */, //!, //!<, ///)
+% Usage:  \newpage \noindent
+%         \inputclassdox
+%         {FileName}
+%         {FileSummary\\}
+%         {File}
+%         {PrintLanguage}
+%         {ActualLanguage}
+% Parameter: FileName The name of this file
+% Parameter: FileSummary A simple summary of this file to print
+% Parameter: File The relative-to-root location of this file
+% Parameter: PrintLanguage The language to print, e.g. Obj-C
+% Parameter: ActualLanguage The actual language for syntax highlighting, e.g. [Objective]C
+\newcommand{\inputfiledox}[5]
+{
+  \begin{minipage}[t]{0.70\textwidth-0pt}
+    {\noindent \bfseries \sffamily \large #1\\}
+    {\noindent \small #2\\}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.28\textwidth-0pt}
+    \begin{flushright}
+    \noindent \sffamily \color{dark-gray} \Huge #4
+    \end{flushright}
+  \end{minipage}
+  %\\
+
+  % #2 being summary of this input
+  \ifx&#2&%
+  % #2 is empty
+  \vspace{-20pt}
+  \else
+  % #2 is nonempty
+  \vspace{-5pt}
+  \fi
+
+  \hrule
+  \lstinputlisting
+  [language={#5},
+  morecomment={[s][\color{doxy-color}\bfseries]{/**}{*/}},
+  morecomment={[l][\color{doxy-color}\bfseries]{//!}},
+  morecomment={[l][\color{doxy-color}\bfseries]{///}}]
+  {#3}
+  %\\
+}
+
+\lstdefinelanguage{swift}
+{
+  morekeywords={
+    func,if,then,else,for,in,while,do,switch,case,default,where,break,continue,fallthrough,return,
+    typealias,struct,class,enum,protocol,var,func,let,get,set,willSet,didSet,inout,init,deinit,extension,
+    subscript,prefix,operator,infix,postfix,precedence,associativity,left,right,none,convenience,dynamic,
+    final,lazy,mutating,nonmutating,optional,override,required,static,unowned,safe,weak,internal,
+    private,public,is,as,self,unsafe,dynamicType,true,false,nil,Type,Protocol,
+  },
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
+\definecolor{keyword}{HTML}{BA2CA3}
+\definecolor{string}{HTML}{D12F1B}
+\definecolor{comment}{HTML}{008400}
+\lstset{
+  language=swift,
+  basicstyle=\ttfamily\footnotesize,
+  showstringspaces=false, % lets spaces in strings appear as real spaces
+  % columns=fixed,
+  % keepspaces=true,
+  keywordstyle=\color{keyword}\footnotesize,
+  stringstyle=\color{string}\footnotesize,
+  commentstyle=\color{comment}\footnotesize,
+}
