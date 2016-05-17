@@ -105,23 +105,37 @@ struct ComplexSentence: Sentence, Equatable {
     }
     
     
-    var inNegationNormalForm: Sentence {
-        var result: Sentence = self
-        // Convert P  => Q to ~P & Q
-        if result.isSentenceKind(.Implicate) {
-            let lhs = sentences.left!.inNegationNormalForm
-            let rhs = sentences.right.inNegationNormalForm
-            result = ~lhs & rhs
+    var withoutImplications: Sentence {
+        // non-binary sentences are just self
+        if self.isUnary {
+            return self
         }
-        // Convert P <=> Q to (P | ~Q) & (~P & Q)
-        else if result.isSentenceKind(.Biconditional) {
-            let lhs = sentences.left!.inNegationNormalForm
-            let rhs = sentences.right.inNegationNormalForm
-            result = (lhs | ~rhs) & (~lhs & rhs)
+        let lhs = self.sentences.left!.withoutImplications
+        let rhs = self.sentences.right.withoutImplications
+        if self.isSentenceKind(.Implicate) {
+            // Implication elimination
+            return ~lhs | rhs
+        }
+        else if self.isSentenceKind(.Biconditional) {
+            // Biconditional elimination
+            return (lhs => rhs) & (rhs => lhs)
+        } else {
+            // Return the lhs and rhs sentence without their implications using
+            // the same connective
+            return ComplexSentence(leftSentence: lhs,
+                                   connective: self.connective,
+                                   rightSentence: rhs)
+        }
+    }
+    
+    var inNegationNormalForm: Sentence {
+        // Eliminate implications
+        var result: Sentence = self.withoutImplications
+        guard let resultAsComplex = (result as? ComplexSentence) else {
+            return self
         }
         // Apply DeMorgan's Law to ~(A) to move .Negate inwards
-        if result.isSentenceKind(.Negate) {
-            let resultAsComplex = (result as! ComplexSentence)
+        if resultAsComplex.isUnary {
             // Assume A is not atomic, else result is assigned
             if let negated = resultAsComplex.sentences.right as? ComplexSentence {
                 // A == (~P)
@@ -150,10 +164,13 @@ struct ComplexSentence: Sentence, Equatable {
                         result = lhs & rhs
                     }
                 }
-            } else {
-                // Else cannot perform any changes
-                result = resultAsComplex
             }
+        } else {
+            let lhs = resultAsComplex.sentences.left!.inNegationNormalForm
+            let rhs = resultAsComplex.sentences.right.inNegationNormalForm
+            result = ComplexSentence(leftSentence: lhs,
+                                     connective: resultAsComplex.connective,
+                                     rightSentence: rhs)
         }
         return result
     }
@@ -187,6 +204,23 @@ struct ComplexSentence: Sentence, Equatable {
                 }
             } else {
                 result = lhs.inConjunctiveNormalForm | rhs.inConjunctiveNormalForm
+            }
+        } else {
+            // Recursively convert non-disjoint sentences
+            guard let resultAsComplex = result as? ComplexSentence else {
+                // If cannot represent as complex, then nothing else to do
+                return result
+            }
+            let rhs = resultAsComplex.sentences.right.inConjunctiveNormalForm
+            if resultAsComplex.isBinary {
+                let lhs = resultAsComplex.sentences.left!.inConjunctiveNormalForm
+                result = ComplexSentence(leftSentence: lhs,
+                                         connective: resultAsComplex.connective,
+                                         rightSentence: rhs)
+            } else {
+                result = ComplexSentence(connective: resultAsComplex.connective,
+                                         sentences: rhs)
+                
             }
         }
         return result

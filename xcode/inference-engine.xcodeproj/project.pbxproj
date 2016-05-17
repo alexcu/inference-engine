@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA246C221CEAA30900C88FE3 /* ResolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA246C201CEAA30600C88FE3 /* ResolutionTests.swift */; };
+		FA246C231CEAA39500C88FE3 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C0F771CE9439E00C8C250 /* Resolution.swift */; };
 		FA2E0D8E1CE4158D00C23797 /* ForwardChainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E0D8C1CE414D100C23797 /* ForwardChainingTests.swift */; };
 		FA2E0D911CE4182D00C23797 /* XCTestCase+EntailmentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E0D8F1CE4172A00C23797 /* XCTestCase+EntailmentTest.swift */; };
 		FA2E0D941CE4194200C23797 /* BackwardChainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E0D921CE4193B00C23797 /* BackwardChainingTests.swift */; };
@@ -61,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FA246C201CEAA30600C88FE3 /* ResolutionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolutionTests.swift; sourceTree = "<group>"; };
 		FA2E0D8C1CE414D100C23797 /* ForwardChainingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardChainingTests.swift; sourceTree = "<group>"; };
 		FA2E0D8F1CE4172A00C23797 /* XCTestCase+EntailmentTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+EntailmentTest.swift"; sourceTree = "<group>"; };
 		FA2E0D921CE4193B00C23797 /* BackwardChainingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackwardChainingTests.swift; sourceTree = "<group>"; };
@@ -210,6 +213,7 @@
 				FA2E0D8C1CE414D100C23797 /* ForwardChainingTests.swift */,
 				FA2E0D921CE4193B00C23797 /* BackwardChainingTests.swift */,
 				FA2E0D8F1CE4172A00C23797 /* XCTestCase+EntailmentTest.swift */,
+				FA246C201CEAA30600C88FE3 /* ResolutionTests.swift */,
 			);
 			name = Tests;
 			path = "inference-engine-tests";
@@ -329,10 +333,12 @@
 				FA963A791CCF914600C424F5 /* FileParser.swift in Sources */,
 				FA963A761CCF914600C424F5 /* PropositionalSymbol.swift in Sources */,
 				FAD6ECC51CE161AB00680CE6 /* ForwardChaining.swift in Sources */,
+				FA246C231CEAA39500C88FE3 /* Resolution.swift in Sources */,
 				FA963A7A1CCF914600C424F5 /* SentenceParser.swift in Sources */,
 				FA6787071CCF08E100EDD988 /* AtomicSentence.swift in Sources */,
 				FA2E0D911CE4182D00C23797 /* XCTestCase+EntailmentTest.swift in Sources */,
 				FAD6ECC61CE161AD00680CE6 /* BackwardChaining.swift in Sources */,
+				FA246C221CEAA30900C88FE3 /* ResolutionTests.swift in Sources */,
 				FA963A771CCF914600C424F5 /* Connective.swift in Sources */,
 				FA6787081CCF09DF00EDD988 /* AtomicSentenceTests.swift in Sources */,
 				FA6787061CCF08E100EDD988 /* ComplexSentence.swift in Sources */,

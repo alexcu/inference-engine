@@ -100,6 +100,10 @@ protocol Sentence: CustomStringConvertible {
     ///
     var inNegationNormalForm: Sentence { get }
     ///
+    /// Returns the sentence without any implications or biconditionals
+    ///
+    var withoutImplications: Sentence { get }
+    ///
     /// Returns `true` iff the connective specified is this part of this sentence
     ///
     func isSentenceKind(connective: Connective) -> Bool
@@ -169,16 +173,27 @@ func !=(lhs: Sentence, rhs: Sentence) -> Bool {
 }
 
 // MARK: Extension to Array for Sentences
-extension Array where Element: ComplexSentence {
+extension _ArrayType where Generator.Element == Sentence {    
     ///
     /// Joins an array of Sentences using the connective provided
     ///
     func join(connective: Connective) -> Sentence {
-        if self.count < 2 {
-            fatalError("Cannot join with less than two elements")
+        if self.count == 1 {
+            return self.first!
+        } else if self.count == 0 {
+            // Return the joined connective based off the specified operator
+            // & -> TRUE, | -> FALSE
+            switch connective {
+            case .Conjoin:
+                return AtomicSentence.TrueAtomicSentence
+            case .Disjoin:
+                return AtomicSentence.FalseAtomicSentence
+            default:
+                fatalError("Cannot join with no arguments using the \(connective) connective")
+            }
         }
-        var result = self.first!
         var selff = self
+        var result = selff.removeFirst()
         while !selff.isEmpty {
             let next = selff.removeFirst()
             result = ComplexSentence(leftSentence: result,
@@ -186,5 +201,23 @@ extension Array where Element: ComplexSentence {
                                      rightSentence: next)
         }
         return result
+    }
+    
+    ///
+    /// Returns the elements of this array not in the other array
+    ///
+    func difference(other: Self) -> [Sentence] {
+        return self.filter({ sentence in
+            !other.contains({sentence == $0})
+        })
+    }
+    
+    ///
+    /// Unions the array with the other array, returning a new array
+    ///
+    func union(other: Self) -> Self {
+        var selff = self
+        selff.appendContentsOf(other.difference(selff))
+        return selff
     }
 }

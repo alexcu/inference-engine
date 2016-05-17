@@ -39,6 +39,14 @@ extension XCTestCase {
 
         return KnowledgeBase.init(percepts: percepts)
     }()
+    
+    static let resolutionKB: KnowledgeBase = {
+        let percepts = [
+            "(b <=> (p1 | p2)) & ~b"
+        ].map({try! SentenceParser.sharedParser.parse($0)})
+        
+        return KnowledgeBase.init(percepts: percepts)
+    }()
 
     static let smokeHeatFireKB: KnowledgeBase = {
         let percepts = [

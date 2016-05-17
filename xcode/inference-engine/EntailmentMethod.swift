@@ -46,6 +46,15 @@ extension Array: EntailmentResponse {
         }
     }
 }
+extension Bool: EntailmentResponse {
+    var doesEntail: Bool {
+        return self
+    }
+    
+    var description: String {
+        return self ? "YES" : "NO"
+    }
+}
 
 ///
 /// An entailment method

@@ -173,14 +173,14 @@ class ComplexSentenceTests: XCTestCase {
     func testNNF_Implication() {
         // P <=> Q to ~P & Q
         let sentence = sentenceFrom("P => Q")
-        let expected = sentenceFrom("~P & Q")
+        let expected = sentenceFrom("~P | Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
     func testNNF_Bidirectional() {
-        // P <=> Q to (P | ~Q) & (~P & Q)
+        // P <=> Q to (P | ~Q) & (~P | Q)
         let sentence = sentenceFrom("P <=> Q")
-        let expected = sentenceFrom("(P | ~Q) & (~P & Q)")
+        let expected = sentenceFrom("(~P | Q) & (~Q | P)")
         XCTAssert(sentence.inNegationNormalForm == expected)
     }
     
@@ -238,6 +238,12 @@ class ComplexSentenceTests: XCTestCase {
         let sentence = sentenceFrom("~(~(P & R) & Q)")
         let expected = sentenceFrom("(P & R) | ~Q")
         XCTAssert(sentence.inNegationNormalForm == expected)
+    }
+    
+    func testWithoutImplications() {
+        let sentence = sentenceFrom("A => (~B <=> C)")
+        let expected = sentenceFrom("~A | ((~B | ~C) & (~~B | C))")
+        XCTAssert(sentence.withoutImplications == expected)
     }
     
     func testCNF() {
