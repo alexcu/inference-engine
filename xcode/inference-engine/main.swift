@@ -94,8 +94,8 @@ struct Launcher {
     var helpText: String {
         let str = [
             "Usage:",
-            "  iengine file method [ OPTIONS ]",
-            "  search --help",
+            "  iengine file method",
+            "  iengine --help",
             "",
             "Puzzle problem search solver",
             "",
@@ -109,10 +109,7 @@ struct Launcher {
             "    w",
             "",
             "Method:",
-            self.searchMethodDescriptions,
-            "",
-            "Options:",
-            " --help"
+            self.searchMethodDescriptions
         ]
         return str.joinWithSeparator("\n")
     }
@@ -123,7 +120,7 @@ struct Launcher {
     var searchMethodDescriptions: String {
         let str = [
             "  [TT] infer using truth table method",
-            "  [BC] infer using backward chaning method",
+            "  [BC] infer using backward chaining method",
             "  [FC] infer using forward chaining method",
             "  [RE] infer using resolution method",
         ]
@@ -166,7 +163,7 @@ struct Launcher {
     }
 
     ///
-    /// Parses program argumenrts
+    /// Parses program arguments
     /// - Returns: An entailment method literal
     ///
     private func parseArgs() throws -> (EntailmentMethodLiteral, KnowledgeQueryPair) {
