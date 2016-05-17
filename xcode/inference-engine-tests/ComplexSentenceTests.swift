@@ -1,9 +1,9 @@
-///
-//  inference_engine_tests.swift
-//  inference-engine-tests
 //
-//  Created by Alex on 20/04/2016.
-//  Copyright © 2016 Alex. All rights reserved.
+//  Author:         Alex Cummaudo
+//  Student ID:     1744070
+//  Program:        A2 - Inference Engine
+//  Unit:           COS30019 - Intro to AI
+//  Date:           20/04/2016
 //
 
 import XCTest

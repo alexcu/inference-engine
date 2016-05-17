@@ -1,9 +1,9 @@
 //
-//  ParserTests.swift
-//  inference-engine
-//
-//  Created by Alex on 25/04/2016.
-//  Copyright © 2016 Alex. All rights reserved.
+//  Author:         Alex Cummaudo
+//  Student ID:     1744070
+//  Program:        A2 - Inference Engine
+//  Unit:           COS30019 - Intro to AI
+//  Date:           25/04/2016
 //
 
 import XCTest
