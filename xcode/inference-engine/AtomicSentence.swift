@@ -15,7 +15,7 @@ struct AtomicSentence: Sentence, Equatable {
     var description: String {
         return self.atom.symbol
     }
-
+    
     // MARK: Implement Sentence
     let isPositive: Bool
     var isNegative: Bool {
@@ -26,7 +26,7 @@ struct AtomicSentence: Sentence, Equatable {
         guard let other = (other as? AtomicSentence) else {
             return false
         }
-        return self.atom.symbol == other.atom.symbol && self.isPositive && other.isPositive
+        return self.atom.symbol == other.atom.symbol && (self.isPositive == other.isPositive)
     }
     
     func applyModel(model: Model) -> Sentence {
@@ -50,6 +50,11 @@ struct AtomicSentence: Sentence, Equatable {
     
     var inNegationNormalForm: Sentence {
         // Atomic in NNF is just itself
+        return self
+    }
+    
+    var withoutImplications: Sentence {
+        // Atomic is just itself
         return self
     }
     
@@ -90,6 +95,30 @@ struct AtomicSentence: Sentence, Equatable {
     init(_ atom: String, _ isPositive: Bool = true) {
         self.atom = PropositionalSymbol(symbol: atom)
         self.isPositive = isPositive
+    }
+    
+    ///
+    /// A false atomic sentence representing `FALSE` primitive
+    ///
+    static let FalseAtomicSentence = AtomicSentence(PropositionalSymbol.False)
+    
+    ///
+    /// A true atomic sentence representing `TRUE` primitive
+    ///
+    static let TrueAtomicSentence = AtomicSentence(PropositionalSymbol.True)
+    
+    ///
+    /// Returns `true` iff the sentence is the False atomic sentence
+    ///
+    var isFalseAtom: Bool {
+        return self == AtomicSentence.FalseAtomicSentence
+    }
+    
+    ///
+    /// Returns `true` iff the sentence is the True atomic sentence
+    ///
+    var isTrueAtom: Bool {
+        return self == AtomicSentence.TrueAtomicSentence
     }
 }
 
