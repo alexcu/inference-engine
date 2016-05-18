@@ -97,7 +97,7 @@ struct Launcher {
             "  iengine file method",
             "  iengine --help",
             "",
-            "Puzzle problem search solver",
+            "Propositional logic inference engine",
             "",
             "File:",
             "  Expects a file whose first line TELL's the knowledge base of its",
