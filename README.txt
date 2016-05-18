@@ -10,7 +10,11 @@ Download executable binary as an Oracle VirtualBox VM from here:
 
     http:// < link >
 
-Please refer to report.pdf for further details.
+To import the Virtual Machine, refer to the instructions here:
+
+    https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html
+
+Please refer to report.pdf for further details on the implementation.
 
 Usage:
 
