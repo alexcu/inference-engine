@@ -58,3 +58,26 @@ aformentioned files.
     \underline{$true$}                & $true$                           & $true$                           & $true$                       & $true$                            & $true$                            & $true$                           & $true$                      & $true$                                 \\ \hline
     \end{tabular}
 \end{sidewaystable}
+
+\subsubsection{Resolution Tests}
+\label{subs:Resolution Tests}
+
+Testing the resolution method identified several bugs with the NNF and CNF implementations.
+Initially, NNF was not removing implications and biconditionals. It was found that
+the NNF, CNF and \texttt{withoutImplications} methods were not recursively recalling
+themselves if \emph{no} special conditions were true. Thus, rather than just
+returning the result, the result is recreated using the same connecitve but applying
+NNF or CNF to the lefthand and righthand sentences, when applicable. This key missing
+implementation would cause errors in creating CNF, especially for the addition of
+new cases.
+
+The resolution method also uses tests to verify that the resolve method works as
+intended. As seen in \texttt{ResolutionTests.swift}, there are tests for checking
+resolve works for tautologies (i.e., $A \vee \neg A$) to the False propositional.
+This was also identified to not work initially in the tests, as it was found that
+a \texttt{Sentence}'s \texttt{join} method did not support the creation of the
+false or true atom when appopriate. Since ``the empty clause—a disjunction of no disjuncts—is equivalent to False because a disjunction is true only if at least one of its disjuncts is true'' \citep[p.254]{aima2009}
+it is required to be calculated correctly, in order to verify that resolution
+method is complete, as shown in \texttt{Resolution.swift}. This is implemented
+in the \texttt{\_ArrayType} extension applied to \texttt{Sentence}s, which can
+be seen at the bottom of the \texttt{Sentence.swift} source.
