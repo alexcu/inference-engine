@@ -6,9 +6,9 @@ Assignment details:
     Alex Cummaudo <1744070@student.swin.edu.au>
     Semester 1, 2016
 
-Download executable binary as an Oracle VirtualBox VM from here:
+Download executable binary in an Oracle VirtualBox VM from here:
 
-    http:// < link >
+    http://link/tba/
 
 To import the Virtual Machine, refer to the instructions here:
 
