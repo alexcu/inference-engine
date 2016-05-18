@@ -10,7 +10,7 @@ Download executable binary as an Oracle VirtualBox VM from here:
 
     http:// < link >
 
-Please refer to Report.pdf for further details.
+Please refer to report.pdf for further details.
 
 Usage:
 

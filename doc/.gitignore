@@ -38,6 +38,6 @@
 *.xdy
 *.tdo
 
-.latex/
-document.pdf
+.latex/*
+!.latex/document.pdf
 document.synctex.gz
