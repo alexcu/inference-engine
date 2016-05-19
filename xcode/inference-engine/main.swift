@@ -37,7 +37,7 @@ struct Launcher {
             case .NotEnoughArgumentsProvided:
                 return "Invalid arguments. Use `help` for more info"
             case .InvalidMethodProvided:
-                return "Invalid inference method provided. Use `help` for more info"
+                return "Invalid method provided. Use `help` for more info"
             case .FileUnreadable:
                 return "File provided was unreadable"
             case .NoAskLine:
@@ -55,11 +55,13 @@ struct Launcher {
     ///
     /// Possible parsable methods from the command line
     ///
-    private enum EntailmentMethodLiteral: String, EntailmentMethod {
+    private enum ParsableMethodCommand: String, EntailmentMethod {
         case TruthTableLiteral = "TT"
         case ForwardChainingLiteral = "FC"
         case BackwardChainingLiteral = "BC"
         case ResolutionLiteral = "RE"
+        case ConvertToCnf = "CNF"
+        case ConvertToNnf = "NNF"
 
         // Implement EntailmentMethod
         func entail(kbQueryPair: KnowledgeQueryPair) -> EntailmentResponse {
@@ -81,9 +83,16 @@ struct Launcher {
             case .ResolutionLiteral:
                 return Resolution().entail(query: query,
                                                   fromKnowledgeBase: kb)
+            case .ConvertToCnf:
+                return [kb.sentences, [query]].flatMap({$0}).map { sentence in
+                    "\n\(sentence) in CNF is \(sentence.inConjunctiveNormalForm)\n"
+                }
+            case .ConvertToNnf:
+                return [kb.sentences, [query]].flatMap({$0}).map { sentence in
+                    "\n\(sentence) in NNF is \(sentence.inConjunctiveNormalForm)\n"
+                }
             }
         }
-
     }
 
     // MARK: Help descriptions
@@ -94,7 +103,7 @@ struct Launcher {
     var helpText: String {
         let str = [
             "Usage:",
-            "  iengine file method",
+            "  iengine file [method|cnf|nnf]",
             "  iengine --help",
             "",
             "Propositional logic inference engine",
@@ -109,20 +118,13 @@ struct Launcher {
             "    w",
             "",
             "Method:",
-            self.searchMethodDescriptions
-        ]
-        return str.joinWithSeparator("\n")
-    }
-
-    ///
-    /// Returns textual description of all search methods available
-    ///
-    var searchMethodDescriptions: String {
-        let str = [
             "  [TT] infer using truth table method",
             "  [BC] infer using backward chaining method",
             "  [FC] infer using forward chaining method",
             "  [RE] infer using resolution method",
+            "",
+            "Alternatively, you can choose to convert your knowledge base and query",
+            "to CNF or NNF forms by running providing CNF or NNF as your method"
         ]
         return str.joinWithSeparator("\n")
     }
@@ -166,11 +168,11 @@ struct Launcher {
     /// Parses program arguments
     /// - Returns: An entailment method literal
     ///
-    private func parseArgs() throws -> (EntailmentMethodLiteral, KnowledgeQueryPair) {
+    private func parseArgs() throws -> (ParsableMethodCommand, KnowledgeQueryPair) {
         // Strip the args
         var args = Process.arguments.enumerate().generate()
         var kbQueryPair: KnowledgeQueryPair?
-        var entailmentMethod: EntailmentMethodLiteral?
+        var parsedMethod: ParsableMethodCommand?
         // Look for extra arguments
         while let arg = args.next() {
             // Default to index positions
@@ -182,9 +184,9 @@ struct Launcher {
                 kbQueryPair = try parseFile(filename)
             // Entailment method
             case 2:
-                if let tryEntailmentMethod = EntailmentMethodLiteral(rawValue: arg.element) {
-                    entailmentMethod = tryEntailmentMethod
-                } else {
+                if let tryParsedMethod = ParsableMethodCommand(rawValue: arg.element.uppercaseString) {
+                    parsedMethod = tryParsedMethod
+                } else  {
                     throw LaunchError.InvalidMethodProvided
                 }
             default:
@@ -192,7 +194,7 @@ struct Launcher {
                 break
             }
         }
-        return (entailmentMethod!, kbQueryPair!)
+        return (parsedMethod!, kbQueryPair!)
     }
 
     // MARK: Entry point
