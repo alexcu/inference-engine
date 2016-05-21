@@ -46,12 +46,15 @@ struct SentenceParser {
     ///
     /// Parser errors when parsing a sentence
     ///
-    enum ParserError: ErrorType {
-        case UnknownConnective
-        case UnknownToken
-        case InvalidSyntax
-        case NeedOneSymbol
-        case MismatchedParentheses
+    enum ParserError: String, ErrorType, CustomStringConvertible {
+        case UnknownConnective = "Unknown connective parsed"
+        case UnknownToken = "Unknown token parsed"
+        case InvalidSyntax = "Invalid syntax while parsing"
+        case NeedOneSymbol = "Must provide one symbol when parsing"
+        case MismatchedParentheses = "Mismatched parentheses while parsing"
+        var description: String {
+            return self.rawValue
+        }
     }
 
     ///
