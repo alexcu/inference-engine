@@ -142,15 +142,15 @@ extension Sentence {
     }
 
     func disjoinWith(other: Sentence) -> ComplexSentence {
-        return ComplexSentence(leftSentence: other,
+        return ComplexSentence(leftSentence: self,
                                connective: .Disjoin,
-                               rightSentence: self)
+                               rightSentence: other)
     }
 
     func conjunctWith(other: Sentence) -> ComplexSentence {
-        return ComplexSentence(leftSentence: other,
+        return ComplexSentence(leftSentence: self,
                                connective: .Conjoin,
-                               rightSentence: self)
+                               rightSentence: other)
     }
 
     func negate() -> ComplexSentence {
