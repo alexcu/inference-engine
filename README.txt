@@ -17,23 +17,25 @@ To import the Virtual Machine, refer to the instructions here:
 Please refer to report.pdf for further details on the implementation.
 
 Usage:
+  iengine file command
+  iengine --help
 
-    iengine file method
-    iengine --help
+Propositional logic inference engine
 
-    Propositional logic inference engine
+File:
+  Expects a file whose first line TELL's the knowledge base of its
+  percepts and whose second line ASK's the knowledge base a query. Ensure
+  that every sentence in your knowledge base has a trailing semicolon:
 
-    File:
-      Expects a file whose first line TELL's the knowledge base of its
-      percepts and whose second line ASK's the knowledge base a query:
+    TELL
+    r; !u; p & !u => w;
+    ASK
+    w
 
-        TELL
-        r; !u; p & !u => w
-        ASK
-        w
-
-    Method:
-      [TT] infer using truth table method
-      [BC] infer using backward chaining method
-      [FC] infer using forward chaining method
-      [RE] infer using resolution method
+Command:
+  [TT]  infer query from knowledge base using truth table method
+  [BC]  infer query from knowledge base using backward chaining method
+  [FC]  infer query from knowledge base using forward chaining method
+  [RE]  infer query from knowledge base using resolution method
+  [CNF] convert knowledge base and query to CNF form
+  [NNF] convert knowledge base and query to NNF form

@@ -87,7 +87,7 @@ struct Launcher {
     var helpText: String {
         let str = [
             "Usage:",
-            "  iengine file [method|cnf|nnf]",
+            "  iengine file command",
             "  iengine --help",
             "",
             "Propositional logic inference engine",
@@ -102,14 +102,13 @@ struct Launcher {
             "    ASK",
             "    w",
             "",
-            "Method:",
-            "  [TT] infer using truth table method",
-            "  [BC] infer using backward chaining method",
-            "  [FC] infer using forward chaining method",
-            "  [RE] infer using resolution method",
-            "",
-            "Alternatively, you can choose to convert your knowledge base and query",
-            "to CNF or NNF forms by running providing CNF or NNF as your method"
+            "Command:",
+            "  [TT]  infer query from knowledge base using truth table method",
+            "  [BC]  infer query from knowledge base using backward chaining method",
+            "  [FC]  infer query from knowledge base using forward chaining method",
+            "  [RE]  infer query from knowledge base using resolution method",
+            "  [CNF] convert knowledge base and query to CNF form",
+            "  [NNF] convert knowledge base and query to NNF form"
         ]
         return str.joinWithSeparator("\n")
     }
