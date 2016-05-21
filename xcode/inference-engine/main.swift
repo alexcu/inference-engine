@@ -220,5 +220,7 @@ struct Launcher {
 do {
     try Launcher.sharedLauncher.run()
 } catch let error as Launcher.LaunchError {
-    print(error.message)
+    print(error)
+} catch let error as SentenceParser.ParserError {
+    print(error)
 }
