@@ -21,32 +21,16 @@ struct Launcher {
     ///
     /// Errors that can be caused on launch
     ///
-    enum LaunchError: ErrorType {
-        case NotEnoughArgumentsProvided
-        case InvalidMethodProvided
-        case FileUnreadable
-        case NoAskLine
-        case NoTellLine
-        case UnexpectedFileFormat
+    enum LaunchError: String, CustomStringConvertible, ErrorType {
+        case NotEnoughArgumentsProvided = "Invalid arguments. Use `help` for more info"
+        case InvalidMethodProvided = "Invalid method provided. Use `help` for more info"
+        case FileUnreadable = "File provided was unreadable"
+        case NoAskLine = "File is missing ASK"
+        case NoTellLine = "File is missing TELL"
+        case UnexpectedFileFormat = "File has invalid format. Ensure you have a semicolon at the end of each sentence in your KB. Use `help` for more info."
 
-        ///
-        /// Textual description of each error
-        ///
-        var message: String {
-            switch self {
-            case .NotEnoughArgumentsProvided:
-                return "Invalid arguments. Use `help` for more info"
-            case .InvalidMethodProvided:
-                return "Invalid method provided. Use `help` for more info"
-            case .FileUnreadable:
-                return "File provided was unreadable"
-            case .NoAskLine:
-                return "File is missing ASK"
-            case .NoTellLine:
-                return "File is missing TELL"
-            case .UnexpectedFileFormat:
-                return "File has invalid format. Use `help` for more info."
-            }
+        var description: String {
+            return self.rawValue
         }
     }
 
