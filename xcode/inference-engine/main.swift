@@ -73,7 +73,7 @@ struct Launcher {
                 }
             case .ConvertToNnf:
                 return [kb.sentences, [query]].flatMap({$0}).map { sentence in
-                    "\n\(sentence) in NNF is \(sentence.inConjunctiveNormalForm)\n"
+                    "\n\(sentence) in NNF is \(sentence.inNegationNormalForm)\n"
                 }
             }
         }
