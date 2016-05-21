@@ -242,7 +242,7 @@ class ComplexSentenceTests: XCTestCase {
     
     func testWithoutImplications() {
         let sentence = sentenceFrom("A => (~B <=> C)")
-        let expected = sentenceFrom("~A | ((~B | ~C) & (~~B | C))")
+        let expected = sentenceFrom("~A | ((~~B | C) & (~C | ~B))")
         XCTAssert(sentence.withoutImplications == expected)
     }
     
