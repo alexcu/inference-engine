@@ -74,29 +74,44 @@ Users can choose to convert their input files to either negation or conjunctive
 normal forms by providing the inference engine with the \texttt{cnf} method or
 \texttt{nnf} methods (refer to README.txt or use the \verb`--help` switch).
 
-For example, the following output shown in Listing~\ref{lst:cnfoutput} is given
-when the knowledge base provided in \ref{eq:kbquerycnf} is provided running
-the \texttt{cnf} method. Each of these can be verified using an alternate
-inference engine such as WolframAlpha (\url{https://www.wolframalpha.com/}),
-which was used to ensure that conversions of forms were indeed correct.
-
-Another example used is that shown in \ref{eq:kbquerynnf}, which shows the
-correct output of a non-representable
+Consider the example shown below. The knowledge base consists of a sentence in
+CNF and thus NNF (\ref{eqn:in nnf in cnf}), a sentence in NNF but not CNF
+(\ref{eqn:in nnf not cnf})\footnote{There is a conjunction in the second disjunction, i.e. $((p\wedge\neg q) \vee r)$}
+and a sentence not in NNF and thus not in CNF (\ref{eqn:not nnf not cnf})\footnote{Only atoms can be negated in CNF, but there is a not before the second negation, i.e., $\neg (\neg q \vee r)$}.
+Lastly, the query $\alpha$ is in CNF and thus NNF (\ref{eqn:in cnf simple}).
 \begin{align}
-\label{eq:kbquerycnf}
-    KB =& \; \{\\
-        & \qquad (\neg p \vee q \vee r)\wedge(\neg q \vee r)\wedge(\neg r),\\
-        & \qquad (\neg p \vee q \vee r)\wedge\neg (\neg q \vee r)\wedge(\neg r),\\
-        & \qquad (\neg p \vee q \vee r)\wedge((p\wedge\neg q) \vee r)\wedge(\neg r)\\
-        & \; \}\\
-\alpha =& \; (p \wedge q) \Rightarrow p \vee q \wedge \neg p
+    KB =& \; \{                                                                         \nonumber                     \\
+        & \qquad (\neg p \vee q \vee r)\wedge(\neg q \vee r)\wedge(\neg r),             \label{eqn:in nnf in cnf}     \\
+        & \qquad (\neg p \vee q \vee r)\wedge((p\wedge\neg q) \vee r)\wedge(\neg r)     \label{eqn:in nnf not cnf}    \\
+        & \qquad (\neg p \vee q \vee r)\wedge\neg (\neg q \vee r)\wedge(\neg r),        \label{eqn:not nnf not cnf}   \\
+        & \; \}                                                                         \nonumber                     \\
+\alpha =& \; p \wedge q                                                                 \label{eqn:in cnf simple}
 \end{align}
+It can be seen that converting the above to CNF and NNF, as shown in Listings~\ref{lst:nnfoutput} and
+\ref{lst:cnfoutput}, stays static for (\ref{eqn:in nnf in cnf}) and (\ref{eqn:in cnf simple}), as per (\ref{eq:1convertnnf}) and (\ref{eq:1convertcnf}),
+successfuly converts (\ref{eqn:in nnf not cnf}) to CNF form, as per (\ref{eq:2convertcnf}), but makes no changes
+when converting to NNF as it is already in NNF, as per (\ref{eq:2convertnnf}), and lastly (\ref{eqn:not nnf not cnf})
+can be converted to NNF, and thus is representable in CNF, as per (\ref{eq:3convertnnf}) and (\ref{eq:3convertcnf}).
+\begin{align}
+  \mathrm{NNF}((\neg p \vee q \vee r)\wedge(\neg q \vee r)\wedge(\neg r)) &= (\neg p \vee q \vee r) \wedge q \wedge \neg r \wedge \neg r  \label{eq:1convertnnf}\\
+  \mathrm{CNF}((\neg p \vee q \vee r)\wedge(\neg q \vee r)\wedge(\neg r)) &= (\neg p \vee q \vee r) \wedge q \wedge \neg r \wedge \neg r  \label{eq:1convertcnf}\\
+  \nonumber \\
+  \mathrm{NNF}((\neg p \vee q \vee r)\wedge((p\wedge\neg q) \vee r)\wedge(\neg r)) &= (\neg p \vee q \vee r) \wedge (p \wedge \neg q \vee r) \wedge \neg r          \label{eq:2convertnnf}\\
+  \mathrm{CNF}((\neg p \vee q \vee r)\wedge((p\wedge\neg q) \vee r)\wedge(\neg r)) &= (\neg p \vee q \vee r) \wedge (p \vee r) \wedge (\neg q \vee r) \wedge \neg r \label{eq:2convertcnf}\\
+  \nonumber \\
+  \mathrm{NNF}((\neg p \vee q \vee r)\wedge\neg (\neg q \vee r)\wedge(\neg r)) &= (\neg p \vee q \vee r) \wedge q \wedge \neg r \wedge \neg r          \label{eq:3convertnnf} \\
+  \mathrm{CNF}((\neg p \vee q \vee r)\wedge\neg (\neg q \vee r)\wedge(\neg r)) &= (\neg p \vee q \vee r) \wedge q \wedge \neg r \wedge \neg r          \label{eq:3convertcnf}
+\end{align}
+\lstinputlisting[
+  label=lst:nnfoutput,
+  caption=
+    Output of NNF conversion using input defined above,
+]{./content/out/nnf.txt}
 \lstinputlisting[
   label=lst:cnfoutput,
   caption=
-    Output of CNF conversion from \ref{eq:kbquerycnf},
-]{./content/cnf.txt}
-
+    Output of CNF conversion using input defined above,
+]{./content/out/cnf.txt}
 \lstinputlisting[
   label=lst:withoutimplications,
   caption=
@@ -104,7 +119,6 @@ correct output of a non-representable
   language=swift,
   linerange=108-129
 ]{../../src/ComplexSentence.swift}
-
 \lstinputlisting[
   label=lst:tonnf,
   caption=
@@ -112,7 +126,6 @@ correct output of a non-representable
   language=swift,
   linerange=131-176
 ]{../../src/ComplexSentence.swift}
-
 \lstinputlisting[
   label=lst:tocnf,
   caption=

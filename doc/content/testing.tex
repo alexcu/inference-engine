@@ -6,7 +6,14 @@
 
 The codebase was developed using a test-driven develop strategy. Test coverage
 for the majority of the codebase was factored in. All tests are located within
-the the \texttt{test} subdirectory.
+the the \texttt{test} subdirectory. These tests help with the confidence of
+complex implementations of equivelence forms, such as De Morgan's laws, implication
+and bidirectional elimination, NNF and CNF conversion using both implications, negations
+and bidirectionals. Refer to the tests shown in \texttt{ComplexSentenceTests.swift}.
+
+Each of these tests can be verified using an alternate inference engine such as
+WolframAlpha (\url{https://www.wolframalpha.com/}), which was used to ensure
+that assertions of tests were indeed correct.
 
 \subsection{Extended Parsing Entailment}
 \label{sub:Extended Parsing Entailment}
@@ -72,8 +79,8 @@ implementation would cause errors in creating CNF, especially for the addition o
 new cases.
 
 The resolution method also uses tests to verify that the resolve method works as
-intended. As seen in \texttt{ResolutionTests.swift}, there are tests for checking
-resolve works for tautologies (i.e., $A \vee \neg A$) to the False propositional.
+intended. As seen in \texttt{ResolutionTests.swift}, tests assert that the resolution
+of two complementaries resolves to the $False$ propositional (i.e., $\mathtt{Resolve(}\{ A, \neg A\}\mathtt{)} \mapsto False$).
 This was also identified to not work initially in the tests, as it was found that
 a \texttt{Sentence}'s \texttt{join} method did not support the creation of the
 false or true atom when appopriate. Since ``the empty clause—a disjunction of no disjuncts—is equivalent to False because a disjunction is true only if at least one of its disjuncts is true'' \citep[p.254]{aima2009}

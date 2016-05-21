@@ -1,12 +1,8 @@
 YES:
-p in CNF is p
+(((~p | q) | r) & (~q | r)) & ~r in CNF is (((~p | q) | r) & (~q | r)) & ~r
 ;
-q in CNF is q
+(((~p | q) | r) & ((p & ~q) | r)) & ~r in CNF is (((~p | q) | r) & ((p | r) & (~q | r))) & ~r
 ;
-~(p & q) in CNF is ~p | ~q
+(((~p | q) | r) & (~(~q | r))) & ~r in CNF is (((~p | q) | r) & (q & ~r)) & ~r
 ;
-~p | ~q in CNF is ~p | ~q
-;
-(~(p & q)) <=> (~p | ~q) in CNF is ((q | (~p | ~q)) & (p | (~p | ~q))) & ((q | (~p | ~q)) & (p | (~p | ~q)))
-;
-(p & q) => (p | (q & ~p)) in CNF is ((~p | ~q) | (p | ~p)) & ((~p | ~q) | (p | q))
+p & q in CNF is p & q

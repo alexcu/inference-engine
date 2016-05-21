@@ -1,0 +1,8 @@
+YES:
+(((~p | q) | r) & (~q | r)) & ~r in NNF is (((~p | q) | r) & (~q | r)) & ~r
+;
+(((~p | q) | r) & ((p & ~q) | r)) & ~r in NNF is (((~p | q) | r) & ((p & ~q) | r)) & ~r
+;
+(((~p | q) | r) & (~(~q | r))) & ~r in NNF is (((~p | q) | r) & (q & ~r)) & ~r
+;
+p & q in NNF is p & q
