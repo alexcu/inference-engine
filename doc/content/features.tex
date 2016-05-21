@@ -70,6 +70,33 @@ implementation that just return the sentence unchanged. Custom operators defined
 in the code make it easier to interoperate sentences together; refer to the implication
 and biconditional eliminations in Listing~\ref{lst:withoutimplications}.
 
+Users can choose to convert their input files to either negation or conjunctive
+normal forms by providing the inference engine with the \texttt{cnf} method or
+\texttt{nnf} methods (refer to README.txt or use the \verb`--help` switch).
+
+For example, the following output shown in Listing~\ref{lst:cnfoutput} is given
+when the knowledge base provided in \ref{eq:kbquerycnf} is provided running
+the \texttt{cnf} method. Each of these can be verified using an alternate
+inference engine such as WolframAlpha (\url{https://www.wolframalpha.com/}),
+which was used to ensure that conversions of forms were indeed correct.
+
+Another example used is that shown in \ref{eq:kbquerynnf}, which shows the
+correct output of a non-representable
+\begin{align}
+\label{eq:kbquerycnf}
+    KB =& \; \{\\
+        & \qquad (\neg p \vee q \vee r)\wedge(\neg q \vee r)\wedge(\neg r),\\
+        & \qquad (\neg p \vee q \vee r)\wedge\neg (\neg q \vee r)\wedge(\neg r),\\
+        & \qquad (\neg p \vee q \vee r)\wedge((p\wedge\neg q) \vee r)\wedge(\neg r)\\
+        & \; \}\\
+\alpha =& \; (p \wedge q) \Rightarrow p \vee q \wedge \neg p
+\end{align}
+\lstinputlisting[
+  label=lst:cnfoutput,
+  caption=
+    Output of CNF conversion from \ref{eq:kbquerycnf},
+]{./content/cnf.txt}
+
 \lstinputlisting[
   label=lst:withoutimplications,
   caption=
