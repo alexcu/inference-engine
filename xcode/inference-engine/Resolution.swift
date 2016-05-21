@@ -41,14 +41,14 @@ struct Resolution: EntailmentMethod {
                 // then return true
                 if resolvents.contains({$0 == AtomicSentence.FalseAtomicSentence}) {
                     // Resolution successful!
-                    return true
+                    return EntailmentLiteral(true)
                 }
                 // Union resolvents to newClauses
                 newClauses = newClauses.union(resolvents)
             }
             // if new is a subset of clauses (no difference) then return false
             if clauses.difference(newClauses).isEmpty {
-                return false
+                return EntailmentLiteral(false)
             }
             // Union newClauses to newClauses
             clauses = clauses.union(newClauses)

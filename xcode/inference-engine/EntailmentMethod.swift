@@ -46,13 +46,19 @@ extension Array: EntailmentResponse {
         }
     }
 }
-extension Bool: EntailmentResponse {
+struct EntailmentLiteral: EntailmentResponse {
     var doesEntail: Bool {
-        return self
+        return self.entailment
     }
     
     var description: String {
-        return self ? "YES" : "NO"
+        return self.entailment ? "YES" : "NO"
+    }
+    
+    private let entailment: Bool
+    
+    init(_ truth: Bool) {
+        self.entailment = truth
     }
 }
 
