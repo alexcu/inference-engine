@@ -8,7 +8,7 @@ Assignment details:
 
 Download executable binary in an Oracle VirtualBox VM from here:
 
-    http://link/tba/
+    https://cloudstor.aarnet.edu.au/plus/index.php/s/g8WPsZHbmbW1PE1
 
 To import the Virtual Machine, refer to the instructions here:
 
