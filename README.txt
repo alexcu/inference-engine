@@ -8,11 +8,22 @@ Assignment details:
 
 Download executable binary in an Oracle VirtualBox VM from here:
 
-    https://cloudstor.aarnet.edu.au/plus/index.php/s/g8WPsZHbmbW1PE1
+    https://cloudstor.aarnet.edu.au/plus/index.php/s/cwR4GzwL5vRJW2b
 
 To import the Virtual Machine, refer to the instructions here:
 
     https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html
+
+To execute, navigate to the desktop and run iengine.sh with specified parameters, or --help to find usage:
+
+    $ cd ~/Desktop/inference-engine
+    $ ./iengine.sh
+
+If the binary does not work, try recompiling by removing the bin directory:
+
+    $ cd ~/Desktop/inference-engine 
+    $ rm -rf bin
+    $ ./iengine.sh
 
 Please refer to report.pdf for further details on the implementation.
 
